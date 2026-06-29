@@ -7,7 +7,7 @@
       "people": {
         "label": "People (FTEs)",
         "unit": "FTEs",
-        "note": "Full-time-equivalent researchers, 2017–2025. Anchored to McAleese's field-growth analysis: ~400 total in 2022 (300 technical + 100 non-technical) and ~1,100 in 2025 (600 technical + 500 non-technical); within the 2025 non-technical count his organizational tally puts governance at ~250 and advocacy/field-building at ~60. The 2025 technical splits follow McAleese's per-category figures (e.g. evals ~100 — METR ~31, Apollo ~19, AISI ~50); the 2022 technical splits draw on Larsen & Lifland's org-by-org survey (corroborated by AI Watch, ~383 researchers in 2022); governance buckets are scaled so 2025 matches McAleese's ~250 governance total, and intervening years are modeled from each branch's documented emergence timeline. Every point carries its own source (see the per-year sourcing table below): 'anchor' points come straight from a published figure, 'modeled' points are our split or interpolation of a published total. Per-bucket splits are approximate, so totals don't sum exactly.",
+        "note": "Full-time-equivalent researchers, 2017–2025. The 2025 technical figures are taken directly from McAleese's org-by-org dataset (629 FTEs across 69 orgs, aggregated by category: misc technical ~200, interpretability 122, evals 100 — AISI ~50, METR ~31, Apollo ~19 — LLM safety 87, …). Non-technical 2025 is ~500: governance ~250, non-technical research ~120, advocacy/field-building ~60, ethics/other ~50. 2025 technical points are anchored to that dataset; every earlier year is modeled — technical history is reconstructed from each org's founding year and normalised to McAleese's published technical totals (≈30 in 2017, ≈50 in 2020, ≈300 in 2022), and the non-technical splits are modeled from his category totals (we don't yet have the org-level non-technical sheet). Every point carries its own source (see the per-year sourcing table below): 'anchor' = straight from the dataset, 'modeled' = our reconstruction. Per-bucket splits are approximate, so totals don't sum exactly.",
         "auto": false
       },
       "papers": {
@@ -22,6 +22,11 @@
         "id": "mcaleese",
         "label": "AI Safety Field Growth Analysis 2025",
         "url": "https://www.lesswrong.com/posts/8QjAnWyuE9fktPRgS/ai-safety-field-growth-analysis-2025"
+      },
+      {
+        "id": "mcaleese-data",
+        "label": "AI Safety Field — org-by-org FTE dataset (McAleese, spreadsheet)",
+        "url": "https://docs.google.com/spreadsheets/d/1KAVuMlHabNqwe-F_9NSKmuCRB26mrFAQ_2A6LPYBP_A/edit?gid=0#gid=0"
       },
       {
         "id": "estimating",
@@ -71,11 +76,111 @@
   },
   "buckets": [
     {
+      "slug": "misc-technical",
+      "label": "Misc technical safety",
+      "group": "technical",
+      "topic": null,
+      "blurb": "Broad technical safety work not tied to one sub-area — labs, nonprofits and academic groups (DeepMind, Apart, MATS, FAR, …).",
+      "arxiv": "(\"AI safety\" OR \"AI alignment\") AND (neural OR \"language model\" OR \"deep learning\")",
+      "people": [
+        {
+          "year": 2017,
+          "value": 20,
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese-data",
+            "mcaleese"
+          ]
+        },
+        {
+          "year": 2018,
+          "value": 22,
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese-data",
+            "mcaleese"
+          ]
+        },
+        {
+          "year": 2019,
+          "value": 26,
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese-data",
+            "mcaleese"
+          ]
+        },
+        {
+          "year": 2020,
+          "value": 29,
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese-data",
+            "mcaleese"
+          ]
+        },
+        {
+          "year": 2021,
+          "value": 98,
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese-data",
+            "mcaleese"
+          ]
+        },
+        {
+          "year": 2022,
+          "value": 151,
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese-data",
+            "mcaleese"
+          ]
+        },
+        {
+          "year": 2023,
+          "value": 197,
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese-data",
+            "mcaleese"
+          ]
+        },
+        {
+          "year": 2024,
+          "value": 207,
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese-data",
+            "mcaleese"
+          ]
+        },
+        {
+          "year": 2025,
+          "value": 200,
+          "estimated": false,
+          "basis": "anchor",
+          "src": [
+            "mcaleese-data",
+            "mcaleese"
+          ]
+        }
+      ]
+    },
+    {
       "slug": "interpretability",
       "label": "Mechanistic interpretability",
       "group": "technical",
       "topic": "/topics/mechanistic-interpretability/",
-      "blurb": "Reverse-engineering model internals: circuits, features, sparse autoencoders.",
+      "blurb": "Reverse-engineering model internals: circuits, features, sparse autoencoders (Anthropic, Goodfire, Transluce, …).",
       "arxiv": "(\"mechanistic interpretability\" OR \"sparse autoencoder\" OR \"superposition\") AND (neural OR transformer OR language model)",
       "people": [
         {
@@ -84,70 +189,77 @@
           "estimated": true,
           "basis": "modeled",
           "src": [
+            "mcaleese-data",
             "mcaleese"
           ]
         },
         {
           "year": 2018,
-          "value": 1,
+          "value": 0,
           "estimated": true,
           "basis": "modeled",
           "src": [
+            "mcaleese-data",
             "mcaleese"
           ]
         },
         {
           "year": 2019,
-          "value": 2,
+          "value": 0,
           "estimated": true,
           "basis": "modeled",
           "src": [
+            "mcaleese-data",
             "mcaleese"
           ]
         },
         {
           "year": 2020,
-          "value": 5,
+          "value": 0,
           "estimated": true,
           "basis": "modeled",
           "src": [
+            "mcaleese-data",
             "mcaleese"
           ]
         },
         {
           "year": 2021,
-          "value": 12,
+          "value": 0,
           "estimated": true,
           "basis": "modeled",
           "src": [
+            "mcaleese-data",
             "mcaleese"
           ]
         },
         {
           "year": 2022,
-          "value": 25,
+          "value": 23,
           "estimated": true,
-          "basis": "anchor",
+          "basis": "modeled",
           "src": [
-            "larsen-lifland",
-            "aiwatch"
+            "mcaleese-data",
+            "mcaleese"
           ]
         },
         {
           "year": 2023,
-          "value": 50,
+          "value": 49,
           "estimated": true,
           "basis": "modeled",
           "src": [
+            "mcaleese-data",
             "mcaleese"
           ]
         },
         {
           "year": 2024,
-          "value": 85,
+          "value": 64,
           "estimated": true,
           "basis": "modeled",
           "src": [
+            "mcaleese-data",
             "mcaleese"
           ]
         },
@@ -157,282 +269,7 @@
           "estimated": false,
           "basis": "anchor",
           "src": [
-            "mcaleese"
-          ]
-        }
-      ]
-    },
-    {
-      "slug": "scalable-oversight",
-      "label": "Scalable oversight",
-      "group": "technical",
-      "topic": "/topics/ai-alignment/",
-      "blurb": "RLHF, RLAIF, debate, recursive reward modeling, weak-to-strong generalization.",
-      "arxiv": "(\"scalable oversight\" OR RLHF OR \"reinforcement learning from human feedback\" OR \"weak-to-strong\" OR \"AI debate\")",
-      "people": [
-        {
-          "year": 2017,
-          "value": 3,
-          "estimated": true,
-          "basis": "modeled",
-          "src": [
-            "mcaleese"
-          ]
-        },
-        {
-          "year": 2018,
-          "value": 5,
-          "estimated": true,
-          "basis": "modeled",
-          "src": [
-            "mcaleese"
-          ]
-        },
-        {
-          "year": 2019,
-          "value": 7,
-          "estimated": true,
-          "basis": "modeled",
-          "src": [
-            "mcaleese"
-          ]
-        },
-        {
-          "year": 2020,
-          "value": 10,
-          "estimated": true,
-          "basis": "modeled",
-          "src": [
-            "mcaleese"
-          ]
-        },
-        {
-          "year": 2021,
-          "value": 18,
-          "estimated": true,
-          "basis": "modeled",
-          "src": [
-            "mcaleese"
-          ]
-        },
-        {
-          "year": 2022,
-          "value": 45,
-          "estimated": true,
-          "basis": "anchor",
-          "src": [
-            "larsen-lifland",
-            "aiwatch"
-          ]
-        },
-        {
-          "year": 2023,
-          "value": 70,
-          "estimated": true,
-          "basis": "modeled",
-          "src": [
-            "mcaleese"
-          ]
-        },
-        {
-          "year": 2024,
-          "value": 92,
-          "estimated": true,
-          "basis": "modeled",
-          "src": [
-            "mcaleese"
-          ]
-        },
-        {
-          "year": 2025,
-          "value": 110,
-          "estimated": false,
-          "basis": "anchor",
-          "src": [
-            "mcaleese"
-          ]
-        }
-      ]
-    },
-    {
-      "slug": "robustness",
-      "label": "Robustness & jailbreaks",
-      "group": "technical",
-      "topic": null,
-      "blurb": "Adversarial robustness, jailbreak resistance, distribution shift.",
-      "arxiv": "(jailbreak OR \"adversarial robustness\" OR \"adversarial examples\") AND (\"language model\" OR LLM OR neural)",
-      "people": [
-        {
-          "year": 2017,
-          "value": 3,
-          "estimated": true,
-          "basis": "modeled",
-          "src": [
-            "mcaleese"
-          ]
-        },
-        {
-          "year": 2018,
-          "value": 4,
-          "estimated": true,
-          "basis": "modeled",
-          "src": [
-            "mcaleese"
-          ]
-        },
-        {
-          "year": 2019,
-          "value": 6,
-          "estimated": true,
-          "basis": "modeled",
-          "src": [
-            "mcaleese"
-          ]
-        },
-        {
-          "year": 2020,
-          "value": 9,
-          "estimated": true,
-          "basis": "modeled",
-          "src": [
-            "mcaleese"
-          ]
-        },
-        {
-          "year": 2021,
-          "value": 15,
-          "estimated": true,
-          "basis": "modeled",
-          "src": [
-            "mcaleese"
-          ]
-        },
-        {
-          "year": 2022,
-          "value": 30,
-          "estimated": true,
-          "basis": "anchor",
-          "src": [
-            "larsen-lifland",
-            "aiwatch"
-          ]
-        },
-        {
-          "year": 2023,
-          "value": 50,
-          "estimated": true,
-          "basis": "modeled",
-          "src": [
-            "mcaleese"
-          ]
-        },
-        {
-          "year": 2024,
-          "value": 66,
-          "estimated": true,
-          "basis": "modeled",
-          "src": [
-            "mcaleese"
-          ]
-        },
-        {
-          "year": 2025,
-          "value": 80,
-          "estimated": false,
-          "basis": "anchor",
-          "src": [
-            "mcaleese"
-          ]
-        }
-      ]
-    },
-    {
-      "slug": "llm-safety",
-      "label": "LLM safety",
-      "group": "technical",
-      "topic": "/topics/large-language-models/",
-      "blurb": "Safety work focused specifically on large language models.",
-      "arxiv": "(\"LLM safety\" OR \"language model safety\" OR \"safe language model\" OR \"harmlessness\")",
-      "people": [
-        {
-          "year": 2017,
-          "value": 0,
-          "estimated": true,
-          "basis": "modeled",
-          "src": [
-            "mcaleese"
-          ]
-        },
-        {
-          "year": 2018,
-          "value": 0,
-          "estimated": true,
-          "basis": "modeled",
-          "src": [
-            "mcaleese"
-          ]
-        },
-        {
-          "year": 2019,
-          "value": 1,
-          "estimated": true,
-          "basis": "modeled",
-          "src": [
-            "mcaleese"
-          ]
-        },
-        {
-          "year": 2020,
-          "value": 2,
-          "estimated": true,
-          "basis": "modeled",
-          "src": [
-            "mcaleese"
-          ]
-        },
-        {
-          "year": 2021,
-          "value": 7,
-          "estimated": true,
-          "basis": "modeled",
-          "src": [
-            "mcaleese"
-          ]
-        },
-        {
-          "year": 2022,
-          "value": 20,
-          "estimated": true,
-          "basis": "anchor",
-          "src": [
-            "larsen-lifland",
-            "aiwatch"
-          ]
-        },
-        {
-          "year": 2023,
-          "value": 43,
-          "estimated": true,
-          "basis": "modeled",
-          "src": [
-            "mcaleese"
-          ]
-        },
-        {
-          "year": 2024,
-          "value": 65,
-          "estimated": true,
-          "basis": "modeled",
-          "src": [
-            "mcaleese"
-          ]
-        },
-        {
-          "year": 2025,
-          "value": 87,
-          "estimated": false,
-          "basis": "anchor",
-          "src": [
+            "mcaleese-data",
             "mcaleese"
           ]
         }
@@ -443,7 +280,7 @@
       "label": "Evals & dangerous-capability testing",
       "group": "technical",
       "topic": null,
-      "blurb": "Capability and propensity evals — bio, cyber, autonomy, persuasion (AISI, METR, Apollo).",
+      "blurb": "Capability and propensity evals — bio, cyber, autonomy, persuasion (AISI ~50, METR ~31, Apollo ~19).",
       "arxiv": "(\"dangerous capabilities\" OR \"capability evaluation\" OR \"model evaluation\" OR \"red teaming\") AND (\"language model\" OR LLM OR \"frontier model\")",
       "people": [
         {
@@ -452,6 +289,7 @@
           "estimated": true,
           "basis": "modeled",
           "src": [
+            "mcaleese-data",
             "mcaleese"
           ]
         },
@@ -461,6 +299,7 @@
           "estimated": true,
           "basis": "modeled",
           "src": [
+            "mcaleese-data",
             "mcaleese"
           ]
         },
@@ -470,52 +309,57 @@
           "estimated": true,
           "basis": "modeled",
           "src": [
+            "mcaleese-data",
             "mcaleese"
           ]
         },
         {
           "year": 2020,
-          "value": 1,
+          "value": 0,
           "estimated": true,
           "basis": "modeled",
           "src": [
+            "mcaleese-data",
             "mcaleese"
           ]
         },
         {
           "year": 2021,
-          "value": 4,
+          "value": 0,
           "estimated": true,
           "basis": "modeled",
           "src": [
+            "mcaleese-data",
             "mcaleese"
           ]
         },
         {
           "year": 2022,
-          "value": 15,
+          "value": 0,
           "estimated": true,
-          "basis": "anchor",
+          "basis": "modeled",
           "src": [
-            "larsen-lifland",
-            "aiwatch"
+            "mcaleese-data",
+            "mcaleese"
           ]
         },
         {
           "year": 2023,
-          "value": 45,
+          "value": 0,
           "estimated": true,
           "basis": "modeled",
           "src": [
+            "mcaleese-data",
             "mcaleese"
           ]
         },
         {
           "year": 2024,
-          "value": 80,
+          "value": 70,
           "estimated": true,
           "basis": "modeled",
           "src": [
+            "mcaleese-data",
             "mcaleese"
           ]
         },
@@ -525,110 +369,19 @@
           "estimated": false,
           "basis": "anchor",
           "src": [
+            "mcaleese-data",
             "mcaleese"
           ]
         }
       ]
     },
     {
-      "slug": "deceptive-alignment",
-      "label": "Deceptive alignment & scheming",
+      "slug": "llm-safety",
+      "label": "LLM safety",
       "group": "technical",
-      "topic": "/topics/deceptive-alignment-and-scheming/",
-      "blurb": "Sleeper agents, mesa-optimization, scheming, models hiding their objectives.",
-      "arxiv": "(\"deceptive alignment\" OR \"sleeper agent\" OR scheming OR \"mesa-optimization\" OR \"mesa optimizer\")",
-      "people": [
-        {
-          "year": 2017,
-          "value": 0,
-          "estimated": true,
-          "basis": "modeled",
-          "src": [
-            "mcaleese"
-          ]
-        },
-        {
-          "year": 2018,
-          "value": 0,
-          "estimated": true,
-          "basis": "modeled",
-          "src": [
-            "mcaleese"
-          ]
-        },
-        {
-          "year": 2019,
-          "value": 1,
-          "estimated": true,
-          "basis": "modeled",
-          "src": [
-            "mcaleese"
-          ]
-        },
-        {
-          "year": 2020,
-          "value": 1,
-          "estimated": true,
-          "basis": "modeled",
-          "src": [
-            "mcaleese"
-          ]
-        },
-        {
-          "year": 2021,
-          "value": 3,
-          "estimated": true,
-          "basis": "modeled",
-          "src": [
-            "mcaleese"
-          ]
-        },
-        {
-          "year": 2022,
-          "value": 8,
-          "estimated": true,
-          "basis": "anchor",
-          "src": [
-            "larsen-lifland",
-            "aiwatch"
-          ]
-        },
-        {
-          "year": 2023,
-          "value": 14,
-          "estimated": true,
-          "basis": "modeled",
-          "src": [
-            "mcaleese"
-          ]
-        },
-        {
-          "year": 2024,
-          "value": 20,
-          "estimated": true,
-          "basis": "modeled",
-          "src": [
-            "mcaleese"
-          ]
-        },
-        {
-          "year": 2025,
-          "value": 25,
-          "estimated": false,
-          "basis": "anchor",
-          "src": [
-            "mcaleese"
-          ]
-        }
-      ]
-    },
-    {
-      "slug": "reward-hacking",
-      "label": "RL & reward hacking",
-      "group": "technical",
-      "topic": "/topics/reinforcement-learning-and-reward-hacking/",
-      "blurb": "Reward hacking, specification gaming, goal misgeneralization.",
-      "arxiv": "(\"reward hacking\" OR \"specification gaming\" OR \"goal misgeneralization\" OR \"reward misspecification\")",
+      "topic": "/topics/large-language-models/",
+      "blurb": "Safety work focused specifically on large language models (OpenAI, MIT AAG, academic groups, …).",
+      "arxiv": "(\"LLM safety\" OR \"language model safety\" OR \"safe language model\" OR \"harmlessness\")",
       "people": [
         {
           "year": 2017,
@@ -636,6 +389,7 @@
           "estimated": true,
           "basis": "modeled",
           "src": [
+            "mcaleese-data",
             "mcaleese"
           ]
         },
@@ -645,61 +399,167 @@
           "estimated": true,
           "basis": "modeled",
           "src": [
+            "mcaleese-data",
             "mcaleese"
           ]
         },
         {
           "year": 2019,
-          "value": 4,
+          "value": 5,
           "estimated": true,
           "basis": "modeled",
           "src": [
+            "mcaleese-data",
             "mcaleese"
           ]
         },
         {
           "year": 2020,
-          "value": 5,
+          "value": 6,
           "estimated": true,
           "basis": "modeled",
           "src": [
+            "mcaleese-data",
             "mcaleese"
           ]
         },
         {
           "year": 2021,
-          "value": 9,
+          "value": 26,
           "estimated": true,
           "basis": "modeled",
           "src": [
+            "mcaleese-data",
             "mcaleese"
           ]
         },
         {
           "year": 2022,
-          "value": 15,
+          "value": 49,
           "estimated": true,
-          "basis": "anchor",
+          "basis": "modeled",
           "src": [
-            "larsen-lifland",
-            "aiwatch"
+            "mcaleese-data",
+            "mcaleese"
           ]
         },
         {
           "year": 2023,
-          "value": 20,
+          "value": 70,
           "estimated": true,
           "basis": "modeled",
           "src": [
+            "mcaleese-data",
             "mcaleese"
           ]
         },
         {
           "year": 2024,
-          "value": 25,
+          "value": 75,
           "estimated": true,
           "basis": "modeled",
           "src": [
+            "mcaleese-data",
+            "mcaleese"
+          ]
+        },
+        {
+          "year": 2025,
+          "value": 87,
+          "estimated": false,
+          "basis": "anchor",
+          "src": [
+            "mcaleese-data",
+            "mcaleese"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "rl-safety",
+      "label": "RL safety",
+      "group": "technical",
+      "topic": null,
+      "blurb": "Reward modeling, reward hacking, specification gaming, goal misgeneralization (CHAI, Krueger lab, …).",
+      "arxiv": "(\"reward hacking\" OR \"specification gaming\" OR \"goal misgeneralization\" OR \"reinforcement learning from human feedback\")",
+      "people": [
+        {
+          "year": 2017,
+          "value": 2,
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese-data",
+            "mcaleese"
+          ]
+        },
+        {
+          "year": 2018,
+          "value": 5,
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese-data",
+            "mcaleese"
+          ]
+        },
+        {
+          "year": 2019,
+          "value": 7,
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese-data",
+            "mcaleese"
+          ]
+        },
+        {
+          "year": 2020,
+          "value": 9,
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese-data",
+            "mcaleese"
+          ]
+        },
+        {
+          "year": 2021,
+          "value": 32,
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese-data",
+            "mcaleese"
+          ]
+        },
+        {
+          "year": 2022,
+          "value": 43,
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese-data",
+            "mcaleese"
+          ]
+        },
+        {
+          "year": 2023,
+          "value": 42,
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese-data",
+            "mcaleese"
+          ]
+        },
+        {
+          "year": 2024,
+          "value": 36,
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese-data",
             "mcaleese"
           ]
         },
@@ -709,190 +569,7 @@
           "estimated": false,
           "basis": "anchor",
           "src": [
-            "mcaleese"
-          ]
-        }
-      ]
-    },
-    {
-      "slug": "agent-foundations",
-      "label": "Agent foundations",
-      "group": "technical",
-      "topic": "/topics/ai-alignment/",
-      "blurb": "Decision theory, embedded agency, corrigibility (MIRI-lineage theory).",
-      "arxiv": "(\"agent foundations\" OR corrigibility OR \"embedded agency\" OR \"decision theory\") AND (AI OR agent)",
-      "people": [
-        {
-          "year": 2017,
-          "value": 10,
-          "estimated": true,
-          "basis": "modeled",
-          "src": [
-            "mcaleese"
-          ]
-        },
-        {
-          "year": 2018,
-          "value": 11,
-          "estimated": true,
-          "basis": "modeled",
-          "src": [
-            "mcaleese"
-          ]
-        },
-        {
-          "year": 2019,
-          "value": 13,
-          "estimated": true,
-          "basis": "modeled",
-          "src": [
-            "mcaleese"
-          ]
-        },
-        {
-          "year": 2020,
-          "value": 14,
-          "estimated": true,
-          "basis": "modeled",
-          "src": [
-            "mcaleese"
-          ]
-        },
-        {
-          "year": 2021,
-          "value": 18,
-          "estimated": true,
-          "basis": "modeled",
-          "src": [
-            "mcaleese"
-          ]
-        },
-        {
-          "year": 2022,
-          "value": 25,
-          "estimated": true,
-          "basis": "anchor",
-          "src": [
-            "larsen-lifland",
-            "aiwatch"
-          ]
-        },
-        {
-          "year": 2023,
-          "value": 22,
-          "estimated": true,
-          "basis": "modeled",
-          "src": [
-            "mcaleese"
-          ]
-        },
-        {
-          "year": 2024,
-          "value": 20,
-          "estimated": true,
-          "basis": "modeled",
-          "src": [
-            "mcaleese"
-          ]
-        },
-        {
-          "year": 2025,
-          "value": 18,
-          "estimated": false,
-          "basis": "anchor",
-          "src": [
-            "mcaleese"
-          ]
-        }
-      ]
-    },
-    {
-      "slug": "ai-control",
-      "label": "AI control",
-      "group": "technical",
-      "topic": null,
-      "blurb": "Containing misaligned-but-capable models — distinct from aligning them.",
-      "arxiv": "(\"AI control\" OR \"controlling untrusted\" OR \"control evaluations\") AND (AI OR \"language model\" OR model)",
-      "people": [
-        {
-          "year": 2017,
-          "value": 0,
-          "estimated": true,
-          "basis": "modeled",
-          "src": [
-            "mcaleese"
-          ]
-        },
-        {
-          "year": 2018,
-          "value": 0,
-          "estimated": true,
-          "basis": "modeled",
-          "src": [
-            "mcaleese"
-          ]
-        },
-        {
-          "year": 2019,
-          "value": 0,
-          "estimated": true,
-          "basis": "modeled",
-          "src": [
-            "mcaleese"
-          ]
-        },
-        {
-          "year": 2020,
-          "value": 0,
-          "estimated": true,
-          "basis": "modeled",
-          "src": [
-            "mcaleese"
-          ]
-        },
-        {
-          "year": 2021,
-          "value": 0,
-          "estimated": true,
-          "basis": "modeled",
-          "src": [
-            "mcaleese"
-          ]
-        },
-        {
-          "year": 2022,
-          "value": 1,
-          "estimated": true,
-          "basis": "anchor",
-          "src": [
-            "larsen-lifland",
-            "aiwatch"
-          ]
-        },
-        {
-          "year": 2023,
-          "value": 3,
-          "estimated": true,
-          "basis": "modeled",
-          "src": [
-            "mcaleese"
-          ]
-        },
-        {
-          "year": 2024,
-          "value": 7,
-          "estimated": true,
-          "basis": "modeled",
-          "src": [
-            "mcaleese"
-          ]
-        },
-        {
-          "year": 2025,
-          "value": 11,
-          "estimated": false,
-          "basis": "anchor",
-          "src": [
+            "mcaleese-data",
             "mcaleese"
           ]
         }
@@ -903,8 +580,8 @@
       "label": "AI security",
       "group": "technical",
       "topic": null,
-      "blurb": "Model-weight security, data poisoning, misuse and uplift pathways.",
-      "arxiv": "(\"model weight\" OR \"data poisoning\" OR \"backdoor attack\" OR \"model extraction\") AND (neural OR \"language model\")",
+      "blurb": "Model-weight security, data poisoning, jailbreak/misuse pathways (Palisade, Gray Swan, Lakera, …).",
+      "arxiv": "(\"model weight\" OR \"data poisoning\" OR \"backdoor attack\" OR jailbreak OR \"model extraction\") AND (neural OR \"language model\")",
       "people": [
         {
           "year": 2017,
@@ -912,70 +589,77 @@
           "estimated": true,
           "basis": "modeled",
           "src": [
+            "mcaleese-data",
             "mcaleese"
           ]
         },
         {
           "year": 2018,
-          "value": 1,
+          "value": 0,
           "estimated": true,
           "basis": "modeled",
           "src": [
+            "mcaleese-data",
             "mcaleese"
           ]
         },
         {
           "year": 2019,
-          "value": 1,
+          "value": 0,
           "estimated": true,
           "basis": "modeled",
           "src": [
+            "mcaleese-data",
             "mcaleese"
           ]
         },
         {
           "year": 2020,
-          "value": 2,
+          "value": 0,
           "estimated": true,
           "basis": "modeled",
           "src": [
+            "mcaleese-data",
             "mcaleese"
           ]
         },
         {
           "year": 2021,
-          "value": 3,
+          "value": 0,
           "estimated": true,
           "basis": "modeled",
           "src": [
+            "mcaleese-data",
             "mcaleese"
           ]
         },
         {
           "year": 2022,
-          "value": 5,
+          "value": 2,
           "estimated": true,
-          "basis": "anchor",
+          "basis": "modeled",
           "src": [
-            "larsen-lifland",
-            "aiwatch"
+            "mcaleese-data",
+            "mcaleese"
           ]
         },
         {
           "year": 2023,
-          "value": 10,
+          "value": 3,
           "estimated": true,
           "basis": "modeled",
           "src": [
+            "mcaleese-data",
             "mcaleese"
           ]
         },
         {
           "year": 2024,
-          "value": 16,
+          "value": 7,
           "estimated": true,
           "basis": "modeled",
           "src": [
+            "mcaleese-data",
             "mcaleese"
           ]
         },
@@ -985,6 +669,407 @@
           "estimated": false,
           "basis": "anchor",
           "src": [
+            "mcaleese-data",
+            "mcaleese"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "agent-foundations",
+      "label": "Agent foundations",
+      "group": "technical",
+      "topic": "/topics/ai-alignment/",
+      "blurb": "Decision theory, embedded agency, corrigibility (MIRI-lineage theory; CORAL, Dovetail, Orthogonal).",
+      "arxiv": "(\"agent foundations\" OR corrigibility OR \"embedded agency\" OR \"decision theory\") AND (AI OR agent)",
+      "people": [
+        {
+          "year": 2017,
+          "value": 6,
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese-data",
+            "mcaleese"
+          ]
+        },
+        {
+          "year": 2018,
+          "value": 6,
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese-data",
+            "mcaleese"
+          ]
+        },
+        {
+          "year": 2019,
+          "value": 6,
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese-data",
+            "mcaleese"
+          ]
+        },
+        {
+          "year": 2020,
+          "value": 6,
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese-data",
+            "mcaleese"
+          ]
+        },
+        {
+          "year": 2021,
+          "value": 19,
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese-data",
+            "mcaleese"
+          ]
+        },
+        {
+          "year": 2022,
+          "value": 23,
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese-data",
+            "mcaleese"
+          ]
+        },
+        {
+          "year": 2023,
+          "value": 23,
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese-data",
+            "mcaleese"
+          ]
+        },
+        {
+          "year": 2024,
+          "value": 21,
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese-data",
+            "mcaleese"
+          ]
+        },
+        {
+          "year": 2025,
+          "value": 18,
+          "estimated": false,
+          "basis": "anchor",
+          "src": [
+            "mcaleese-data",
+            "mcaleese"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "ai-control",
+      "label": "AI control",
+      "group": "technical",
+      "topic": null,
+      "blurb": "Containing misaligned-but-capable models — distinct from aligning them (Redwood, Luthien).",
+      "arxiv": "(\"AI control\" OR \"controlling untrusted\" OR \"control evaluations\") AND (AI OR \"language model\" OR model)",
+      "people": [
+        {
+          "year": 2017,
+          "value": 0,
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese-data",
+            "mcaleese"
+          ]
+        },
+        {
+          "year": 2018,
+          "value": 0,
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese-data",
+            "mcaleese"
+          ]
+        },
+        {
+          "year": 2019,
+          "value": 0,
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese-data",
+            "mcaleese"
+          ]
+        },
+        {
+          "year": 2020,
+          "value": 0,
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese-data",
+            "mcaleese"
+          ]
+        },
+        {
+          "year": 2021,
+          "value": 0,
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese-data",
+            "mcaleese"
+          ]
+        },
+        {
+          "year": 2022,
+          "value": 6,
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese-data",
+            "mcaleese"
+          ]
+        },
+        {
+          "year": 2023,
+          "value": 9,
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese-data",
+            "mcaleese"
+          ]
+        },
+        {
+          "year": 2024,
+          "value": 11,
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese-data",
+            "mcaleese"
+          ]
+        },
+        {
+          "year": 2025,
+          "value": 11,
+          "estimated": false,
+          "basis": "anchor",
+          "src": [
+            "mcaleese-data",
+            "mcaleese"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "multi-agent",
+      "label": "Multi-agent alignment",
+      "group": "technical",
+      "topic": null,
+      "blurb": "Cooperation, conflict and alignment among multiple AI agents (Conitzer, Softmax).",
+      "arxiv": "(\"multi-agent\" OR \"multiagent\") AND (cooperation OR alignment OR \"game theory\") AND (AI OR agent)",
+      "people": [
+        {
+          "year": 2017,
+          "value": 0,
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese-data",
+            "mcaleese"
+          ]
+        },
+        {
+          "year": 2018,
+          "value": 0,
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese-data",
+            "mcaleese"
+          ]
+        },
+        {
+          "year": 2019,
+          "value": 0,
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese-data",
+            "mcaleese"
+          ]
+        },
+        {
+          "year": 2020,
+          "value": 0,
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese-data",
+            "mcaleese"
+          ]
+        },
+        {
+          "year": 2021,
+          "value": 0,
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese-data",
+            "mcaleese"
+          ]
+        },
+        {
+          "year": 2022,
+          "value": 0,
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese-data",
+            "mcaleese"
+          ]
+        },
+        {
+          "year": 2023,
+          "value": 5,
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese-data",
+            "mcaleese"
+          ]
+        },
+        {
+          "year": 2024,
+          "value": 8,
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese-data",
+            "mcaleese"
+          ]
+        },
+        {
+          "year": 2025,
+          "value": 11,
+          "estimated": false,
+          "basis": "anchor",
+          "src": [
+            "mcaleese-data",
+            "mcaleese"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "interdisciplinary",
+      "label": "Interdisciplinary",
+      "group": "technical",
+      "topic": null,
+      "blurb": "Cross-disciplinary foundations bridging AI safety with other fields (PIBBSS, ACS).",
+      "arxiv": "(\"AI safety\" OR alignment) AND (interdisciplinary OR \"complex systems\" OR \"cognitive science\")",
+      "people": [
+        {
+          "year": 2017,
+          "value": 0,
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese-data",
+            "mcaleese"
+          ]
+        },
+        {
+          "year": 2018,
+          "value": 0,
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese-data",
+            "mcaleese"
+          ]
+        },
+        {
+          "year": 2019,
+          "value": 0,
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese-data",
+            "mcaleese"
+          ]
+        },
+        {
+          "year": 2020,
+          "value": 0,
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese-data",
+            "mcaleese"
+          ]
+        },
+        {
+          "year": 2021,
+          "value": 0,
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese-data",
+            "mcaleese"
+          ]
+        },
+        {
+          "year": 2022,
+          "value": 0,
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese-data",
+            "mcaleese"
+          ]
+        },
+        {
+          "year": 2023,
+          "value": 3,
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese-data",
+            "mcaleese"
+          ]
+        },
+        {
+          "year": 2024,
+          "value": 8,
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese-data",
+            "mcaleese"
+          ]
+        },
+        {
+          "year": 2025,
+          "value": 10,
+          "estimated": false,
+          "basis": "anchor",
+          "src": [
+            "mcaleese-data",
             "mcaleese"
           ]
         }
@@ -992,91 +1077,99 @@
     },
     {
       "slug": "forecasting",
-      "label": "Forecasting & timelines",
+      "label": "AI forecasting",
       "group": "technical",
       "topic": "/topics/ai-forecasting-and-timelines/",
-      "blurb": "Scaling laws, takeoff dynamics, timeline forecasting (incl. Epoch AI).",
+      "blurb": "Scaling laws, compute trends, takeoff and timeline forecasting (Epoch AI).",
       "arxiv": "(\"scaling laws\" OR \"compute trends\" OR \"AI timelines\" OR \"emergent abilities\")",
       "people": [
         {
           "year": 2017,
-          "value": 2,
+          "value": 0,
           "estimated": true,
           "basis": "modeled",
           "src": [
+            "mcaleese-data",
             "mcaleese"
           ]
         },
         {
           "year": 2018,
-          "value": 2,
+          "value": 0,
           "estimated": true,
           "basis": "modeled",
           "src": [
+            "mcaleese-data",
             "mcaleese"
           ]
         },
         {
           "year": 2019,
-          "value": 3,
+          "value": 0,
           "estimated": true,
           "basis": "modeled",
           "src": [
+            "mcaleese-data",
             "mcaleese"
           ]
         },
         {
           "year": 2020,
-          "value": 4,
+          "value": 0,
           "estimated": true,
           "basis": "modeled",
           "src": [
+            "mcaleese-data",
             "mcaleese"
           ]
         },
         {
           "year": 2021,
-          "value": 6,
+          "value": 0,
           "estimated": true,
           "basis": "modeled",
           "src": [
+            "mcaleese-data",
             "mcaleese"
           ]
         },
         {
           "year": 2022,
-          "value": 10,
+          "value": 0,
           "estimated": true,
-          "basis": "anchor",
+          "basis": "modeled",
           "src": [
-            "larsen-lifland",
-            "aiwatch"
+            "mcaleese-data",
+            "mcaleese"
           ]
         },
         {
           "year": 2023,
-          "value": 16,
+          "value": 3,
           "estimated": true,
           "basis": "modeled",
           "src": [
+            "mcaleese-data",
             "mcaleese"
           ]
         },
         {
           "year": 2024,
-          "value": 21,
+          "value": 5,
           "estimated": true,
           "basis": "modeled",
           "src": [
+            "mcaleese-data",
             "mcaleese"
           ]
         },
         {
           "year": 2025,
-          "value": 25,
+          "value": 5,
           "estimated": false,
           "basis": "anchor",
           "src": [
+            "mcaleese-data",
             "mcaleese"
           ]
         }
@@ -1084,82 +1177,89 @@
     },
     {
       "slug": "theory",
-      "label": "Learning theory & guarantees",
+      "label": "Theoretical safety",
       "group": "technical",
       "topic": null,
-      "blurb": "Formal guarantees, singular learning theory, theoretical safety.",
-      "arxiv": "(\"singular learning theory\" OR \"provable safety\" OR \"formal verification\") AND (neural OR \"deep learning\")",
+      "blurb": "Formal guarantees and theoretical safety research (ARC theory).",
+      "arxiv": "(\"singular learning theory\" OR \"provable safety\" OR \"formal verification\" OR \"agency theory\") AND (neural OR \"deep learning\")",
       "people": [
         {
           "year": 2017,
-          "value": 2,
+          "value": 0,
           "estimated": true,
           "basis": "modeled",
           "src": [
+            "mcaleese-data",
             "mcaleese"
           ]
         },
         {
           "year": 2018,
-          "value": 3,
+          "value": 0,
           "estimated": true,
           "basis": "modeled",
           "src": [
+            "mcaleese-data",
             "mcaleese"
           ]
         },
         {
           "year": 2019,
-          "value": 3,
+          "value": 0,
           "estimated": true,
           "basis": "modeled",
           "src": [
+            "mcaleese-data",
             "mcaleese"
           ]
         },
         {
           "year": 2020,
-          "value": 4,
+          "value": 0,
           "estimated": true,
           "basis": "modeled",
           "src": [
+            "mcaleese-data",
             "mcaleese"
           ]
         },
         {
           "year": 2021,
-          "value": 5,
+          "value": 0,
           "estimated": true,
           "basis": "modeled",
           "src": [
+            "mcaleese-data",
             "mcaleese"
           ]
         },
         {
           "year": 2022,
-          "value": 5,
+          "value": 2,
           "estimated": true,
-          "basis": "anchor",
+          "basis": "modeled",
           "src": [
-            "larsen-lifland",
-            "aiwatch"
+            "mcaleese-data",
+            "mcaleese"
           ]
         },
         {
           "year": 2023,
-          "value": 6,
+          "value": 4,
           "estimated": true,
           "basis": "modeled",
           "src": [
+            "mcaleese-data",
             "mcaleese"
           ]
         },
         {
           "year": 2024,
-          "value": 5,
+          "value": 4,
           "estimated": true,
           "basis": "modeled",
           "src": [
+            "mcaleese-data",
             "mcaleese"
           ]
         },
@@ -1169,6 +1269,107 @@
           "estimated": false,
           "basis": "anchor",
           "src": [
+            "mcaleese-data",
+            "mcaleese"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "emerging-technical",
+      "label": "Other emerging areas",
+      "group": "technical",
+      "topic": null,
+      "blurb": "Smaller / newer technical areas: CoT monitoring, value learning, provably-safe AI, lock-in risk, brain-like AGI safety.",
+      "arxiv": "(\"chain-of-thought monitoring\" OR \"value learning\" OR \"provably safe\" OR \"lock-in\") AND AI",
+      "people": [
+        {
+          "year": 2017,
+          "value": 0,
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese-data",
+            "mcaleese"
+          ]
+        },
+        {
+          "year": 2018,
+          "value": 0,
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese-data",
+            "mcaleese"
+          ]
+        },
+        {
+          "year": 2019,
+          "value": 0,
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese-data",
+            "mcaleese"
+          ]
+        },
+        {
+          "year": 2020,
+          "value": 0,
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese-data",
+            "mcaleese"
+          ]
+        },
+        {
+          "year": 2021,
+          "value": 0,
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese-data",
+            "mcaleese"
+          ]
+        },
+        {
+          "year": 2022,
+          "value": 1,
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese-data",
+            "mcaleese"
+          ]
+        },
+        {
+          "year": 2023,
+          "value": 1,
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese-data",
+            "mcaleese"
+          ]
+        },
+        {
+          "year": 2024,
+          "value": 3,
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese-data",
+            "mcaleese"
+          ]
+        },
+        {
+          "year": 2025,
+          "value": 11,
+          "estimated": false,
+          "basis": "anchor",
+          "src": [
+            "mcaleese-data",
             "mcaleese"
           ]
         }
@@ -1543,16 +1744,16 @@
       ]
     },
     {
-      "slug": "advocacy",
-      "label": "Advocacy & field-building",
+      "slug": "research",
+      "label": "Non-technical research",
       "group": "crosscutting",
       "topic": null,
-      "blurb": "Public engagement, awareness, talent pipelines and field-building.",
-      "arxiv": "(\"public attitudes\" OR \"AI awareness\" OR \"field building\") AND (AI OR \"artificial intelligence\")",
+      "blurb": "Non-technical AI-safety research: strategy, economics, security studies, sociotechnical analysis.",
+      "arxiv": "(\"AI safety\" OR \"AI governance\") AND (strategy OR economics OR sociotechnical OR \"security studies\")",
       "people": [
         {
           "year": 2017,
-          "value": 3,
+          "value": 2,
           "estimated": true,
           "basis": "modeled",
           "src": [
@@ -1561,7 +1762,7 @@
         },
         {
           "year": 2018,
-          "value": 4,
+          "value": 3,
           "estimated": true,
           "basis": "modeled",
           "src": [
@@ -1570,7 +1771,7 @@
         },
         {
           "year": 2019,
-          "value": 6,
+          "value": 4,
           "estimated": true,
           "basis": "modeled",
           "src": [
@@ -1579,7 +1780,7 @@
         },
         {
           "year": 2020,
-          "value": 8,
+          "value": 7,
           "estimated": true,
           "basis": "modeled",
           "src": [
@@ -1588,7 +1789,7 @@
         },
         {
           "year": 2021,
-          "value": 11,
+          "value": 14,
           "estimated": true,
           "basis": "modeled",
           "src": [
@@ -1597,7 +1798,7 @@
         },
         {
           "year": 2022,
-          "value": 15,
+          "value": 30,
           "estimated": true,
           "basis": "modeled",
           "src": [
@@ -1607,7 +1808,7 @@
         },
         {
           "year": 2023,
-          "value": 40,
+          "value": 60,
           "estimated": true,
           "basis": "modeled",
           "src": [
@@ -1616,7 +1817,7 @@
         },
         {
           "year": 2024,
-          "value": 65,
+          "value": 95,
           "estimated": true,
           "basis": "modeled",
           "src": [
@@ -1625,7 +1826,99 @@
         },
         {
           "year": 2025,
-          "value": 90,
+          "value": 120,
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "estimating"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "advocacy",
+      "label": "Advocacy & field-building",
+      "group": "crosscutting",
+      "topic": null,
+      "blurb": "Public engagement, awareness, talent pipelines and field-building.",
+      "arxiv": "(\"public attitudes\" OR \"AI awareness\" OR \"field building\") AND (AI OR \"artificial intelligence\")",
+      "people": [
+        {
+          "year": 2017,
+          "value": 2,
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "estimating"
+          ]
+        },
+        {
+          "year": 2018,
+          "value": 3,
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "estimating"
+          ]
+        },
+        {
+          "year": 2019,
+          "value": 4,
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "estimating"
+          ]
+        },
+        {
+          "year": 2020,
+          "value": 5,
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "estimating"
+          ]
+        },
+        {
+          "year": 2021,
+          "value": 7,
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "estimating"
+          ]
+        },
+        {
+          "year": 2022,
+          "value": 10,
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "estimating",
+            "aiwatch"
+          ]
+        },
+        {
+          "year": 2023,
+          "value": 27,
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "estimating"
+          ]
+        },
+        {
+          "year": 2024,
+          "value": 43,
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "estimating"
+          ]
+        },
+        {
+          "year": 2025,
+          "value": 60,
           "estimated": true,
           "basis": "modeled",
           "src": [
