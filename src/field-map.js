@@ -1,8 +1,10 @@
-// Interactive AI-safety field map.
+// Interactive AI-safety field map — animated multi-line chart.
 //
-// Reads the JSON inlined by scripts/build.mjs (#field-map-data) and renders
-// every research branch as a bubble sized by a chosen metric. A year slider
-// animates the bubbles growing/shrinking as the field changes over time.
+// Reads the JSON inlined by scripts/build.mjs (#field-map-data) and plots every
+// research branch as a line: time on the x-axis, the chosen metric (FTEs or
+// papers/year) on the y-axis. A play/slider sweeps time so each line grows to
+// the right, a dot rides the leading edge, and a label tracks it — the way Our
+// World in Data animates a line chart.
 //
 // Vanilla, zero-dependency, theme-aware (colors come from CSS custom props).
 (function () {
@@ -26,8 +28,8 @@
 
   // ── Data helpers ──────────────────────────────────────────────────────────
 
-  // Linear interpolation of a metric series at an arbitrary year. Clamps at the
-  // ends (no wild extrapolation), returns 0 when the branch has no data.
+  // Linear interpolation of a metric series at an arbitrary (possibly
+  // fractional) year. Clamps at the ends; returns 0 when the branch has no data.
   function valueAt(bucket, metric, year) {
     var series = bucket[metric];
     if (!series || !series.length) return 0;
@@ -45,15 +47,11 @@
     return last.value;
   }
 
-  function isEstimated(bucket, metric, year) {
+  function isEstimated(bucket, metric) {
     var series = bucket[metric];
     if (!series || !series.length) return false;
-    // estimated if either surrounding snapshot is flagged
     for (var i = 0; i < series.length; i++) {
-      if (series[i].estimated) {
-        // only the people metric carries the flag; treat the whole series as est. if any point is
-        return true;
-      }
+      if (series[i].estimated) return true; // any flagged point ⇒ treat series as est.
     }
     return false;
   }
@@ -68,7 +66,6 @@
   var metric =
     METRICS.indexOf(DATA.meta.defaultMetric) >= 0 ? DATA.meta.defaultMetric : METRICS[0];
 
-  // Year range for the active metric.
   function yearRange(m) {
     var min = Infinity,
       max = -Infinity;
@@ -81,7 +78,8 @@
     return { min: min, max: max };
   }
 
-  // Stable size scale: largest bubble across ALL years so growth reads visually.
+  // Largest value across ALL years for the active metric — fixes the y-axis so
+  // growth reads as growth (the scale doesn't rescale under you).
   function maxValueFor(m) {
     var mv = 0;
     var r = yearRange(m);
@@ -94,21 +92,28 @@
     return mv || 1;
   }
 
+  // Round a raw maximum up to a clean axis ceiling (…, 40, 50, 100, 200, …).
+  function niceCeil(v) {
+    if (v <= 0) return 1;
+    var mag = Math.pow(10, Math.floor(Math.log10(v)));
+    var r = v / mag;
+    var nice = r <= 1 ? 1 : r <= 2 ? 2 : r <= 2.5 ? 2.5 : r <= 5 ? 5 : 10;
+    return nice * mag;
+  }
+
+  function clamp(v, lo, hi) {
+    return v < lo ? lo : v > hi ? hi : v;
+  }
+
   // ── State ─────────────────────────────────────────────────────────────────
 
   var range = yearRange(metric);
-  var year = range.max;
+  var year = range.max; // integer target driven by the slider
+  var displayYear = range.max; // eased/animated position (the leading edge)
+  var lastNoteYear = null;
+
   var nodes = DATA.buckets.map(function (b) {
-    return {
-      b: b,
-      x: 0,
-      y: 0,
-      r: 0,
-      tr: 0, // target radius
-      el: null,
-      circle: null,
-      label: null,
-    };
+    return { b: b, el: null, path: null, hit: null, dot: null, lbl: null };
   });
 
   // ── DOM scaffold ──────────────────────────────────────────────────────────
@@ -171,7 +176,7 @@
     legend.appendChild(item);
   });
 
-  // Only surface the metric toggle once more than one metric has data (the
+  // The metric toggle only matters once more than one metric has data (the
   // "papers" series is empty until the monthly arXiv job populates it).
   if (METRICS.length > 1) controls.appendChild(metricWrap);
   controls.appendChild(timeWrap);
@@ -181,11 +186,21 @@
   var svg = document.createElementNS(SVG_NS, "svg");
   svg.setAttribute("class", "field-map-svg");
   svg.setAttribute("role", "img");
-  svg.setAttribute(
-    "aria-label",
-    "Bubble chart of AI safety research branches sized by " + DATA.meta.metrics[metric].label
-  );
+  function axisLabel() {
+    return (
+      "Line chart of AI safety research branches over time, sized by " +
+      DATA.meta.metrics[metric].label
+    );
+  }
+  svg.setAttribute("aria-label", axisLabel());
   stage.appendChild(svg);
+
+  // Layered groups: axes behind, then lines, dots, labels.
+  var gAxes = document.createElementNS(SVG_NS, "g");
+  gAxes.setAttribute("class", "fm-axis");
+  var gLines = document.createElementNS(SVG_NS, "g");
+  svg.appendChild(gAxes);
+  svg.appendChild(gLines);
 
   // Tooltip
   var tip = document.createElement("div");
@@ -194,7 +209,7 @@
   tip.hidden = true;
   stage.appendChild(tip);
 
-  // Build one group per node (circle + label) once.
+  // One <g> per branch: visible line + transparent hit line + dot + end label.
   nodes.forEach(function (n) {
     var g = document.createElementNS(SVG_NS, "g");
     g.setAttribute("class", "fm-node");
@@ -203,31 +218,45 @@
     if (n.b.topic) g.setAttribute("data-href", n.b.topic);
     g.setAttribute("role", n.b.topic ? "link" : "img");
 
-    var c = document.createElementNS(SVG_NS, "circle");
-    c.setAttribute("class", "fm-bubble");
-    g.appendChild(c);
+    var hit = document.createElementNS(SVG_NS, "path");
+    hit.setAttribute("class", "fm-hit");
+    var path = document.createElementNS(SVG_NS, "path");
+    path.setAttribute("class", "fm-line");
+    var dot = document.createElementNS(SVG_NS, "circle");
+    dot.setAttribute("class", "fm-dot");
+    dot.setAttribute("r", "3.2");
+    var lbl = document.createElementNS(SVG_NS, "text");
+    lbl.setAttribute("class", "fm-endlabel");
+    lbl.setAttribute("dy", "0.32em");
 
-    var t = document.createElementNS(SVG_NS, "text");
-    t.setAttribute("class", "fm-label");
-    t.setAttribute("text-anchor", "middle");
-    t.setAttribute("dy", "0.32em");
-    g.appendChild(t);
+    g.appendChild(hit);
+    g.appendChild(path);
+    g.appendChild(dot);
+    g.appendChild(lbl);
 
     n.el = g;
-    n.circle = c;
-    n.label = t;
+    n.path = path;
+    n.hit = hit;
+    n.dot = dot;
+    n.lbl = lbl;
 
     g.addEventListener("mouseenter", function () {
+      highlight(n, true);
       showTip(n);
     });
-    g.addEventListener("mousemove", function (ev) {
-      positionTip(ev);
+    g.addEventListener("mousemove", positionTip);
+    g.addEventListener("mouseleave", function () {
+      highlight(n, false);
+      hideTip();
     });
-    g.addEventListener("mouseleave", hideTip);
     g.addEventListener("focus", function () {
+      highlight(n, true);
       showTip(n, true);
     });
-    g.addEventListener("blur", hideTip);
+    g.addEventListener("blur", function () {
+      highlight(n, false);
+      hideTip();
+    });
     g.addEventListener("click", function () {
       if (n.b.topic) window.location.href = n.b.topic;
     });
@@ -238,194 +267,225 @@
       }
     });
 
-    svg.appendChild(g);
+    gLines.appendChild(g);
   });
 
-  // ── Layout / simulation ───────────────────────────────────────────────────
+  // ── Scales / layout ────────────────────────────────────────────────────────
 
   var W = 900,
-    H = 540,
-    maxValue = maxValueFor(metric);
+    H = 520,
+    yMax = niceCeil(maxValueFor(metric));
+  var M = { top: 20, right: 142, bottom: 30, left: 50 };
+  var plotW = 0,
+    plotH = 0;
+
+  function years() {
+    var ys = [];
+    for (var y = range.min; y <= range.max; y++) ys.push(y);
+    return ys;
+  }
 
   function measure() {
-    W = Math.max(320, stage.clientWidth || 900);
-    H = W < 560 ? 460 : 540;
+    W = Math.max(360, stage.clientWidth || 900);
+    H = W < 560 ? 420 : 520;
+    M.right = W < 560 ? 104 : 158; // room for the tracking labels
     svg.setAttribute("viewBox", "0 0 " + W + " " + H);
+    plotW = W - M.left - M.right;
+    plotH = H - M.top - M.bottom;
+    buildAxes();
   }
 
-  // Group anchor x positions (thirds) so groups cluster but can overlap.
-  function groupAnchorX(key) {
-    var idx = DATA.meta.groups.findIndex(function (g) {
-      return g.key === key;
-    });
-    var n = DATA.meta.groups.length;
-    return (W * (idx + 0.5)) / n;
+  function xScale(yr) {
+    if (range.max === range.min) return M.left + plotW;
+    return M.left + ((yr - range.min) / (range.max - range.min)) * plotW;
+  }
+  function yScale(v) {
+    return M.top + plotH - (v / yMax) * plotH;
   }
 
-  function radiusFor(value) {
-    if (value <= 0) return 0;
-    var minSide = Math.min(W, H);
-    var rMax = minSide * 0.16; // largest bubble caps at ~16% of the short side
-    var rMin = 6;
-    return rMin + (rMax - rMin) * Math.sqrt(value / maxValue);
-  }
+  // Redraw axis gridlines + tick labels (cheap; only on resize / metric change).
+  function buildAxes() {
+    while (gAxes.firstChild) gAxes.removeChild(gAxes.firstChild);
 
-  // Seed positions deterministically (by index) the first time.
-  function seedPositions() {
-    nodes.forEach(function (n, i) {
-      var ax = groupAnchorX(n.b.group);
-      // golden-angle spread around the group anchor for a stable, non-random start
-      var ang = i * 2.399963;
-      var rad = 30 + (i % 5) * 18;
-      n.x = ax + Math.cos(ang) * rad;
-      n.y = H / 2 + Math.sin(ang) * rad;
-    });
-  }
+    var nTicks = 4;
+    for (var i = 0; i <= nTicks; i++) {
+      var v = (yMax * i) / nTicks;
+      var y = yScale(v);
+      var grid = document.createElementNS(SVG_NS, "line");
+      grid.setAttribute("class", "fm-axis-grid");
+      grid.setAttribute("x1", M.left);
+      grid.setAttribute("x2", M.left + plotW);
+      grid.setAttribute("y1", y.toFixed(1));
+      grid.setAttribute("y2", y.toFixed(1));
+      gAxes.appendChild(grid);
 
-  function updateTargets() {
-    nodes.forEach(function (n) {
-      n.tr = radiusFor(valueAt(n.b, metric, year));
-    });
-  }
-
-  // One relaxation step: ease radius toward target, resolve collisions, pull
-  // toward the group anchor + vertical center. Returns total movement (for
-  // settling detection).
-  function step() {
-    var moved = 0;
-    // ease radii
-    nodes.forEach(function (n) {
-      n.r += (n.tr - n.r) * 0.18;
-    });
-    // centering / grouping pull
-    nodes.forEach(function (n) {
-      if (n.tr <= 0) return;
-      var ax = groupAnchorX(n.b.group);
-      n.x += (ax - n.x) * 0.04;
-      n.y += (H / 2 - n.y) * 0.06;
-    });
-    // collision resolution
-    for (var i = 0; i < nodes.length; i++) {
-      var a = nodes[i];
-      if (a.tr <= 0) continue;
-      for (var j = i + 1; j < nodes.length; j++) {
-        var b = nodes[j];
-        if (b.tr <= 0) continue;
-        var dx = b.x - a.x,
-          dy = b.y - a.y;
-        var d = Math.sqrt(dx * dx + dy * dy) || 0.01;
-        var min = a.r + b.r + 2;
-        if (d < min) {
-          var push = (min - d) / 2;
-          var ux = dx / d,
-            uy = dy / d;
-          a.x -= ux * push;
-          a.y -= uy * push;
-          b.x += ux * push;
-          b.y += uy * push;
-          moved += push;
-        }
-      }
+      var yt = document.createElementNS(SVG_NS, "text");
+      yt.setAttribute("x", M.left - 8);
+      yt.setAttribute("y", y.toFixed(1));
+      yt.setAttribute("text-anchor", "end");
+      yt.setAttribute("dy", "0.32em");
+      yt.textContent = Math.round(v).toLocaleString();
+      gAxes.appendChild(yt);
     }
-    // keep inside the box
-    nodes.forEach(function (n) {
-      if (n.tr <= 0) return;
-      var r = n.r;
-      if (n.x < r) n.x = r;
-      if (n.x > W - r) n.x = W - r;
-      if (n.y < r) n.y = r;
-      if (n.y > H - r) n.y = H - r;
+
+    // y-axis unit caption
+    var unit = document.createElementNS(SVG_NS, "text");
+    unit.setAttribute("class", "fm-axis-unit");
+    unit.setAttribute("x", M.left - 8);
+    unit.setAttribute("y", M.top - 7);
+    unit.setAttribute("text-anchor", "start");
+    unit.textContent = DATA.meta.metrics[metric].unit;
+    gAxes.appendChild(unit);
+
+    years().forEach(function (yr) {
+      var x = xScale(yr);
+      var xt = document.createElementNS(SVG_NS, "text");
+      xt.setAttribute("x", x.toFixed(1));
+      xt.setAttribute("y", H - M.bottom + 16);
+      xt.setAttribute("text-anchor", "middle");
+      xt.textContent = String(yr);
+      gAxes.appendChild(xt);
     });
-    return moved;
   }
+
+  // Shorten a branch label so the tracking label fits the right margin.
+  function shortLabel(s) {
+    var cap = W < 560 ? 11 : 15;
+    if (s.length <= cap) return s;
+    var first = s.split(/\s*&\s*/)[0];
+    if (first.length <= cap) return first;
+    return first.slice(0, cap - 1) + "…";
+  }
+
+  // ── Render one frame at the current displayYear ────────────────────────────
 
   function render() {
+    var dy = Math.min(displayYear, range.max);
+    var ends = [];
+
     nodes.forEach(function (n) {
-      if (n.tr <= 0) {
-        n.el.setAttribute("opacity", "0");
-        n.el.style.pointerEvents = "none";
+      var series = n.b[metric] || [];
+      var d = "";
+      var started = false;
+      for (var i = 0; i < series.length; i++) {
+        var p = series[i];
+        if (p.year < dy) {
+          d += (started ? "L" : "M") + xScale(p.year).toFixed(1) + " " + yScale(p.value).toFixed(1);
+          started = true;
+        }
+      }
+      var v = valueAt(n.b, metric, dy);
+      var ex = xScale(dy);
+      var ey = yScale(v);
+      d += (started ? "L" : "M") + ex.toFixed(1) + " " + ey.toFixed(1);
+
+      n.path.setAttribute("d", d);
+      n.hit.setAttribute("d", d);
+      n.dot.setAttribute("cx", ex.toFixed(1));
+      n.dot.setAttribute("cy", ey.toFixed(1));
+      n._ex = ex;
+      n._v = v;
+      ends.push(n);
+    });
+
+    // De-collide the tracking labels vertically: clamp into the plot, then
+    // enforce a minimum gap with a down-pass and an up-pass.
+    var gap = 13;
+    ends.forEach(function (n) {
+      n._ly = clamp(yScale(n._v), M.top + 6, M.top + plotH);
+    });
+    ends.sort(function (a, b) {
+      return a._ly - b._ly;
+    });
+    for (var i = 1; i < ends.length; i++) {
+      if (ends[i]._ly - ends[i - 1]._ly < gap) ends[i]._ly = ends[i - 1]._ly + gap;
+    }
+    for (var j = ends.length - 2; j >= 0; j--) {
+      if (ends[j + 1]._ly - ends[j]._ly < gap) ends[j]._ly = ends[j + 1]._ly - gap;
+    }
+    ends.forEach(function (n) {
+      n.lbl.setAttribute("x", (n._ex + 8).toFixed(1));
+      n.lbl.setAttribute("y", n._ly.toFixed(1));
+      n.lbl.textContent = shortLabel(n.b.label) + " " + Math.round(n._v).toLocaleString();
+      n.el.setAttribute(
+        "aria-label",
+        n.b.label + ": " + Math.round(n._v).toLocaleString() + " " + DATA.meta.metrics[metric].unit
+      );
+    });
+
+    var yNow = Math.round(dy);
+    if (yNow !== lastNoteYear) {
+      lastNoteYear = yNow;
+      updateNote(yNow);
+      yearOut.textContent = String(yNow);
+      slider.value = String(yNow);
+    }
+  }
+
+  // ── Animation loop ─────────────────────────────────────────────────────────
+  // Idle: ease displayYear toward the slider's `year`. Playing: sweep it
+  // continuously to range.max so every line grows rightward in one motion.
+
+  var rafId = null;
+  var PLAY_PER_YEAR_MS = 1100;
+
+  function frame() {
+    if (playing) {
+      displayYear += 16 / PLAY_PER_YEAR_MS;
+      if (displayYear >= range.max) {
+        displayYear = range.max;
+        render();
+        stopPlay();
         return;
       }
-      n.el.setAttribute("opacity", "1");
-      n.el.style.pointerEvents = "";
-      n.el.setAttribute("transform", "translate(" + n.x.toFixed(1) + "," + n.y.toFixed(1) + ")");
-      n.circle.setAttribute("r", Math.max(0, n.r).toFixed(1));
-      // show the label only when the bubble is roomy enough
-      if (n.r > 30) {
-        var fontSize = Math.min(15, 8 + n.r / 7);
-        n.label.textContent = fitLabel(n.b.label, n.r, fontSize);
-        n.label.setAttribute("opacity", "1");
-        n.label.setAttribute("font-size", fontSize.toFixed(1));
-      } else {
-        n.label.setAttribute("opacity", "0");
-      }
-    });
-  }
-
-  // Trim a label to what fits inside a bubble of radius r at the given font
-  // size: keep the full label if it fits, else the first word, else ellipsis.
-  function fitLabel(s, r, fontSize) {
-    var maxChars = Math.max(3, Math.floor((1.7 * r) / (0.56 * fontSize)));
-    if (s.length <= maxChars) return s;
-    var first = s.split(/\s*&\s*|\s+/)[0];
-    if (first.length <= maxChars) return first;
-    return first.slice(0, Math.max(1, maxChars - 1)) + "…";
-  }
-
-  var rafId = null,
-    settleFrames = 0;
-  function loop() {
-    var moved = step();
+      render();
+      rafId = requestAnimationFrame(frame);
+      return;
+    }
+    var diff = year - displayYear;
+    displayYear += diff * 0.2;
+    if (Math.abs(diff) < 0.01) displayYear = year;
     render();
-    // also count radius easing as movement
-    var rDelta = 0;
-    nodes.forEach(function (n) {
-      rDelta += Math.abs(n.tr - n.r);
-    });
-    if (moved < 0.4 && rDelta < 0.6) {
-      settleFrames++;
-    } else {
-      settleFrames = 0;
-    }
-    if (settleFrames > 8 && !playing) {
+    if (Math.abs(year - displayYear) < 0.005) {
       rafId = null;
-      return; // settled — stop animating to save battery
+      return;
     }
-    rafId = requestAnimationFrame(loop);
+    rafId = requestAnimationFrame(frame);
   }
 
   function kick() {
-    if (prefersReduced) {
-      // snap to target without animating
-      nodes.forEach(function (n) {
-        n.r = n.tr;
-      });
-      for (var k = 0; k < 200; k++) step();
+    if (prefersReduced && !playing) {
+      displayYear = year;
       render();
       return;
     }
-    settleFrames = 0;
-    if (rafId == null) rafId = requestAnimationFrame(loop);
+    if (rafId == null) rafId = requestAnimationFrame(frame);
   }
 
-  // ── Tooltip ───────────────────────────────────────────────────────────────
+  // ── Highlight / tooltip ────────────────────────────────────────────────────
+
+  function highlight(n, on) {
+    svg.classList.toggle("is-hovering", on);
+    n.el.classList.toggle("is-active", on);
+    if (on) n.el.parentNode.appendChild(n.el); // raise to front
+  }
 
   function showTip(n, keyboard) {
     var m = DATA.meta.metrics[metric];
-    var v = valueAt(n.b, metric, year);
-    var est = isEstimated(n.b, metric, year);
-    var shown = metric === "people" ? Math.round(v) : Math.round(v);
+    var yNow = Math.round(Math.min(displayYear, range.max));
+    var v = valueAt(n.b, metric, yNow);
+    var est = isEstimated(n.b, metric);
     tip.innerHTML =
-      '<strong>' +
+      "<strong>" +
       escapeHtml(n.b.label) +
       "</strong>" +
       '<span class="field-map-tip-num">' +
-      shown +
+      Math.round(v).toLocaleString() +
       " " +
       escapeHtml(m.unit) +
       (est ? " <em>(est.)</em>" : "") +
       " · " +
-      year +
+      yNow +
       "</span>" +
       '<span class="field-map-tip-blurb">' +
       escapeHtml(n.b.blurb) +
@@ -433,11 +493,10 @@
       (n.b.topic ? '<span class="field-map-tip-cta">Open topic →</span>' : "");
     tip.hidden = false;
     if (keyboard) {
-      // position near the node for keyboard users
       var rect = stage.getBoundingClientRect();
-      var sx = (n.x / W) * rect.width;
-      var sy = (n.y / H) * rect.height;
-      tip.style.left = sx + "px";
+      var sx = (n._ex / W) * rect.width;
+      var sy = (clamp(yScale(n._v), M.top, M.top + plotH) / H) * rect.height;
+      tip.style.left = Math.min(sx, rect.width - 16) + "px";
       tip.style.top = Math.max(0, sy - 10) + "px";
     }
   }
@@ -456,13 +515,16 @@
     });
   }
 
-  // ── Note / caption ────────────────────────────────────────────────────────
+  // ── Note / caption ─────────────────────────────────────────────────────────
 
-  function updateNote() {
+  function updateNote(yNow) {
     var m = DATA.meta.metrics[metric];
-    var total = 0;
+    var total = 0,
+      live = 0;
     nodes.forEach(function (n) {
-      total += valueAt(n.b, metric, year);
+      var v = valueAt(n.b, metric, yNow);
+      total += v;
+      if (v > 0) live++;
     });
     noteEl.innerHTML =
       "<strong>" +
@@ -470,33 +532,30 @@
       " " +
       escapeHtml(m.unit) +
       "</strong> across " +
-      nodes.filter(function (n) {
-        return n.tr > 0;
-      }).length +
+      live +
       " branches in " +
-      year +
+      yNow +
       ". " +
       escapeHtml(m.note);
   }
 
-  // ── Wiring ────────────────────────────────────────────────────────────────
+  // ── Wiring ─────────────────────────────────────────────────────────────────
 
   function setYear(y) {
     year = y;
     yearOut.textContent = String(y);
     slider.value = String(y);
-    updateTargets();
-    updateNote();
     kick();
   }
 
   function setMetric(m) {
     metric = m;
     range = yearRange(metric);
-    maxValue = maxValueFor(metric);
-    // keep year in range
+    yMax = niceCeil(maxValueFor(metric));
     if (year < range.min) year = range.min;
     if (year > range.max) year = range.max;
+    displayYear = year;
+    lastNoteYear = null;
     slider.min = String(range.min);
     slider.max = String(range.max);
     slider.value = String(year);
@@ -506,69 +565,57 @@
       btn.classList.toggle("is-active", active);
       btn.setAttribute("aria-pressed", active ? "true" : "false");
     });
-    svg.setAttribute(
-      "aria-label",
-      "Bubble chart of AI safety research branches sized by " + DATA.meta.metrics[metric].label
-    );
-    updateTargets();
-    updateNote();
+    svg.setAttribute("aria-label", axisLabel());
+    buildAxes();
+    render();
     kick();
   }
 
   slider.addEventListener("input", function () {
+    if (playing) stopPlay();
     setYear(parseInt(slider.value, 10));
   });
 
-  // Play / pause sweeps the slider across the range.
-  var playing = false,
-    playTimer = null;
+  // Play / pause sweeps time from the start so the lines draw rightward.
+  var playing = false;
   function stopPlay() {
     playing = false;
     playBtn.textContent = "▶";
     playBtn.classList.remove("is-playing");
-    if (playTimer) {
-      clearInterval(playTimer);
-      playTimer = null;
-    }
+    year = Math.round(Math.min(displayYear, range.max));
+    slider.value = String(year);
+    yearOut.textContent = String(year);
   }
   function startPlay() {
-    if (year >= range.max) setYear(range.min);
+    if (displayYear >= range.max) displayYear = range.min;
+    year = range.max;
     playing = true;
     playBtn.textContent = "❚❚";
     playBtn.classList.add("is-playing");
-    kick();
-    playTimer = setInterval(function () {
-      if (year >= range.max) {
-        stopPlay();
-        return;
-      }
-      setYear(year + 1);
-    }, prefersReduced ? 1 : 1100);
+    if (prefersReduced) {
+      displayYear = range.max;
+      render();
+      stopPlay();
+      return;
+    }
+    if (rafId == null) rafId = requestAnimationFrame(frame);
   }
   playBtn.addEventListener("click", function () {
     if (playing) stopPlay();
     else startPlay();
   });
 
-  // ── Init ──────────────────────────────────────────────────────────────────
+  // ── Init ───────────────────────────────────────────────────────────────────
 
   measure();
-  seedPositions();
-  updateTargets();
-  updateNote();
-  // warm the layout so first paint isn't a pile in the corner
-  for (var w = 0; w < 60; w++) step();
   render();
-  kick();
 
   var resizeT = null;
   window.addEventListener("resize", function () {
     if (resizeT) clearTimeout(resizeT);
     resizeT = setTimeout(function () {
       measure();
-      maxValue = maxValueFor(metric);
-      updateTargets();
-      kick();
+      render();
     }, 150);
   });
 })();

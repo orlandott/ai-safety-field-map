@@ -124,44 +124,85 @@
   width: 100%;
   height: auto;
 }
+/* Axes */
+.fm-axis text {
+  fill: var(--muted);
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+}
+.fm-axis-unit {
+  font-weight: 600;
+}
+.fm-axis-grid {
+  stroke: var(--border);
+  stroke-dasharray: 2 3;
+  opacity: 0.7;
+}
+/* Lines */
 .fm-node {
   cursor: default;
-  transition: opacity 0.4s ease;
+  transition: opacity 0.2s ease;
 }
 .fm-node[data-href] {
   cursor: pointer;
 }
-.fm-bubble {
+.fm-line {
+  fill: none;
+  stroke-width: 2;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  transition: stroke-width 0.12s;
+}
+.fm-hit {
+  fill: none;
+  stroke: transparent;
+  stroke-width: 14;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+.fm-dot {
   stroke: var(--surface);
   stroke-width: 1.5;
-  fill-opacity: 0.82;
-  transition: fill-opacity 0.15s;
 }
-.fm-node:hover .fm-bubble,
-.fm-node:focus .fm-bubble {
-  fill-opacity: 1;
+.fm-endlabel {
+  font-size: 11px;
+  font-weight: 600;
+  pointer-events: none;
+  paint-order: stroke;
+  stroke: var(--surface);
+  stroke-width: 3px;
+}
+/* Fade everything but the hovered/focused line */
+.field-map-svg.is-hovering .fm-node:not(.is-active) {
+  opacity: 0.22;
 }
 .fm-node:focus {
   outline: none;
 }
-.fm-node:focus .fm-bubble {
-  stroke: var(--accent-text);
-  stroke-width: 2.5;
+.fm-node.is-active .fm-line,
+.fm-node:focus .fm-line {
+  stroke-width: 3.5;
 }
-.fm-node[data-group="technical"] .fm-bubble {
+.fm-node[data-group="technical"] .fm-line {
+  stroke: var(--fm-technical);
+}
+.fm-node[data-group="technical"] .fm-dot,
+.fm-node[data-group="technical"] .fm-endlabel {
   fill: var(--fm-technical);
 }
-.fm-node[data-group="governance"] .fm-bubble {
+.fm-node[data-group="governance"] .fm-line {
+  stroke: var(--fm-governance);
+}
+.fm-node[data-group="governance"] .fm-dot,
+.fm-node[data-group="governance"] .fm-endlabel {
   fill: var(--fm-governance);
 }
-.fm-node[data-group="crosscutting"] .fm-bubble {
-  fill: var(--fm-crosscutting);
+.fm-node[data-group="crosscutting"] .fm-line {
+  stroke: var(--fm-crosscutting);
 }
-.fm-label {
-  fill: #fff;
-  font-weight: 600;
-  pointer-events: none;
-  paint-order: stroke;
+.fm-node[data-group="crosscutting"] .fm-dot,
+.fm-node[data-group="crosscutting"] .fm-endlabel {
+  fill: var(--fm-crosscutting);
 }
 .field-map-tip {
   position: absolute;
@@ -248,7 +289,7 @@
 }
 @media (prefers-reduced-motion: reduce) {
   .fm-node,
-  .fm-bubble {
+  .fm-line {
     transition: none;
   }
 }

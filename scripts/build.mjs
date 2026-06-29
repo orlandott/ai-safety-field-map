@@ -135,7 +135,7 @@ ${css}</style>
 <div class="wrap">
   <button class="theme-btn" type="button" onclick="var h=document.documentElement;h.setAttribute('data-theme',h.getAttribute('data-theme')==='dark'?'light':'dark')">Toggle theme</button>
   <h1 class="hero-title">${title}</h1>
-  <p class="lead">Each branch of AI safety research as a bubble sized by headcount. Drag the slider to watch the field grow over time.</p>
+  <p class="lead">Each branch of AI safety research as a line: years across the bottom, headcount up the side. Press play (or drag the slider) to watch every branch grow over time.</p>
   <div class="field-map" data-field-map hidden>
     <div class="field-map-controls" data-field-map-controls></div>
     <div class="field-map-stage" data-field-map-stage></div>
