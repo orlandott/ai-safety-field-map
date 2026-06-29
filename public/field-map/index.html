@@ -1997,16 +1997,27 @@ h1{font-size:1.9rem;margin:.2rem 0 .4rem;}
     tip.hidden = false;
     if (keyboard) {
       var rect = stage.getBoundingClientRect();
-      var sx = (n._ex / W) * rect.width;
-      var sy = (clamp(yScale(n._v), M.top, M.top + plotH) / H) * rect.height;
-      tip.style.left = Math.min(sx, rect.width - 16) + "px";
-      tip.style.top = Math.max(0, sy - 10) + "px";
+      placeTip((n._ex / W) * rect.width, (clamp(yScale(n._v), M.top, M.top + plotH) / H) * rect.height);
     }
   }
   function positionTip(ev) {
     var rect = stage.getBoundingClientRect();
-    tip.style.left = ev.clientX - rect.left + 14 + "px";
-    tip.style.top = ev.clientY - rect.top + 14 + "px";
+    placeTip(ev.clientX - rect.left, ev.clientY - rect.top);
+  }
+  // Keep the tooltip fully inside the stage (which clips overflow): offset from
+  // the cursor, but flip to the other side when it would run off an edge.
+  function placeTip(x, y) {
+    var pad = 6;
+    var tw = tip.offsetWidth || 0;
+    var th = tip.offsetHeight || 0;
+    var maxX = stage.clientWidth - tw - pad;
+    var maxY = stage.clientHeight - th - pad;
+    var left = x + 14;
+    if (left > maxX) left = x - 14 - tw; // flip to the left of the cursor
+    var top = y + 14;
+    if (top > maxY) top = y - 14 - th; // flip above the cursor
+    tip.style.left = clamp(left, pad, Math.max(pad, maxX)) + "px";
+    tip.style.top = clamp(top, pad, Math.max(pad, maxY)) + "px";
   }
   function hideTip() {
     tip.hidden = true;
