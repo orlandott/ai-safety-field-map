@@ -303,11 +303,111 @@
   color: var(--muted);
   font-weight: 400;
 }
-/* When JS is active the interactive map is shown and the table becomes a
-   supplementary data view; keep it but de-emphasise. */
+/* When JS is active the live breakdown under the chart replaces this static
+   single-year fallback table, so hide it (it stays for no-JS users). */
 .field-map:not([hidden]) ~ .field-map-table {
-  opacity: 0.85;
+  display: none;
 }
+/* ── Live per-year breakdown (under the chart) ─────────────────────────── */
+.field-map-breakdown {
+  margin: 0.8rem 0 0.2rem;
+}
+.fm-bd-head {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 0.5rem;
+}
+.fm-bd-hint {
+  font-weight: 400;
+  color: var(--muted);
+}
+.fm-bd-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 0.25rem 1rem;
+}
+.fm-bd-item {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.84rem;
+  padding: 0.12rem 0;
+  border-bottom: 1px solid var(--border);
+}
+.fm-bd-dot {
+  width: 0.6rem;
+  height: 0.6rem;
+  border-radius: 50%;
+  flex: none;
+}
+.fm-bd-item[data-group="technical"] .fm-bd-dot {
+  background: var(--fm-technical);
+}
+.fm-bd-item[data-group="governance"] .fm-bd-dot {
+  background: var(--fm-governance);
+}
+.fm-bd-item[data-group="crosscutting"] .fm-bd-dot {
+  background: var(--fm-crosscutting);
+}
+.fm-bd-label {
+  flex: 1 1 auto;
+  color: var(--text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+a.fm-bd-num {
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  color: var(--link);
+  text-decoration: none;
+  flex: none;
+}
+a.fm-bd-num:hover,
+a.fm-bd-num:focus {
+  text-decoration: underline;
+}
+.fm-bd-num {
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  flex: none;
+}
+.fm-bd-basis {
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  font-weight: 700;
+  flex: none;
+}
+.fm-bd-basis.is-anchor {
+  color: var(--accent-text);
+}
+.fm-bd-basis.is-modeled {
+  color: var(--muted);
+}
+.fm-bd-srcs {
+  display: inline-flex;
+  gap: 0.2rem;
+  flex: none;
+}
+.fm-bd-src {
+  font-size: 0.64rem;
+  font-weight: 600;
+  color: var(--link);
+  text-decoration: none;
+  border: 1px solid var(--border-strong);
+  border-radius: 4px;
+  padding: 0 0.22rem;
+  line-height: 1.5;
+}
+.fm-bd-src:hover {
+  background: var(--accent-soft);
+}
+
 /* ── Per-year sourcing table ───────────────────────────────────────────── */
 .field-map-provenance {
   margin-top: 1.25rem;
@@ -366,6 +466,18 @@
 .fm-prov-val {
   font-variant-numeric: tabular-nums;
 }
+a.fm-prov-val {
+  color: var(--link);
+  text-decoration: none;
+  font-weight: 600;
+}
+a.fm-prov-val:hover,
+a.fm-prov-val:focus {
+  text-decoration: underline;
+}
+.fm-prov-cell.is-anchor a.fm-prov-val {
+  font-weight: 700;
+}
 .fm-prov-val.is-anchor {
   font-weight: 700;
   color: var(--text);
@@ -397,6 +509,17 @@
 }
 .fm-prov-key-item {
   white-space: nowrap;
+}
+a.fm-prov-key-link {
+  color: var(--link);
+  text-decoration: none;
+}
+a.fm-prov-key-link:hover,
+a.fm-prov-key-link:focus {
+  text-decoration: underline;
+}
+a.fm-prov-key-link b {
+  color: var(--text);
 }
 .fm-prov-key .fm-prov-val {
   display: inline-block;

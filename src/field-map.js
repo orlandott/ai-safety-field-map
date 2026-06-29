@@ -69,6 +69,20 @@
     SRC_BY_ID[s.id] = s;
   });
 
+  // Short badges for the per-source links (mirrors scripts/build.mjs).
+  var SRC_ABBR = {
+    mcaleese: "M",
+    estimating: "E",
+    "eightyk-tech": "8t",
+    "eightyk-count": "8c",
+    "larsen-lifland": "L",
+    aiwatch: "W",
+    eto: "ETO",
+  };
+  function srcAbbr(id) {
+    return SRC_ABBR[id] || id;
+  }
+
   // The snapshot whose provenance (basis + sources) applies at a given year —
   // the point on or just before it. Used to cite the value the tooltip shows.
   function pointAt(bucket, metric, year) {
@@ -149,6 +163,17 @@
   var controls = root.querySelector("[data-field-map-controls]");
   var stage = root.querySelector("[data-field-map-stage]");
   var noteEl = root.querySelector("[data-field-map-note]");
+
+  // Live per-branch breakdown for the year you're viewing — every value is a
+  // link to its source, and the whole list re-renders as the slider moves.
+  // Inserted right under the chart so the numbers track the year you scrub to.
+  var breakdown = root.querySelector("[data-field-map-breakdown]");
+  if (!breakdown) {
+    breakdown = document.createElement("div");
+    breakdown.className = "field-map-breakdown";
+    breakdown.setAttribute("data-field-map-breakdown", "");
+    stage.parentNode.insertBefore(breakdown, stage.nextSibling);
+  }
 
   // Metric toggle
   var metricWrap = document.createElement("div");
@@ -460,6 +485,7 @@
     if (yNow !== lastNoteYear) {
       lastNoteYear = yNow;
       updateNote(yNow);
+      updateBreakdown(yNow);
       yearOut.textContent = String(yNow);
       slider.value = String(yNow);
     }
@@ -619,6 +645,92 @@
       yNow +
       ". " +
       escapeHtml(m.note);
+  }
+
+  // Re-render the live breakdown for `yNow`: every active branch as a row whose
+  // number links to the source backing that exact year's figure. Sorted high to
+  // low so the biggest branches read first.
+  function updateBreakdown(yNow) {
+    var m = DATA.meta.metrics[metric];
+    var rows = nodes
+      .map(function (n) {
+        return { n: n, v: valueAt(n.b, metric, yNow) };
+      })
+      .filter(function (r) {
+        return r.v > 0;
+      })
+      .sort(function (a, b) {
+        return b.v - a.v;
+      });
+
+    var items = rows
+      .map(function (r) {
+        var pt = pointAt(r.n.b, metric, yNow);
+        var num = Math.round(r.v).toLocaleString();
+        var ids = pt && pt.src ? pt.src : [];
+        var primary = ids.length ? SRC_BY_ID[ids[0]] : null;
+        var basis = pt && pt.basis === "anchor" ? "anchor" : pt ? "modeled" : "";
+        var numTitle = primary
+          ? (basis ? basis + " · " : "") + primary.label
+          : "";
+        var numHtml = primary
+          ? '<a class="fm-bd-num" href="' +
+            escapeHtml(primary.url) +
+            '" rel="noopener noreferrer" title="' +
+            escapeHtml(numTitle) +
+            '">' +
+            num +
+            "</a>"
+          : '<span class="fm-bd-num">' + num + "</span>";
+        var badges = ids
+          .map(function (id) {
+            var s = SRC_BY_ID[id];
+            return s
+              ? '<a class="fm-bd-src" href="' +
+                  escapeHtml(s.url) +
+                  '" rel="noopener noreferrer" title="' +
+                  escapeHtml(s.label) +
+                  '">' +
+                  escapeHtml(srcAbbr(id)) +
+                  "</a>"
+              : "";
+          })
+          .filter(Boolean)
+          .join("");
+        var basisTag = basis
+          ? '<span class="fm-bd-basis ' +
+            (basis === "anchor" ? "is-anchor" : "is-modeled") +
+            '">' +
+            basis +
+            "</span>"
+          : "";
+        return (
+          '<li class="fm-bd-item" data-group="' +
+          escapeHtml(r.n.b.group) +
+          '">' +
+          '<span class="fm-bd-dot"></span>' +
+          '<span class="fm-bd-label">' +
+          escapeHtml(r.n.b.label) +
+          "</span>" +
+          numHtml +
+          basisTag +
+          '<span class="fm-bd-srcs">' +
+          badges +
+          "</span>" +
+          "</li>"
+        );
+      })
+      .join("");
+
+    breakdown.innerHTML =
+      '<div class="fm-bd-head">' +
+      escapeHtml(m.label) +
+      " by branch in " +
+      yNow +
+      ' <span class="fm-bd-hint">— click a number for its source</span></div>' +
+      '<ol class="fm-bd-list">' +
+      items +
+      "</ol>";
   }
 
   // ── Wiring ─────────────────────────────────────────────────────────────────

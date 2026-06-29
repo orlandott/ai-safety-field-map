@@ -144,6 +144,7 @@ function buildProvenance(data) {
   function cell(pt) {
     if (!pt) return `<td class="fm-prov-cell">—</td>`;
     const ids = pt.src && pt.src.length ? pt.src : [];
+    const primary = ids.length ? srcById[ids[0]] : null;
     const sup = ids
       .map((id) => {
         const s = srcById[id];
@@ -156,9 +157,16 @@ function buildProvenance(data) {
       .join("");
     const basisClass = pt.basis === "anchor" ? " is-anchor" : " is-modeled";
     const basisTitle = pt.basis === "anchor" ? "Anchored to a published figure" : "Modeled / interpolated";
+    const num = Math.round(pt.value).toLocaleString();
+    // The number itself links to its primary source; the superscript exposes
+    // any additional corroborating sources.
+    const valHtml = primary
+      ? `<a class="fm-prov-val" href="${escapeHtml(primary.url)}" rel="noopener noreferrer" ` +
+        `title="${escapeHtml((pt.basis === "anchor" ? "anchor · " : "modeled · ") + primary.label)}">${num}</a>`
+      : `<span class="fm-prov-val">${num}</span>`;
     return (
       `<td class="fm-prov-cell${basisClass}" title="${escapeHtml(basisTitle)}">` +
-      `<span class="fm-prov-val">${Math.round(pt.value).toLocaleString()}</span>` +
+      valHtml +
       (sup ? `<sup class="fm-prov-src">${sup}</sup>` : "") +
       `</td>`
     );
@@ -190,8 +198,8 @@ function buildProvenance(data) {
   const legend = (data.meta.sources || [])
     .map(
       (s) =>
-        `<span class="fm-prov-key-item"><b>${escapeHtml(abbr(s.id))}</b> ` +
-        `<a href="${escapeHtml(s.url)}" rel="noopener noreferrer">${escapeHtml(s.label)}</a></span>`
+        `<a class="fm-prov-key-item fm-prov-key-link" href="${escapeHtml(s.url)}" rel="noopener noreferrer">` +
+        `<b>${escapeHtml(abbr(s.id))}</b> ${escapeHtml(s.label)}</a>`
     )
     .join("");
 
