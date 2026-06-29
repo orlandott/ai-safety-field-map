@@ -7,7 +7,7 @@
       "people": {
         "label": "People (FTEs)",
         "unit": "FTEs",
-        "note": "Full-time-equivalent researchers, 2017–2025. The 2025 technical figures are taken directly from McAleese's org-by-org dataset (629 FTEs across 69 orgs, aggregated by category: misc technical ~200, interpretability 122, evals 100 — AISI ~50, METR ~31, Apollo ~19 — LLM safety 87, …). Non-technical 2025 is ~500: governance ~250, non-technical research ~120, advocacy/field-building ~60, ethics/other ~50. 2025 technical points are anchored to that dataset; every earlier year is modeled — technical history is reconstructed from each org's founding year and normalised to McAleese's published technical totals (≈30 in 2017, ≈50 in 2020, ≈300 in 2022), and the non-technical splits are modeled from his category totals (we don't yet have the org-level non-technical sheet). Every point carries its own source (see the per-year sourcing table below): 'anchor' = straight from the dataset, 'modeled' = our reconstruction. Per-bucket splits are approximate, so totals don't sum exactly.",
+        "note": "Full-time-equivalent researchers, 2017–2025. The 2025 column is taken directly from McAleese's org-by-org dataset — 118 organisations totalling ~1,130 FTEs: ~624 technical (misc technical 200, interpretability 122, evals 100 [AISI 50, METR 31, Apollo 19], LLM safety 87, …) and ~505 non-technical (governance 249, non-technical research 146, advocacy 79, forecasting 25, watchdog/whistleblower 6). Every 2025 point is anchored to that dataset; earlier years are modeled — each category's history is reconstructed from its organisations' founding years and normalised to McAleese's published totals (≈30 technical in 2017, ≈50 in 2020, ≈300 technical + ≈100 non-technical in 2022). Every point carries its own source (see the per-year sourcing table below): 'anchor' = straight from the dataset, 'modeled' = our founding-year reconstruction. Per-bucket splits are approximate, so totals don't sum exactly.",
         "auto": false
       },
       "papers": {
@@ -62,7 +62,7 @@
     "groups": [
       {
         "key": "technical",
-        "label": "Technical alignment"
+        "label": "Technical safety"
       },
       {
         "key": "governance",
@@ -145,7 +145,7 @@
         },
         {
           "year": 2023,
-          "value": 197,
+          "value": 198,
           "estimated": true,
           "basis": "modeled",
           "src": [
@@ -355,7 +355,7 @@
         },
         {
           "year": 2024,
-          "value": 70,
+          "value": 71,
           "estimated": true,
           "basis": "modeled",
           "src": [
@@ -745,7 +745,7 @@
         },
         {
           "year": 2023,
-          "value": 23,
+          "value": 24,
           "estimated": true,
           "basis": "modeled",
           "src": [
@@ -845,7 +845,7 @@
         },
         {
           "year": 2023,
-          "value": 9,
+          "value": 10,
           "estimated": true,
           "basis": "modeled",
           "src": [
@@ -881,7 +881,7 @@
       "group": "technical",
       "topic": null,
       "blurb": "Cooperation, conflict and alignment among multiple AI agents (Conitzer, Softmax).",
-      "arxiv": "(\"multi-agent\" OR \"multiagent\") AND (cooperation OR alignment OR \"game theory\") AND (AI OR agent)",
+      "arxiv": "(\"multi-agent\" OR multiagent) AND (cooperation OR alignment OR \"game theory\") AND (AI OR agent)",
       "people": [
         {
           "year": 2017,
@@ -1076,112 +1076,12 @@
       ]
     },
     {
-      "slug": "forecasting",
-      "label": "AI forecasting",
-      "group": "technical",
-      "topic": "/topics/ai-forecasting-and-timelines/",
-      "blurb": "Scaling laws, compute trends, takeoff and timeline forecasting (Epoch AI).",
-      "arxiv": "(\"scaling laws\" OR \"compute trends\" OR \"AI timelines\" OR \"emergent abilities\")",
-      "people": [
-        {
-          "year": 2017,
-          "value": 0,
-          "estimated": true,
-          "basis": "modeled",
-          "src": [
-            "mcaleese-data",
-            "mcaleese"
-          ]
-        },
-        {
-          "year": 2018,
-          "value": 0,
-          "estimated": true,
-          "basis": "modeled",
-          "src": [
-            "mcaleese-data",
-            "mcaleese"
-          ]
-        },
-        {
-          "year": 2019,
-          "value": 0,
-          "estimated": true,
-          "basis": "modeled",
-          "src": [
-            "mcaleese-data",
-            "mcaleese"
-          ]
-        },
-        {
-          "year": 2020,
-          "value": 0,
-          "estimated": true,
-          "basis": "modeled",
-          "src": [
-            "mcaleese-data",
-            "mcaleese"
-          ]
-        },
-        {
-          "year": 2021,
-          "value": 0,
-          "estimated": true,
-          "basis": "modeled",
-          "src": [
-            "mcaleese-data",
-            "mcaleese"
-          ]
-        },
-        {
-          "year": 2022,
-          "value": 0,
-          "estimated": true,
-          "basis": "modeled",
-          "src": [
-            "mcaleese-data",
-            "mcaleese"
-          ]
-        },
-        {
-          "year": 2023,
-          "value": 3,
-          "estimated": true,
-          "basis": "modeled",
-          "src": [
-            "mcaleese-data",
-            "mcaleese"
-          ]
-        },
-        {
-          "year": 2024,
-          "value": 5,
-          "estimated": true,
-          "basis": "modeled",
-          "src": [
-            "mcaleese-data",
-            "mcaleese"
-          ]
-        },
-        {
-          "year": 2025,
-          "value": 5,
-          "estimated": false,
-          "basis": "anchor",
-          "src": [
-            "mcaleese-data",
-            "mcaleese"
-          ]
-        }
-      ]
-    },
-    {
       "slug": "theory",
       "label": "Theoretical safety",
       "group": "technical",
       "topic": null,
       "blurb": "Formal guarantees and theoretical safety research (ARC theory).",
-      "arxiv": "(\"singular learning theory\" OR \"provable safety\" OR \"formal verification\" OR \"agency theory\") AND (neural OR \"deep learning\")",
+      "arxiv": "(\"singular learning theory\" OR \"provable safety\" OR \"formal verification\") AND (neural OR \"deep learning\")",
       "people": [
         {
           "year": 2017,
@@ -1277,7 +1177,7 @@
     },
     {
       "slug": "emerging-technical",
-      "label": "Other emerging areas",
+      "label": "Other emerging technical",
       "group": "technical",
       "topic": null,
       "blurb": "Smaller / newer technical areas: CoT monitoring, value learning, provably-safe AI, lock-in risk, brain-like AGI safety.",
@@ -1376,368 +1276,100 @@
       ]
     },
     {
-      "slug": "compute-governance",
-      "label": "Compute governance",
+      "slug": "governance",
+      "label": "Governance & policy",
       "group": "governance",
       "topic": "/topics/ai-governance-and-policy/",
-      "blurb": "Tracking/controlling training compute, export controls, on-chip mechanisms.",
-      "arxiv": "(\"compute governance\" OR \"hardware governance\" OR \"on-chip\" OR \"export controls\") AND (AI OR chip OR semiconductor)",
+      "blurb": "Policy, standards, institutions and government bodies (GovAI, EU AI Office, the AISIs, Ada Lovelace, …).",
+      "arxiv": "(\"AI regulation\" OR \"AI policy\" OR \"AI governance\" OR \"frontier AI\") AND (policy OR regulation OR standard OR institute)",
       "people": [
         {
           "year": 2017,
-          "value": 0,
-          "estimated": true,
-          "basis": "modeled",
-          "src": [
-            "estimating"
-          ]
-        },
-        {
-          "year": 2018,
-          "value": 1,
-          "estimated": true,
-          "basis": "modeled",
-          "src": [
-            "estimating"
-          ]
-        },
-        {
-          "year": 2019,
-          "value": 1,
-          "estimated": true,
-          "basis": "modeled",
-          "src": [
-            "estimating"
-          ]
-        },
-        {
-          "year": 2020,
-          "value": 2,
-          "estimated": true,
-          "basis": "modeled",
-          "src": [
-            "estimating"
-          ]
-        },
-        {
-          "year": 2021,
-          "value": 4,
-          "estimated": true,
-          "basis": "modeled",
-          "src": [
-            "estimating"
-          ]
-        },
-        {
-          "year": 2022,
-          "value": 11,
-          "estimated": true,
-          "basis": "modeled",
-          "src": [
-            "estimating",
-            "aiwatch"
-          ]
-        },
-        {
-          "year": 2023,
-          "value": 27,
-          "estimated": true,
-          "basis": "modeled",
-          "src": [
-            "estimating"
-          ]
-        },
-        {
-          "year": 2024,
-          "value": 42,
-          "estimated": true,
-          "basis": "modeled",
-          "src": [
-            "estimating"
-          ]
-        },
-        {
-          "year": 2025,
-          "value": 53,
-          "estimated": true,
-          "basis": "modeled",
-          "src": [
-            "mcaleese"
-          ]
-        }
-      ]
-    },
-    {
-      "slug": "policy-standards",
-      "label": "Policy & standards",
-      "group": "governance",
-      "topic": "/topics/ai-governance-and-policy/",
-      "blurb": "Frontier-model regulation, evals-based policy, standards, law (EU AI Act, RSPs).",
-      "arxiv": "(\"AI regulation\" OR \"AI policy\" OR \"AI governance\" OR \"frontier AI\") AND (policy OR regulation OR standard)",
-      "people": [
-        {
-          "year": 2017,
-          "value": 2,
-          "estimated": true,
-          "basis": "modeled",
-          "src": [
-            "estimating"
-          ]
-        },
-        {
-          "year": 2018,
           "value": 3,
           "estimated": true,
           "basis": "modeled",
           "src": [
-            "estimating"
-          ]
-        },
-        {
-          "year": 2019,
-          "value": 5,
-          "estimated": true,
-          "basis": "modeled",
-          "src": [
-            "estimating"
-          ]
-        },
-        {
-          "year": 2020,
-          "value": 9,
-          "estimated": true,
-          "basis": "modeled",
-          "src": [
-            "estimating"
-          ]
-        },
-        {
-          "year": 2021,
-          "value": 17,
-          "estimated": true,
-          "basis": "modeled",
-          "src": [
-            "estimating"
-          ]
-        },
-        {
-          "year": 2022,
-          "value": 30,
-          "estimated": true,
-          "basis": "modeled",
-          "src": [
-            "estimating",
-            "aiwatch"
-          ]
-        },
-        {
-          "year": 2023,
-          "value": 61,
-          "estimated": true,
-          "basis": "modeled",
-          "src": [
-            "estimating"
-          ]
-        },
-        {
-          "year": 2024,
-          "value": 91,
-          "estimated": true,
-          "basis": "modeled",
-          "src": [
-            "estimating"
-          ]
-        },
-        {
-          "year": 2025,
-          "value": 114,
-          "estimated": true,
-          "basis": "modeled",
-          "src": [
+            "mcaleese-data",
             "mcaleese"
-          ]
-        }
-      ]
-    },
-    {
-      "slug": "intl-coordination",
-      "label": "International coordination",
-      "group": "governance",
-      "topic": "/topics/ai-governance-and-policy/",
-      "blurb": "Treaties, arms-race dynamics, international institutions for AI.",
-      "arxiv": "(\"international governance\" OR \"AI treaty\" OR \"arms race\" OR \"international coordination\") AND AI",
-      "people": [
-        {
-          "year": 2017,
-          "value": 1,
-          "estimated": true,
-          "basis": "modeled",
-          "src": [
-            "estimating"
           ]
         },
         {
           "year": 2018,
-          "value": 2,
-          "estimated": true,
-          "basis": "modeled",
-          "src": [
-            "estimating"
-          ]
-        },
-        {
-          "year": 2019,
-          "value": 2,
-          "estimated": true,
-          "basis": "modeled",
-          "src": [
-            "estimating"
-          ]
-        },
-        {
-          "year": 2020,
-          "value": 3,
-          "estimated": true,
-          "basis": "modeled",
-          "src": [
-            "estimating"
-          ]
-        },
-        {
-          "year": 2021,
           "value": 6,
           "estimated": true,
           "basis": "modeled",
           "src": [
-            "estimating"
-          ]
-        },
-        {
-          "year": 2022,
-          "value": 11,
-          "estimated": true,
-          "basis": "modeled",
-          "src": [
-            "estimating",
-            "aiwatch"
-          ]
-        },
-        {
-          "year": 2023,
-          "value": 27,
-          "estimated": true,
-          "basis": "modeled",
-          "src": [
-            "estimating"
-          ]
-        },
-        {
-          "year": 2024,
-          "value": 42,
-          "estimated": true,
-          "basis": "modeled",
-          "src": [
-            "estimating"
-          ]
-        },
-        {
-          "year": 2025,
-          "value": 53,
-          "estimated": true,
-          "basis": "modeled",
-          "src": [
+            "mcaleese-data",
             "mcaleese"
-          ]
-        }
-      ]
-    },
-    {
-      "slug": "lab-governance",
-      "label": "Lab governance & RSPs",
-      "group": "governance",
-      "topic": "/topics/ai-governance-and-policy/",
-      "blurb": "Responsible scaling policies, internal lab governance and commitments.",
-      "arxiv": "(\"responsible scaling\" OR \"responsible AI\" OR \"AI safety levels\" OR \"corporate governance\") AND AI",
-      "people": [
-        {
-          "year": 2017,
-          "value": 0,
-          "estimated": true,
-          "basis": "modeled",
-          "src": [
-            "estimating"
-          ]
-        },
-        {
-          "year": 2018,
-          "value": 0,
-          "estimated": true,
-          "basis": "modeled",
-          "src": [
-            "estimating"
           ]
         },
         {
           "year": 2019,
-          "value": 0,
+          "value": 11,
           "estimated": true,
           "basis": "modeled",
           "src": [
-            "estimating"
+            "mcaleese-data",
+            "mcaleese"
           ]
         },
         {
           "year": 2020,
-          "value": 1,
+          "value": 16,
           "estimated": true,
           "basis": "modeled",
           "src": [
-            "estimating"
+            "mcaleese-data",
+            "mcaleese"
           ]
         },
         {
           "year": 2021,
-          "value": 2,
+          "value": 32,
           "estimated": true,
           "basis": "modeled",
           "src": [
-            "estimating"
+            "mcaleese-data",
+            "mcaleese"
           ]
         },
         {
           "year": 2022,
-          "value": 4,
+          "value": 49,
           "estimated": true,
           "basis": "modeled",
           "src": [
-            "estimating",
-            "aiwatch"
+            "mcaleese-data",
+            "mcaleese"
           ]
         },
         {
           "year": 2023,
-          "value": 14,
+          "value": 110,
           "estimated": true,
           "basis": "modeled",
           "src": [
-            "estimating"
+            "mcaleese-data",
+            "mcaleese"
           ]
         },
         {
           "year": 2024,
-          "value": 23,
+          "value": 170,
           "estimated": true,
           "basis": "modeled",
           "src": [
-            "estimating"
+            "mcaleese-data",
+            "mcaleese"
           ]
         },
         {
           "year": 2025,
-          "value": 30,
-          "estimated": true,
-          "basis": "modeled",
+          "value": 249,
+          "estimated": false,
+          "basis": "anchor",
           "src": [
+            "mcaleese-data",
             "mcaleese"
           ]
         }
@@ -1748,7 +1380,7 @@
       "label": "Non-technical research",
       "group": "crosscutting",
       "topic": null,
-      "blurb": "Non-technical AI-safety research: strategy, economics, security studies, sociotechnical analysis.",
+      "blurb": "Strategy, economics, security studies and sociotechnical research (CSET, Open Phil, Concordia, SaferAI, …).",
       "arxiv": "(\"AI safety\" OR \"AI governance\") AND (strategy OR economics OR sociotechnical OR \"security studies\")",
       "people": [
         {
@@ -1757,80 +1389,88 @@
           "estimated": true,
           "basis": "modeled",
           "src": [
-            "estimating"
+            "mcaleese-data",
+            "mcaleese"
           ]
         },
         {
           "year": 2018,
-          "value": 3,
+          "value": 5,
           "estimated": true,
           "basis": "modeled",
           "src": [
-            "estimating"
+            "mcaleese-data",
+            "mcaleese"
           ]
         },
         {
           "year": 2019,
-          "value": 4,
+          "value": 8,
           "estimated": true,
           "basis": "modeled",
           "src": [
-            "estimating"
+            "mcaleese-data",
+            "mcaleese"
           ]
         },
         {
           "year": 2020,
-          "value": 7,
+          "value": 12,
           "estimated": true,
           "basis": "modeled",
           "src": [
-            "estimating"
+            "mcaleese-data",
+            "mcaleese"
           ]
         },
         {
           "year": 2021,
-          "value": 14,
+          "value": 24,
           "estimated": true,
           "basis": "modeled",
           "src": [
-            "estimating"
+            "mcaleese-data",
+            "mcaleese"
           ]
         },
         {
           "year": 2022,
-          "value": 30,
+          "value": 37,
           "estimated": true,
           "basis": "modeled",
           "src": [
-            "estimating",
-            "aiwatch"
+            "mcaleese-data",
+            "mcaleese"
           ]
         },
         {
           "year": 2023,
-          "value": 60,
+          "value": 86,
           "estimated": true,
           "basis": "modeled",
           "src": [
-            "estimating"
+            "mcaleese-data",
+            "mcaleese"
           ]
         },
         {
           "year": 2024,
-          "value": 95,
+          "value": 124,
           "estimated": true,
           "basis": "modeled",
           "src": [
-            "estimating"
+            "mcaleese-data",
+            "mcaleese"
           ]
         },
         {
           "year": 2025,
-          "value": 120,
-          "estimated": true,
-          "basis": "modeled",
+          "value": 146,
+          "estimated": false,
+          "basis": "anchor",
           "src": [
-            "estimating"
+            "mcaleese-data",
+            "mcaleese"
           ]
         }
       ]
@@ -1840,180 +1480,296 @@
       "label": "Advocacy & field-building",
       "group": "crosscutting",
       "topic": null,
-      "blurb": "Public engagement, awareness, talent pipelines and field-building.",
-      "arxiv": "(\"public attitudes\" OR \"AI awareness\" OR \"field building\") AND (AI OR \"artificial intelligence\")",
+      "blurb": "Public engagement, campaigning and field-building (FLI, Pause AI, ControlAI, The Future Society, …).",
+      "arxiv": "(\"public attitudes\" OR \"AI awareness\" OR \"field building\" OR \"AI advocacy\") AND (AI OR \"artificial intelligence\")",
       "people": [
         {
           "year": 2017,
-          "value": 2,
-          "estimated": true,
-          "basis": "modeled",
-          "src": [
-            "estimating"
-          ]
-        },
-        {
-          "year": 2018,
           "value": 3,
           "estimated": true,
           "basis": "modeled",
           "src": [
-            "estimating"
+            "mcaleese-data",
+            "mcaleese"
+          ]
+        },
+        {
+          "year": 2018,
+          "value": 6,
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese-data",
+            "mcaleese"
           ]
         },
         {
           "year": 2019,
-          "value": 4,
-          "estimated": true,
-          "basis": "modeled",
-          "src": [
-            "estimating"
-          ]
-        },
-        {
-          "year": 2020,
-          "value": 5,
-          "estimated": true,
-          "basis": "modeled",
-          "src": [
-            "estimating"
-          ]
-        },
-        {
-          "year": 2021,
           "value": 7,
           "estimated": true,
           "basis": "modeled",
           "src": [
-            "estimating"
+            "mcaleese-data",
+            "mcaleese"
+          ]
+        },
+        {
+          "year": 2020,
+          "value": 7,
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese-data",
+            "mcaleese"
+          ]
+        },
+        {
+          "year": 2021,
+          "value": 12,
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese-data",
+            "mcaleese"
           ]
         },
         {
           "year": 2022,
-          "value": 10,
+          "value": 14,
           "estimated": true,
           "basis": "modeled",
           "src": [
-            "estimating",
-            "aiwatch"
+            "mcaleese-data",
+            "mcaleese"
           ]
         },
         {
           "year": 2023,
-          "value": 27,
+          "value": 29,
           "estimated": true,
           "basis": "modeled",
           "src": [
-            "estimating"
+            "mcaleese-data",
+            "mcaleese"
           ]
         },
         {
           "year": 2024,
-          "value": 43,
+          "value": 54,
           "estimated": true,
           "basis": "modeled",
           "src": [
-            "estimating"
+            "mcaleese-data",
+            "mcaleese"
           ]
         },
         {
           "year": 2025,
-          "value": 60,
-          "estimated": true,
-          "basis": "modeled",
+          "value": 79,
+          "estimated": false,
+          "basis": "anchor",
           "src": [
+            "mcaleese-data",
             "mcaleese"
           ]
         }
       ]
     },
     {
-      "slug": "ethics-society",
-      "label": "Ethics & societal impact",
+      "slug": "forecasting",
+      "label": "Forecasting & timelines",
       "group": "crosscutting",
-      "topic": "/topics/ai-ethics-and-society/",
-      "blurb": "Fairness, bias, model welfare, and broader social impact of advanced AI.",
-      "arxiv": "(\"AI ethics\" OR \"AI fairness\" OR \"algorithmic bias\" OR \"model welfare\")",
+      "topic": "/topics/ai-forecasting-and-timelines/",
+      "blurb": "Scaling laws, compute trends, takeoff and timeline forecasting (Epoch AI).",
+      "arxiv": "(\"scaling laws\" OR \"compute trends\" OR \"AI timelines\" OR \"emergent abilities\")",
       "people": [
         {
           "year": 2017,
-          "value": 3,
+          "value": 0,
           "estimated": true,
           "basis": "modeled",
           "src": [
-            "estimating"
+            "mcaleese-data",
+            "mcaleese"
           ]
         },
         {
           "year": 2018,
-          "value": 5,
+          "value": 0,
           "estimated": true,
           "basis": "modeled",
           "src": [
-            "estimating"
+            "mcaleese-data",
+            "mcaleese"
           ]
         },
         {
           "year": 2019,
-          "value": 7,
+          "value": 0,
           "estimated": true,
           "basis": "modeled",
           "src": [
-            "estimating"
+            "mcaleese-data",
+            "mcaleese"
           ]
         },
         {
           "year": 2020,
-          "value": 9,
+          "value": 0,
           "estimated": true,
           "basis": "modeled",
           "src": [
-            "estimating"
+            "mcaleese-data",
+            "mcaleese"
           ]
         },
         {
           "year": 2021,
-          "value": 10,
+          "value": 0,
           "estimated": true,
           "basis": "modeled",
           "src": [
-            "estimating"
+            "mcaleese-data",
+            "mcaleese"
           ]
         },
         {
           "year": 2022,
-          "value": 10,
+          "value": 0,
           "estimated": true,
           "basis": "modeled",
           "src": [
-            "estimating",
-            "aiwatch"
+            "mcaleese-data",
+            "mcaleese"
           ]
         },
         {
           "year": 2023,
-          "value": 22,
+          "value": 10,
           "estimated": true,
           "basis": "modeled",
           "src": [
-            "estimating"
+            "mcaleese-data",
+            "mcaleese"
           ]
         },
         {
           "year": 2024,
-          "value": 38,
+          "value": 21,
           "estimated": true,
           "basis": "modeled",
           "src": [
-            "estimating"
+            "mcaleese-data",
+            "mcaleese"
           ]
         },
         {
           "year": 2025,
-          "value": 50,
+          "value": 25,
+          "estimated": false,
+          "basis": "anchor",
+          "src": [
+            "mcaleese-data",
+            "mcaleese"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "watchdog-whistleblower",
+      "label": "Watchdog & whistleblower",
+      "group": "crosscutting",
+      "topic": null,
+      "blurb": "Independent lab watchdogs and whistleblower support (AI Lab Watch, the AI Whistleblower Initiative).",
+      "arxiv": "(\"AI watchdog\" OR whistleblower OR \"lab transparency\") AND AI",
+      "people": [
+        {
+          "year": 2017,
+          "value": 0,
           "estimated": true,
           "basis": "modeled",
           "src": [
+            "mcaleese-data",
+            "mcaleese"
+          ]
+        },
+        {
+          "year": 2018,
+          "value": 0,
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese-data",
+            "mcaleese"
+          ]
+        },
+        {
+          "year": 2019,
+          "value": 0,
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese-data",
+            "mcaleese"
+          ]
+        },
+        {
+          "year": 2020,
+          "value": 0,
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese-data",
+            "mcaleese"
+          ]
+        },
+        {
+          "year": 2021,
+          "value": 0,
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese-data",
+            "mcaleese"
+          ]
+        },
+        {
+          "year": 2022,
+          "value": 0,
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese-data",
+            "mcaleese"
+          ]
+        },
+        {
+          "year": 2023,
+          "value": 0,
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese-data",
+            "mcaleese"
+          ]
+        },
+        {
+          "year": 2024,
+          "value": 0,
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese-data",
+            "mcaleese"
+          ]
+        },
+        {
+          "year": 2025,
+          "value": 6,
+          "estimated": false,
+          "basis": "anchor",
+          "src": [
+            "mcaleese-data",
             "mcaleese"
           ]
         }

@@ -111,6 +111,7 @@ function buildSources(data) {
 // Short abbreviations for the per-cell source markers in the provenance table.
 const SRC_ABBR = {
   mcaleese: "M",
+  "mcaleese-data": "MD",
   estimating: "E",
   "eightyk-tech": "8t",
   "eightyk-count": "8c",
@@ -194,8 +195,11 @@ function buildProvenance(data) {
   const yearCols = years.map((y) => `<th scope="col">${y}</th>`).join("");
 
   // Legend: every abbreviation → its full, linked source, plus the anchor /
-  // modeled key.
+  // modeled key. Only show sources actually cited by a data point.
+  const usedIds = new Set();
+  for (const b of data.buckets) for (const p of b[metric] || []) (p.src || []).forEach((id) => usedIds.add(id));
   const legend = (data.meta.sources || [])
+    .filter((s) => usedIds.has(s.id))
     .map(
       (s) =>
         `<a class="fm-prov-key-item fm-prov-key-link" href="${escapeHtml(s.url)}" rel="noopener noreferrer">` +

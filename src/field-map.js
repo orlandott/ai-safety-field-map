@@ -72,6 +72,7 @@
   // Short badges for the per-source links (mirrors scripts/build.mjs).
   var SRC_ABBR = {
     mcaleese: "M",
+    "mcaleese-data": "MD",
     estimating: "E",
     "eightyk-tech": "8t",
     "eightyk-count": "8c",
