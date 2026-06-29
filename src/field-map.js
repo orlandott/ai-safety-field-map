@@ -541,11 +541,16 @@
 
   // ── Wiring ─────────────────────────────────────────────────────────────────
 
+  // Scrubbing the slider maps straight to the leading edge — the dots track
+  // your drag exactly (no easing lag). The eased sweep is reserved for Play.
   function setYear(y) {
     year = y;
-    yearOut.textContent = String(y);
-    slider.value = String(y);
-    kick();
+    displayYear = y;
+    if (rafId != null) {
+      cancelAnimationFrame(rafId);
+      rafId = null;
+    }
+    render();
   }
 
   function setMetric(m) {
