@@ -7,7 +7,7 @@
       "people": {
         "label": "People (FTEs)",
         "unit": "FTEs",
-        "note": "Full-time-equivalent researchers, 2017–2025. Anchored to published estimates: ~30 technical in 2017, ~50 in 2020 and ~400 total in 2022 (McAleese; 80,000 Hours' '~400 people'), and ~1,100 in 2025 (McAleese: ~600 technical, ~500 non-technical). The 2025 technical splits follow McAleese's 2025 per-category figures (e.g. interpretability ~122, evals ~100, LLM safety ~87); the 2022 splits draw on Larsen & Lifland's org-by-org survey; intervening years are modeled from each branch's documented emergence timeline, and the shape is corroborated by AI Watch (~383 researchers tracked in 2022). Per-bucket splits are approximate, so totals don't sum exactly, and points marked 'estimated' are back-of-envelope.",
+        "note": "Full-time-equivalent researchers, 2017–2025. Anchored to published estimates: ~30 technical in 2017, ~50 in 2020 and ~400 total in 2022 (McAleese; 80,000 Hours' '~400 people'), and ~1,100 in 2025 (McAleese: ~600 technical, ~500 non-technical). The 2025 technical splits follow McAleese's 2025 per-category figures (e.g. interpretability ~122, evals ~100, LLM safety ~87); the 2022 technical splits draw on Larsen & Lifland's org-by-org survey (corroborated by AI Watch, ~383 researchers in 2022); intervening years are modeled from each branch's documented emergence timeline. Every point carries its own source (see the per-year sourcing table below): 'anchor' points come straight from a published per-category figure, 'modeled' points are our split or interpolation of a published total. Per-bucket splits are approximate, so totals don't sum exactly.",
         "auto": false
       },
       "papers": {
@@ -19,30 +19,37 @@
     },
     "sources": [
       {
+        "id": "mcaleese",
         "label": "AI Safety Field Growth Analysis 2025",
         "url": "https://www.lesswrong.com/posts/8QjAnWyuE9fktPRgS/ai-safety-field-growth-analysis-2025"
       },
       {
+        "id": "estimating",
         "label": "Estimating the Number of AI Safety Researchers",
         "url": "https://www.lesswrong.com/posts/mC3oeq62DWeqxiNBx/estimating-the-current-and-future-number-of-ai-safety"
       },
       {
+        "id": "eightyk-tech",
         "label": "80,000 Hours – AI safety technical research",
         "url": "https://80000hours.org/career-reviews/ai-safety-technical-research/"
       },
       {
+        "id": "eightyk-count",
         "label": "How many people work directly on reducing AI existential risk? (80,000 Hours)",
         "url": "https://www.lesswrong.com/posts/FYFrFjk57WrdFdQB8/how-many-people-are-working-directly-on-reducing-existential"
       },
       {
+        "id": "larsen-lifland",
         "label": "What Everyone in Technical Alignment is Doing and Why (Larsen & Lifland, 2022)",
         "url": "https://www.lesswrong.com/posts/QBAjndPuFbhEXKcCr/my-understanding-of-what-everyone-in-technical-alignment-is"
       },
       {
+        "id": "aiwatch",
         "label": "AI Watch – AI safety organizations & researchers dataset (Issa Rice)",
         "url": "https://aiwatch.issarice.com/"
       },
       {
+        "id": "eto",
         "label": "Emerging Technology Observatory – AI safety almanac",
         "url": "https://almanac.eto.tech/topics/ai-safety/"
       }
@@ -74,47 +81,84 @@
         {
           "year": 2017,
           "value": 0,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2018,
           "value": 1,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2019,
           "value": 2,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2020,
           "value": 5,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2021,
           "value": 12,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2022,
           "value": 25,
-          "estimated": true
+          "estimated": true,
+          "basis": "anchor",
+          "src": [
+            "larsen-lifland",
+            "aiwatch"
+          ]
         },
         {
           "year": 2023,
           "value": 50,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2024,
           "value": 85,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2025,
           "value": 122,
-          "estimated": false
+          "estimated": false,
+          "basis": "anchor",
+          "src": [
+            "mcaleese"
+          ]
         }
       ]
     },
@@ -129,47 +173,84 @@
         {
           "year": 2017,
           "value": 3,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2018,
           "value": 5,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2019,
           "value": 7,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2020,
           "value": 10,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2021,
           "value": 18,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2022,
           "value": 45,
-          "estimated": true
+          "estimated": true,
+          "basis": "anchor",
+          "src": [
+            "larsen-lifland",
+            "aiwatch"
+          ]
         },
         {
           "year": 2023,
           "value": 70,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2024,
           "value": 92,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2025,
           "value": 110,
-          "estimated": false
+          "estimated": false,
+          "basis": "anchor",
+          "src": [
+            "mcaleese"
+          ]
         }
       ]
     },
@@ -184,47 +265,84 @@
         {
           "year": 2017,
           "value": 3,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2018,
           "value": 4,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2019,
           "value": 6,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2020,
           "value": 9,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2021,
           "value": 15,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2022,
           "value": 30,
-          "estimated": true
+          "estimated": true,
+          "basis": "anchor",
+          "src": [
+            "larsen-lifland",
+            "aiwatch"
+          ]
         },
         {
           "year": 2023,
           "value": 50,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2024,
           "value": 66,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2025,
           "value": 80,
-          "estimated": false
+          "estimated": false,
+          "basis": "anchor",
+          "src": [
+            "mcaleese"
+          ]
         }
       ]
     },
@@ -239,47 +357,84 @@
         {
           "year": 2017,
           "value": 0,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2018,
           "value": 0,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2019,
           "value": 1,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2020,
           "value": 2,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2021,
           "value": 7,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2022,
           "value": 20,
-          "estimated": true
+          "estimated": true,
+          "basis": "anchor",
+          "src": [
+            "larsen-lifland",
+            "aiwatch"
+          ]
         },
         {
           "year": 2023,
           "value": 43,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2024,
           "value": 65,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2025,
           "value": 87,
-          "estimated": false
+          "estimated": false,
+          "basis": "anchor",
+          "src": [
+            "mcaleese"
+          ]
         }
       ]
     },
@@ -294,47 +449,84 @@
         {
           "year": 2017,
           "value": 0,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2018,
           "value": 0,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2019,
           "value": 0,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2020,
           "value": 1,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2021,
           "value": 4,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2022,
           "value": 15,
-          "estimated": true
+          "estimated": true,
+          "basis": "anchor",
+          "src": [
+            "larsen-lifland",
+            "aiwatch"
+          ]
         },
         {
           "year": 2023,
           "value": 45,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2024,
           "value": 80,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2025,
           "value": 100,
-          "estimated": false
+          "estimated": false,
+          "basis": "anchor",
+          "src": [
+            "mcaleese"
+          ]
         }
       ]
     },
@@ -349,47 +541,84 @@
         {
           "year": 2017,
           "value": 0,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2018,
           "value": 0,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2019,
           "value": 1,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2020,
           "value": 1,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2021,
           "value": 3,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2022,
           "value": 8,
-          "estimated": true
+          "estimated": true,
+          "basis": "anchor",
+          "src": [
+            "larsen-lifland",
+            "aiwatch"
+          ]
         },
         {
           "year": 2023,
           "value": 14,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2024,
           "value": 20,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2025,
           "value": 25,
-          "estimated": false
+          "estimated": false,
+          "basis": "anchor",
+          "src": [
+            "mcaleese"
+          ]
         }
       ]
     },
@@ -404,47 +633,84 @@
         {
           "year": 2017,
           "value": 2,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2018,
           "value": 3,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2019,
           "value": 4,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2020,
           "value": 5,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2021,
           "value": 9,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2022,
           "value": 15,
-          "estimated": true
+          "estimated": true,
+          "basis": "anchor",
+          "src": [
+            "larsen-lifland",
+            "aiwatch"
+          ]
         },
         {
           "year": 2023,
           "value": 20,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2024,
           "value": 25,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2025,
           "value": 29,
-          "estimated": false
+          "estimated": false,
+          "basis": "anchor",
+          "src": [
+            "mcaleese"
+          ]
         }
       ]
     },
@@ -459,47 +725,84 @@
         {
           "year": 2017,
           "value": 10,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2018,
           "value": 11,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2019,
           "value": 13,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2020,
           "value": 14,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2021,
           "value": 18,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2022,
           "value": 25,
-          "estimated": true
+          "estimated": true,
+          "basis": "anchor",
+          "src": [
+            "larsen-lifland",
+            "aiwatch"
+          ]
         },
         {
           "year": 2023,
           "value": 22,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2024,
           "value": 20,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2025,
           "value": 18,
-          "estimated": false
+          "estimated": false,
+          "basis": "anchor",
+          "src": [
+            "mcaleese"
+          ]
         }
       ]
     },
@@ -514,47 +817,84 @@
         {
           "year": 2017,
           "value": 0,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2018,
           "value": 0,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2019,
           "value": 0,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2020,
           "value": 0,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2021,
           "value": 0,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2022,
           "value": 1,
-          "estimated": true
+          "estimated": true,
+          "basis": "anchor",
+          "src": [
+            "larsen-lifland",
+            "aiwatch"
+          ]
         },
         {
           "year": 2023,
           "value": 3,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2024,
           "value": 7,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2025,
           "value": 11,
-          "estimated": false
+          "estimated": false,
+          "basis": "anchor",
+          "src": [
+            "mcaleese"
+          ]
         }
       ]
     },
@@ -569,47 +909,84 @@
         {
           "year": 2017,
           "value": 0,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2018,
           "value": 1,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2019,
           "value": 1,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2020,
           "value": 2,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2021,
           "value": 3,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2022,
           "value": 5,
-          "estimated": true
+          "estimated": true,
+          "basis": "anchor",
+          "src": [
+            "larsen-lifland",
+            "aiwatch"
+          ]
         },
         {
           "year": 2023,
           "value": 10,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2024,
           "value": 16,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2025,
           "value": 21,
-          "estimated": false
+          "estimated": false,
+          "basis": "anchor",
+          "src": [
+            "mcaleese"
+          ]
         }
       ]
     },
@@ -624,47 +1001,84 @@
         {
           "year": 2017,
           "value": 2,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2018,
           "value": 2,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2019,
           "value": 3,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2020,
           "value": 4,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2021,
           "value": 6,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2022,
           "value": 10,
-          "estimated": true
+          "estimated": true,
+          "basis": "anchor",
+          "src": [
+            "larsen-lifland",
+            "aiwatch"
+          ]
         },
         {
           "year": 2023,
           "value": 16,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2024,
           "value": 21,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2025,
           "value": 25,
-          "estimated": false
+          "estimated": false,
+          "basis": "anchor",
+          "src": [
+            "mcaleese"
+          ]
         }
       ]
     },
@@ -679,47 +1093,84 @@
         {
           "year": 2017,
           "value": 2,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2018,
           "value": 3,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2019,
           "value": 3,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2020,
           "value": 4,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2021,
           "value": 5,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2022,
           "value": 5,
-          "estimated": true
+          "estimated": true,
+          "basis": "anchor",
+          "src": [
+            "larsen-lifland",
+            "aiwatch"
+          ]
         },
         {
           "year": 2023,
           "value": 6,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2024,
           "value": 5,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2025,
           "value": 4,
-          "estimated": false
+          "estimated": false,
+          "basis": "anchor",
+          "src": [
+            "mcaleese"
+          ]
         }
       ]
     },
@@ -734,47 +1185,84 @@
         {
           "year": 2017,
           "value": 0,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "estimating"
+          ]
         },
         {
           "year": 2018,
           "value": 1,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "estimating"
+          ]
         },
         {
           "year": 2019,
           "value": 1,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "estimating"
+          ]
         },
         {
           "year": 2020,
           "value": 2,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "estimating"
+          ]
         },
         {
           "year": 2021,
           "value": 5,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "estimating"
+          ]
         },
         {
           "year": 2022,
           "value": 15,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "estimating",
+            "aiwatch"
+          ]
         },
         {
           "year": 2023,
           "value": 35,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "estimating"
+          ]
         },
         {
           "year": 2024,
           "value": 55,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "estimating"
+          ]
         },
         {
           "year": 2025,
           "value": 70,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         }
       ]
     },
@@ -789,47 +1277,84 @@
         {
           "year": 2017,
           "value": 3,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "estimating"
+          ]
         },
         {
           "year": 2018,
           "value": 4,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "estimating"
+          ]
         },
         {
           "year": 2019,
           "value": 6,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "estimating"
+          ]
         },
         {
           "year": 2020,
           "value": 12,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "estimating"
+          ]
         },
         {
           "year": 2021,
           "value": 22,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "estimating"
+          ]
         },
         {
           "year": 2022,
           "value": 40,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "estimating",
+            "aiwatch"
+          ]
         },
         {
           "year": 2023,
           "value": 80,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "estimating"
+          ]
         },
         {
           "year": 2024,
           "value": 120,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "estimating"
+          ]
         },
         {
           "year": 2025,
           "value": 150,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         }
       ]
     },
@@ -844,47 +1369,84 @@
         {
           "year": 2017,
           "value": 1,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "estimating"
+          ]
         },
         {
           "year": 2018,
           "value": 2,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "estimating"
+          ]
         },
         {
           "year": 2019,
           "value": 3,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "estimating"
+          ]
         },
         {
           "year": 2020,
           "value": 4,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "estimating"
+          ]
         },
         {
           "year": 2021,
           "value": 8,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "estimating"
+          ]
         },
         {
           "year": 2022,
           "value": 15,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "estimating",
+            "aiwatch"
+          ]
         },
         {
           "year": 2023,
           "value": 35,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "estimating"
+          ]
         },
         {
           "year": 2024,
           "value": 55,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "estimating"
+          ]
         },
         {
           "year": 2025,
           "value": 70,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         }
       ]
     },
@@ -899,47 +1461,84 @@
         {
           "year": 2017,
           "value": 0,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "estimating"
+          ]
         },
         {
           "year": 2018,
           "value": 0,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "estimating"
+          ]
         },
         {
           "year": 2019,
           "value": 0,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "estimating"
+          ]
         },
         {
           "year": 2020,
           "value": 1,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "estimating"
+          ]
         },
         {
           "year": 2021,
           "value": 2,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "estimating"
+          ]
         },
         {
           "year": 2022,
           "value": 5,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "estimating",
+            "aiwatch"
+          ]
         },
         {
           "year": 2023,
           "value": 18,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "estimating"
+          ]
         },
         {
           "year": 2024,
           "value": 30,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "estimating"
+          ]
         },
         {
           "year": 2025,
           "value": 40,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         }
       ]
     },
@@ -954,47 +1553,84 @@
         {
           "year": 2017,
           "value": 3,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "estimating"
+          ]
         },
         {
           "year": 2018,
           "value": 4,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "estimating"
+          ]
         },
         {
           "year": 2019,
           "value": 6,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "estimating"
+          ]
         },
         {
           "year": 2020,
           "value": 8,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "estimating"
+          ]
         },
         {
           "year": 2021,
           "value": 11,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "estimating"
+          ]
         },
         {
           "year": 2022,
           "value": 15,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "estimating",
+            "aiwatch"
+          ]
         },
         {
           "year": 2023,
           "value": 40,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "estimating"
+          ]
         },
         {
           "year": 2024,
           "value": 65,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "estimating"
+          ]
         },
         {
           "year": 2025,
           "value": 90,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         }
       ]
     },
@@ -1009,47 +1645,84 @@
         {
           "year": 2017,
           "value": 3,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "estimating"
+          ]
         },
         {
           "year": 2018,
           "value": 5,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "estimating"
+          ]
         },
         {
           "year": 2019,
           "value": 7,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "estimating"
+          ]
         },
         {
           "year": 2020,
           "value": 9,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "estimating"
+          ]
         },
         {
           "year": 2021,
           "value": 10,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "estimating"
+          ]
         },
         {
           "year": 2022,
           "value": 10,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "estimating",
+            "aiwatch"
+          ]
         },
         {
           "year": 2023,
           "value": 22,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "estimating"
+          ]
         },
         {
           "year": 2024,
           "value": 38,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "estimating"
+          ]
         },
         {
           "year": 2025,
           "value": 50,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         }
       ]
     }

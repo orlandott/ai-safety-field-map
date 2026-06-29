@@ -36,6 +36,23 @@ points to animate over time. `"estimated": true` flags a rough value. The
 `papers` series is optional and filled by the fetch script; the metric toggle
 only appears once that series has data.
 
+### Sourcing
+
+Every `people` point carries its own provenance so each FTE figure — every
+year, every branch — is traceable:
+
+- `"src"` — an array of source ids, each referencing an entry in
+  `meta.sources` (every source now has an `"id"`, e.g. `"mcaleese"`).
+- `"basis"` — `"anchor"` when the value comes straight from a published
+  per-category figure, or `"modeled"` when it's our split or interpolation of a
+  published total.
+
+The build emits a collapsible **per-year sourcing table** (branch × year, every
+cell linked to its source) below the no-JS table, and the interactive chart's
+hover tooltip shows the basis + source for the year you're viewing. To add a
+source, append it to `meta.sources` with a new `id`, then reference that `id`
+from the relevant points' `src` arrays.
+
 ## Refreshing the "papers / year" metric
 
 `scripts/fetch-field-map.mjs` queries the arXiv API for the number of papers

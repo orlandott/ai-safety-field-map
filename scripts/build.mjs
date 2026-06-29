@@ -108,6 +108,109 @@ function buildSources(data) {
   return `      <p class="field-map-sources">Sources: ${items}</p>\n`;
 }
 
+// Short abbreviations for the per-cell source markers in the provenance table.
+const SRC_ABBR = {
+  mcaleese: "M",
+  estimating: "E",
+  "eightyk-tech": "8t",
+  "eightyk-count": "8c",
+  "larsen-lifland": "L",
+  aiwatch: "W",
+  eto: "ETO",
+};
+
+function abbr(id) {
+  return SRC_ABBR[id] || id;
+}
+
+// Full per-year sourcing table: every (branch, year) FTE value with a link to
+// the source(s) backing it. This is the verifiable record behind the chart —
+// it gives "a link for every FTE, every year, every category" the chart's
+// hover tooltips show one at a time. Wrapped in <details> so it doesn't
+// overwhelm the page.
+function buildProvenance(data) {
+  const metric = data.meta.defaultMetric;
+  const srcById = Object.fromEntries((data.meta.sources || []).map((s) => [s.id, s]));
+
+  // Collect the full sorted set of years present in the people series.
+  const yearSet = new Set();
+  for (const b of data.buckets) for (const p of b[metric] || []) yearSet.add(p.year);
+  const years = Array.from(yearSet).sort((a, b) => a - b);
+  if (!years.length) return "";
+
+  // One linked cell per (branch, year): the value, plus a superscript of
+  // source abbreviations each linking to that source. Anchored points (a
+  // published per-category figure) are marked distinctly from modeled ones.
+  function cell(pt) {
+    if (!pt) return `<td class="fm-prov-cell">—</td>`;
+    const ids = pt.src && pt.src.length ? pt.src : [];
+    const sup = ids
+      .map((id) => {
+        const s = srcById[id];
+        if (!s) return "";
+        return (
+          `<a href="${escapeHtml(s.url)}" rel="noopener noreferrer" ` +
+          `title="${escapeHtml(s.label)}">${escapeHtml(abbr(id))}</a>`
+        );
+      })
+      .join("");
+    const basisClass = pt.basis === "anchor" ? " is-anchor" : " is-modeled";
+    const basisTitle = pt.basis === "anchor" ? "Anchored to a published figure" : "Modeled / interpolated";
+    return (
+      `<td class="fm-prov-cell${basisClass}" title="${escapeHtml(basisTitle)}">` +
+      `<span class="fm-prov-val">${Math.round(pt.value).toLocaleString()}</span>` +
+      (sup ? `<sup class="fm-prov-src">${sup}</sup>` : "") +
+      `</td>`
+    );
+  }
+
+  let rows = "";
+  for (const group of data.meta.groups) {
+    const buckets = data.buckets.filter((b) => b.group === group.key);
+    if (!buckets.length) continue;
+    rows +=
+      `          <tr class="field-map-group-row"><th colspan="${years.length + 1}" scope="rowgroup">` +
+      `${escapeHtml(group.label)}</th></tr>\n`;
+    for (const b of buckets) {
+      const byYear = Object.fromEntries((b[metric] || []).map((p) => [p.year, p]));
+      const label = b.topic
+        ? `<a href="${escapeHtml(b.topic)}">${escapeHtml(b.label)}</a>`
+        : escapeHtml(b.label);
+      rows +=
+        `          <tr><th scope="row">${label}</th>` +
+        years.map((y) => cell(byYear[y])).join("") +
+        `</tr>\n`;
+    }
+  }
+
+  const yearCols = years.map((y) => `<th scope="col">${y}</th>`).join("");
+
+  // Legend: every abbreviation → its full, linked source, plus the anchor /
+  // modeled key.
+  const legend = (data.meta.sources || [])
+    .map(
+      (s) =>
+        `<span class="fm-prov-key-item"><b>${escapeHtml(abbr(s.id))}</b> ` +
+        `<a href="${escapeHtml(s.url)}" rel="noopener noreferrer">${escapeHtml(s.label)}</a></span>`
+    )
+    .join("");
+
+  const unit = data.meta.metrics[metric].unit;
+  return (
+    `      <details class="field-map-provenance">\n` +
+    `        <summary>Per-year sourcing — every ${escapeHtml(unit)} value, every year, with its source</summary>\n` +
+    `        <div class="fm-prov-scroll">\n` +
+    `        <table class="fm-prov-table">\n` +
+    `          <thead><tr><th scope="col">Branch</th>${yearCols}</tr></thead>\n` +
+    `          <tbody>\n${rows}          </tbody>\n` +
+    `        </table>\n` +
+    `        </div>\n` +
+    `        <p class="fm-prov-key"><span class="fm-prov-key-item"><b class="fm-prov-val is-anchor">n</b> anchored to a published per-category figure</span>` +
+    `<span class="fm-prov-key-item"><b class="fm-prov-val is-modeled">n</b> modeled (our split or interpolation of a published total)</span>${legend}</p>\n` +
+    `      </details>\n`
+  );
+}
+
 function main() {
   const dataRaw = fs.readFileSync(DATA_PATH, "utf8");
   const data = JSON.parse(dataRaw);
@@ -141,7 +244,7 @@ ${css}</style>
     <div class="field-map-stage" data-field-map-stage></div>
     <p class="field-map-note" data-field-map-note></p>
   </div>
-${buildTable(data)}${buildSources(data)}  <script type="application/json" id="field-map-data">${safeData}</script>
+${buildTable(data)}${buildProvenance(data)}${buildSources(data)}  <script type="application/json" id="field-map-data">${safeData}</script>
   <script>${safeJs}</script>
 </div>
 </body>

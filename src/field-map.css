@@ -233,6 +233,27 @@
   color: var(--link);
   font-weight: 600;
 }
+.field-map-tip-src {
+  color: var(--muted);
+  line-height: 1.35;
+  font-size: 0.92em;
+}
+.field-map-tip-src a {
+  color: var(--link);
+  pointer-events: auto;
+}
+.field-map-tip-basis {
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.85em;
+  letter-spacing: 0.03em;
+}
+.field-map-tip-basis.is-anchor {
+  color: var(--accent-text);
+}
+.field-map-tip-basis.is-modeled {
+  color: var(--muted);
+}
 .field-map-note {
   font-size: 0.82rem;
   color: var(--muted);
@@ -287,6 +308,105 @@
 .field-map:not([hidden]) ~ .field-map-table {
   opacity: 0.85;
 }
+/* ── Per-year sourcing table ───────────────────────────────────────────── */
+.field-map-provenance {
+  margin-top: 1.25rem;
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+.field-map-provenance > summary {
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--text);
+  padding: 0.3rem 0;
+}
+.field-map-provenance > summary:hover {
+  color: var(--accent-text);
+}
+.fm-prov-scroll {
+  overflow-x: auto;
+  margin: 0.6rem 0;
+}
+.fm-prov-table {
+  border-collapse: collapse;
+  font-size: 0.8rem;
+  width: 100%;
+  min-width: 640px;
+}
+.fm-prov-table th,
+.fm-prov-table td {
+  border-bottom: 1px solid var(--border);
+  padding: 0.32rem 0.5rem;
+  text-align: right;
+  white-space: nowrap;
+}
+.fm-prov-table thead th {
+  color: var(--muted);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  border-bottom: 1px solid var(--border-strong);
+}
+.fm-prov-table th[scope="row"] {
+  text-align: left;
+  color: var(--text);
+  font-weight: 500;
+}
+.fm-prov-table th[scope="row"] a {
+  color: var(--text);
+}
+.fm-prov-table .field-map-group-row th {
+  text-align: left;
+  color: var(--accent-text);
+  font-size: 0.74rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding-top: 0.7rem;
+  border-bottom: none;
+}
+.fm-prov-val {
+  font-variant-numeric: tabular-nums;
+}
+.fm-prov-val.is-anchor {
+  font-weight: 700;
+  color: var(--text);
+}
+.fm-prov-val.is-modeled {
+  color: var(--muted);
+}
+.fm-prov-cell.is-anchor {
+  background: var(--accent-soft);
+}
+.fm-prov-src {
+  margin-left: 0.15rem;
+  font-size: 0.72em;
+}
+.fm-prov-src a {
+  color: var(--link);
+  text-decoration: none;
+  margin-left: 0.1rem;
+}
+.fm-prov-src a:hover {
+  text-decoration: underline;
+}
+.fm-prov-key {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 1.1rem;
+  line-height: 1.5;
+  margin: 0.5rem 0 0;
+}
+.fm-prov-key-item {
+  white-space: nowrap;
+}
+.fm-prov-key .fm-prov-val {
+  display: inline-block;
+  padding: 0 0.25rem;
+  border-radius: 4px;
+}
+.fm-prov-key .fm-prov-val.is-anchor {
+  background: var(--accent-soft);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .fm-node,
   .fm-line {

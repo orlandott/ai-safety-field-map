@@ -258,6 +258,27 @@ h1{font-size:1.9rem;margin:.2rem 0 .4rem;}
   color: var(--link);
   font-weight: 600;
 }
+.field-map-tip-src {
+  color: var(--muted);
+  line-height: 1.35;
+  font-size: 0.92em;
+}
+.field-map-tip-src a {
+  color: var(--link);
+  pointer-events: auto;
+}
+.field-map-tip-basis {
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.85em;
+  letter-spacing: 0.03em;
+}
+.field-map-tip-basis.is-anchor {
+  color: var(--accent-text);
+}
+.field-map-tip-basis.is-modeled {
+  color: var(--muted);
+}
 .field-map-note {
   font-size: 0.82rem;
   color: var(--muted);
@@ -312,6 +333,105 @@ h1{font-size:1.9rem;margin:.2rem 0 .4rem;}
 .field-map:not([hidden]) ~ .field-map-table {
   opacity: 0.85;
 }
+/* ── Per-year sourcing table ───────────────────────────────────────────── */
+.field-map-provenance {
+  margin-top: 1.25rem;
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+.field-map-provenance > summary {
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--text);
+  padding: 0.3rem 0;
+}
+.field-map-provenance > summary:hover {
+  color: var(--accent-text);
+}
+.fm-prov-scroll {
+  overflow-x: auto;
+  margin: 0.6rem 0;
+}
+.fm-prov-table {
+  border-collapse: collapse;
+  font-size: 0.8rem;
+  width: 100%;
+  min-width: 640px;
+}
+.fm-prov-table th,
+.fm-prov-table td {
+  border-bottom: 1px solid var(--border);
+  padding: 0.32rem 0.5rem;
+  text-align: right;
+  white-space: nowrap;
+}
+.fm-prov-table thead th {
+  color: var(--muted);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  border-bottom: 1px solid var(--border-strong);
+}
+.fm-prov-table th[scope="row"] {
+  text-align: left;
+  color: var(--text);
+  font-weight: 500;
+}
+.fm-prov-table th[scope="row"] a {
+  color: var(--text);
+}
+.fm-prov-table .field-map-group-row th {
+  text-align: left;
+  color: var(--accent-text);
+  font-size: 0.74rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding-top: 0.7rem;
+  border-bottom: none;
+}
+.fm-prov-val {
+  font-variant-numeric: tabular-nums;
+}
+.fm-prov-val.is-anchor {
+  font-weight: 700;
+  color: var(--text);
+}
+.fm-prov-val.is-modeled {
+  color: var(--muted);
+}
+.fm-prov-cell.is-anchor {
+  background: var(--accent-soft);
+}
+.fm-prov-src {
+  margin-left: 0.15rem;
+  font-size: 0.72em;
+}
+.fm-prov-src a {
+  color: var(--link);
+  text-decoration: none;
+  margin-left: 0.1rem;
+}
+.fm-prov-src a:hover {
+  text-decoration: underline;
+}
+.fm-prov-key {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 1.1rem;
+  line-height: 1.5;
+  margin: 0.5rem 0 0;
+}
+.fm-prov-key-item {
+  white-space: nowrap;
+}
+.fm-prov-key .fm-prov-val {
+  display: inline-block;
+  padding: 0 0.25rem;
+  border-radius: 4px;
+}
+.fm-prov-key .fm-prov-val.is-anchor {
+  background: var(--accent-soft);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .fm-node,
   .fm-line {
@@ -331,7 +451,7 @@ h1{font-size:1.9rem;margin:.2rem 0 .4rem;}
     <p class="field-map-note" data-field-map-note></p>
   </div>
       <table class="field-map-table">
-        <caption>People (FTEs) by branch (2025). Full-time-equivalent researchers, 2017–2025. Anchored to published estimates: ~30 technical in 2017, ~50 in 2020 and ~400 total in 2022 (McAleese; 80,000 Hours&#39; &#39;~400 people&#39;), and ~1,100 in 2025 (McAleese: ~600 technical, ~500 non-technical). The 2025 technical splits follow McAleese&#39;s 2025 per-category figures (e.g. interpretability ~122, evals ~100, LLM safety ~87); the 2022 splits draw on Larsen &amp; Lifland&#39;s org-by-org survey; intervening years are modeled from each branch&#39;s documented emergence timeline, and the shape is corroborated by AI Watch (~383 researchers tracked in 2022). Per-bucket splits are approximate, so totals don&#39;t sum exactly, and points marked &#39;estimated&#39; are back-of-envelope.</caption>
+        <caption>People (FTEs) by branch (2025). Full-time-equivalent researchers, 2017–2025. Anchored to published estimates: ~30 technical in 2017, ~50 in 2020 and ~400 total in 2022 (McAleese; 80,000 Hours&#39; &#39;~400 people&#39;), and ~1,100 in 2025 (McAleese: ~600 technical, ~500 non-technical). The 2025 technical splits follow McAleese&#39;s 2025 per-category figures (e.g. interpretability ~122, evals ~100, LLM safety ~87); the 2022 technical splits draw on Larsen &amp; Lifland&#39;s org-by-org survey (corroborated by AI Watch, ~383 researchers in 2022); intervening years are modeled from each branch&#39;s documented emergence timeline. Every point carries its own source (see the per-year sourcing table below): &#39;anchor&#39; points come straight from a published per-category figure, &#39;modeled&#39; points are our split or interpolation of a published total. Per-bucket splits are approximate, so totals don&#39;t sum exactly.</caption>
         <thead>
           <tr><th scope="col">Branch</th><th scope="col">People (FTEs)</th><th scope="col">What it covers</th></tr>
         </thead>
@@ -431,6 +551,38 @@ h1{font-size:1.9rem;margin:.2rem 0 .4rem;}
         </tr>
         </tbody>
       </table>
+      <details class="field-map-provenance">
+        <summary>Per-year sourcing — every FTEs value, every year, with its source</summary>
+        <div class="fm-prov-scroll">
+        <table class="fm-prov-table">
+          <thead><tr><th scope="col">Branch</th><th scope="col">2017</th><th scope="col">2018</th><th scope="col">2019</th><th scope="col">2020</th><th scope="col">2021</th><th scope="col">2022</th><th scope="col">2023</th><th scope="col">2024</th><th scope="col">2025</th></tr></thead>
+          <tbody>
+          <tr class="field-map-group-row"><th colspan="10" scope="rowgroup">Technical alignment</th></tr>
+          <tr><th scope="row"><a href="/topics/mechanistic-interpretability/">Mechanistic interpretability</a></th><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">0</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/8QjAnWyuE9fktPRgS/ai-safety-field-growth-analysis-2025" rel="noopener noreferrer" title="AI Safety Field Growth Analysis 2025">M</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">1</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/8QjAnWyuE9fktPRgS/ai-safety-field-growth-analysis-2025" rel="noopener noreferrer" title="AI Safety Field Growth Analysis 2025">M</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">2</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/8QjAnWyuE9fktPRgS/ai-safety-field-growth-analysis-2025" rel="noopener noreferrer" title="AI Safety Field Growth Analysis 2025">M</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">5</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/8QjAnWyuE9fktPRgS/ai-safety-field-growth-analysis-2025" rel="noopener noreferrer" title="AI Safety Field Growth Analysis 2025">M</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">12</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/8QjAnWyuE9fktPRgS/ai-safety-field-growth-analysis-2025" rel="noopener noreferrer" title="AI Safety Field Growth Analysis 2025">M</a></sup></td><td class="fm-prov-cell is-anchor" title="Anchored to a published figure"><span class="fm-prov-val">25</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/QBAjndPuFbhEXKcCr/my-understanding-of-what-everyone-in-technical-alignment-is" rel="noopener noreferrer" title="What Everyone in Technical Alignment is Doing and Why (Larsen &amp; Lifland, 2022)">L</a><a href="https://aiwatch.issarice.com/" rel="noopener noreferrer" title="AI Watch – AI safety organizations &amp; researchers dataset (Issa Rice)">W</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">50</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/8QjAnWyuE9fktPRgS/ai-safety-field-growth-analysis-2025" rel="noopener noreferrer" title="AI Safety Field Growth Analysis 2025">M</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">85</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/8QjAnWyuE9fktPRgS/ai-safety-field-growth-analysis-2025" rel="noopener noreferrer" title="AI Safety Field Growth Analysis 2025">M</a></sup></td><td class="fm-prov-cell is-anchor" title="Anchored to a published figure"><span class="fm-prov-val">122</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/8QjAnWyuE9fktPRgS/ai-safety-field-growth-analysis-2025" rel="noopener noreferrer" title="AI Safety Field Growth Analysis 2025">M</a></sup></td></tr>
+          <tr><th scope="row"><a href="/topics/ai-alignment/">Scalable oversight</a></th><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">3</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/8QjAnWyuE9fktPRgS/ai-safety-field-growth-analysis-2025" rel="noopener noreferrer" title="AI Safety Field Growth Analysis 2025">M</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">5</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/8QjAnWyuE9fktPRgS/ai-safety-field-growth-analysis-2025" rel="noopener noreferrer" title="AI Safety Field Growth Analysis 2025">M</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">7</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/8QjAnWyuE9fktPRgS/ai-safety-field-growth-analysis-2025" rel="noopener noreferrer" title="AI Safety Field Growth Analysis 2025">M</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">10</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/8QjAnWyuE9fktPRgS/ai-safety-field-growth-analysis-2025" rel="noopener noreferrer" title="AI Safety Field Growth Analysis 2025">M</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">18</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/8QjAnWyuE9fktPRgS/ai-safety-field-growth-analysis-2025" rel="noopener noreferrer" title="AI Safety Field Growth Analysis 2025">M</a></sup></td><td class="fm-prov-cell is-anchor" title="Anchored to a published figure"><span class="fm-prov-val">45</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/QBAjndPuFbhEXKcCr/my-understanding-of-what-everyone-in-technical-alignment-is" rel="noopener noreferrer" title="What Everyone in Technical Alignment is Doing and Why (Larsen &amp; Lifland, 2022)">L</a><a href="https://aiwatch.issarice.com/" rel="noopener noreferrer" title="AI Watch – AI safety organizations &amp; researchers dataset (Issa Rice)">W</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">70</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/8QjAnWyuE9fktPRgS/ai-safety-field-growth-analysis-2025" rel="noopener noreferrer" title="AI Safety Field Growth Analysis 2025">M</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">92</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/8QjAnWyuE9fktPRgS/ai-safety-field-growth-analysis-2025" rel="noopener noreferrer" title="AI Safety Field Growth Analysis 2025">M</a></sup></td><td class="fm-prov-cell is-anchor" title="Anchored to a published figure"><span class="fm-prov-val">110</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/8QjAnWyuE9fktPRgS/ai-safety-field-growth-analysis-2025" rel="noopener noreferrer" title="AI Safety Field Growth Analysis 2025">M</a></sup></td></tr>
+          <tr><th scope="row">Robustness &amp; jailbreaks</th><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">3</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/8QjAnWyuE9fktPRgS/ai-safety-field-growth-analysis-2025" rel="noopener noreferrer" title="AI Safety Field Growth Analysis 2025">M</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">4</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/8QjAnWyuE9fktPRgS/ai-safety-field-growth-analysis-2025" rel="noopener noreferrer" title="AI Safety Field Growth Analysis 2025">M</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">6</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/8QjAnWyuE9fktPRgS/ai-safety-field-growth-analysis-2025" rel="noopener noreferrer" title="AI Safety Field Growth Analysis 2025">M</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">9</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/8QjAnWyuE9fktPRgS/ai-safety-field-growth-analysis-2025" rel="noopener noreferrer" title="AI Safety Field Growth Analysis 2025">M</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">15</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/8QjAnWyuE9fktPRgS/ai-safety-field-growth-analysis-2025" rel="noopener noreferrer" title="AI Safety Field Growth Analysis 2025">M</a></sup></td><td class="fm-prov-cell is-anchor" title="Anchored to a published figure"><span class="fm-prov-val">30</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/QBAjndPuFbhEXKcCr/my-understanding-of-what-everyone-in-technical-alignment-is" rel="noopener noreferrer" title="What Everyone in Technical Alignment is Doing and Why (Larsen &amp; Lifland, 2022)">L</a><a href="https://aiwatch.issarice.com/" rel="noopener noreferrer" title="AI Watch – AI safety organizations &amp; researchers dataset (Issa Rice)">W</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">50</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/8QjAnWyuE9fktPRgS/ai-safety-field-growth-analysis-2025" rel="noopener noreferrer" title="AI Safety Field Growth Analysis 2025">M</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">66</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/8QjAnWyuE9fktPRgS/ai-safety-field-growth-analysis-2025" rel="noopener noreferrer" title="AI Safety Field Growth Analysis 2025">M</a></sup></td><td class="fm-prov-cell is-anchor" title="Anchored to a published figure"><span class="fm-prov-val">80</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/8QjAnWyuE9fktPRgS/ai-safety-field-growth-analysis-2025" rel="noopener noreferrer" title="AI Safety Field Growth Analysis 2025">M</a></sup></td></tr>
+          <tr><th scope="row"><a href="/topics/large-language-models/">LLM safety</a></th><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">0</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/8QjAnWyuE9fktPRgS/ai-safety-field-growth-analysis-2025" rel="noopener noreferrer" title="AI Safety Field Growth Analysis 2025">M</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">0</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/8QjAnWyuE9fktPRgS/ai-safety-field-growth-analysis-2025" rel="noopener noreferrer" title="AI Safety Field Growth Analysis 2025">M</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">1</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/8QjAnWyuE9fktPRgS/ai-safety-field-growth-analysis-2025" rel="noopener noreferrer" title="AI Safety Field Growth Analysis 2025">M</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">2</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/8QjAnWyuE9fktPRgS/ai-safety-field-growth-analysis-2025" rel="noopener noreferrer" title="AI Safety Field Growth Analysis 2025">M</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">7</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/8QjAnWyuE9fktPRgS/ai-safety-field-growth-analysis-2025" rel="noopener noreferrer" title="AI Safety Field Growth Analysis 2025">M</a></sup></td><td class="fm-prov-cell is-anchor" title="Anchored to a published figure"><span class="fm-prov-val">20</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/QBAjndPuFbhEXKcCr/my-understanding-of-what-everyone-in-technical-alignment-is" rel="noopener noreferrer" title="What Everyone in Technical Alignment is Doing and Why (Larsen &amp; Lifland, 2022)">L</a><a href="https://aiwatch.issarice.com/" rel="noopener noreferrer" title="AI Watch – AI safety organizations &amp; researchers dataset (Issa Rice)">W</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">43</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/8QjAnWyuE9fktPRgS/ai-safety-field-growth-analysis-2025" rel="noopener noreferrer" title="AI Safety Field Growth Analysis 2025">M</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">65</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/8QjAnWyuE9fktPRgS/ai-safety-field-growth-analysis-2025" rel="noopener noreferrer" title="AI Safety Field Growth Analysis 2025">M</a></sup></td><td class="fm-prov-cell is-anchor" title="Anchored to a published figure"><span class="fm-prov-val">87</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/8QjAnWyuE9fktPRgS/ai-safety-field-growth-analysis-2025" rel="noopener noreferrer" title="AI Safety Field Growth Analysis 2025">M</a></sup></td></tr>
+          <tr><th scope="row">Evals &amp; dangerous-capability testing</th><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">0</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/8QjAnWyuE9fktPRgS/ai-safety-field-growth-analysis-2025" rel="noopener noreferrer" title="AI Safety Field Growth Analysis 2025">M</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">0</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/8QjAnWyuE9fktPRgS/ai-safety-field-growth-analysis-2025" rel="noopener noreferrer" title="AI Safety Field Growth Analysis 2025">M</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">0</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/8QjAnWyuE9fktPRgS/ai-safety-field-growth-analysis-2025" rel="noopener noreferrer" title="AI Safety Field Growth Analysis 2025">M</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">1</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/8QjAnWyuE9fktPRgS/ai-safety-field-growth-analysis-2025" rel="noopener noreferrer" title="AI Safety Field Growth Analysis 2025">M</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">4</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/8QjAnWyuE9fktPRgS/ai-safety-field-growth-analysis-2025" rel="noopener noreferrer" title="AI Safety Field Growth Analysis 2025">M</a></sup></td><td class="fm-prov-cell is-anchor" title="Anchored to a published figure"><span class="fm-prov-val">15</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/QBAjndPuFbhEXKcCr/my-understanding-of-what-everyone-in-technical-alignment-is" rel="noopener noreferrer" title="What Everyone in Technical Alignment is Doing and Why (Larsen &amp; Lifland, 2022)">L</a><a href="https://aiwatch.issarice.com/" rel="noopener noreferrer" title="AI Watch – AI safety organizations &amp; researchers dataset (Issa Rice)">W</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">45</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/8QjAnWyuE9fktPRgS/ai-safety-field-growth-analysis-2025" rel="noopener noreferrer" title="AI Safety Field Growth Analysis 2025">M</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">80</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/8QjAnWyuE9fktPRgS/ai-safety-field-growth-analysis-2025" rel="noopener noreferrer" title="AI Safety Field Growth Analysis 2025">M</a></sup></td><td class="fm-prov-cell is-anchor" title="Anchored to a published figure"><span class="fm-prov-val">100</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/8QjAnWyuE9fktPRgS/ai-safety-field-growth-analysis-2025" rel="noopener noreferrer" title="AI Safety Field Growth Analysis 2025">M</a></sup></td></tr>
+          <tr><th scope="row"><a href="/topics/deceptive-alignment-and-scheming/">Deceptive alignment &amp; scheming</a></th><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">0</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/8QjAnWyuE9fktPRgS/ai-safety-field-growth-analysis-2025" rel="noopener noreferrer" title="AI Safety Field Growth Analysis 2025">M</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">0</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/8QjAnWyuE9fktPRgS/ai-safety-field-growth-analysis-2025" rel="noopener noreferrer" title="AI Safety Field Growth Analysis 2025">M</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">1</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/8QjAnWyuE9fktPRgS/ai-safety-field-growth-analysis-2025" rel="noopener noreferrer" title="AI Safety Field Growth Analysis 2025">M</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">1</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/8QjAnWyuE9fktPRgS/ai-safety-field-growth-analysis-2025" rel="noopener noreferrer" title="AI Safety Field Growth Analysis 2025">M</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">3</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/8QjAnWyuE9fktPRgS/ai-safety-field-growth-analysis-2025" rel="noopener noreferrer" title="AI Safety Field Growth Analysis 2025">M</a></sup></td><td class="fm-prov-cell is-anchor" title="Anchored to a published figure"><span class="fm-prov-val">8</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/QBAjndPuFbhEXKcCr/my-understanding-of-what-everyone-in-technical-alignment-is" rel="noopener noreferrer" title="What Everyone in Technical Alignment is Doing and Why (Larsen &amp; Lifland, 2022)">L</a><a href="https://aiwatch.issarice.com/" rel="noopener noreferrer" title="AI Watch – AI safety organizations &amp; researchers dataset (Issa Rice)">W</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">14</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/8QjAnWyuE9fktPRgS/ai-safety-field-growth-analysis-2025" rel="noopener noreferrer" title="AI Safety Field Growth Analysis 2025">M</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">20</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/8QjAnWyuE9fktPRgS/ai-safety-field-growth-analysis-2025" rel="noopener noreferrer" title="AI Safety Field Growth Analysis 2025">M</a></sup></td><td class="fm-prov-cell is-anchor" title="Anchored to a published figure"><span class="fm-prov-val">25</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/8QjAnWyuE9fktPRgS/ai-safety-field-growth-analysis-2025" rel="noopener noreferrer" title="AI Safety Field Growth Analysis 2025">M</a></sup></td></tr>
+          <tr><th scope="row"><a href="/topics/reinforcement-learning-and-reward-hacking/">RL &amp; reward hacking</a></th><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">2</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/8QjAnWyuE9fktPRgS/ai-safety-field-growth-analysis-2025" rel="noopener noreferrer" title="AI Safety Field Growth Analysis 2025">M</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">3</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/8QjAnWyuE9fktPRgS/ai-safety-field-growth-analysis-2025" rel="noopener noreferrer" title="AI Safety Field Growth Analysis 2025">M</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">4</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/8QjAnWyuE9fktPRgS/ai-safety-field-growth-analysis-2025" rel="noopener noreferrer" title="AI Safety Field Growth Analysis 2025">M</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">5</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/8QjAnWyuE9fktPRgS/ai-safety-field-growth-analysis-2025" rel="noopener noreferrer" title="AI Safety Field Growth Analysis 2025">M</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">9</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/8QjAnWyuE9fktPRgS/ai-safety-field-growth-analysis-2025" rel="noopener noreferrer" title="AI Safety Field Growth Analysis 2025">M</a></sup></td><td class="fm-prov-cell is-anchor" title="Anchored to a published figure"><span class="fm-prov-val">15</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/QBAjndPuFbhEXKcCr/my-understanding-of-what-everyone-in-technical-alignment-is" rel="noopener noreferrer" title="What Everyone in Technical Alignment is Doing and Why (Larsen &amp; Lifland, 2022)">L</a><a href="https://aiwatch.issarice.com/" rel="noopener noreferrer" title="AI Watch – AI safety organizations &amp; researchers dataset (Issa Rice)">W</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">20</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/8QjAnWyuE9fktPRgS/ai-safety-field-growth-analysis-2025" rel="noopener noreferrer" title="AI Safety Field Growth Analysis 2025">M</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">25</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/8QjAnWyuE9fktPRgS/ai-safety-field-growth-analysis-2025" rel="noopener noreferrer" title="AI Safety Field Growth Analysis 2025">M</a></sup></td><td class="fm-prov-cell is-anchor" title="Anchored to a published figure"><span class="fm-prov-val">29</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/8QjAnWyuE9fktPRgS/ai-safety-field-growth-analysis-2025" rel="noopener noreferrer" title="AI Safety Field Growth Analysis 2025">M</a></sup></td></tr>
+          <tr><th scope="row"><a href="/topics/ai-alignment/">Agent foundations</a></th><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">10</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/8QjAnWyuE9fktPRgS/ai-safety-field-growth-analysis-2025" rel="noopener noreferrer" title="AI Safety Field Growth Analysis 2025">M</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">11</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/8QjAnWyuE9fktPRgS/ai-safety-field-growth-analysis-2025" rel="noopener noreferrer" title="AI Safety Field Growth Analysis 2025">M</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">13</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/8QjAnWyuE9fktPRgS/ai-safety-field-growth-analysis-2025" rel="noopener noreferrer" title="AI Safety Field Growth Analysis 2025">M</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">14</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/8QjAnWyuE9fktPRgS/ai-safety-field-growth-analysis-2025" rel="noopener noreferrer" title="AI Safety Field Growth Analysis 2025">M</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">18</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/8QjAnWyuE9fktPRgS/ai-safety-field-growth-analysis-2025" rel="noopener noreferrer" title="AI Safety Field Growth Analysis 2025">M</a></sup></td><td class="fm-prov-cell is-anchor" title="Anchored to a published figure"><span class="fm-prov-val">25</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/QBAjndPuFbhEXKcCr/my-understanding-of-what-everyone-in-technical-alignment-is" rel="noopener noreferrer" title="What Everyone in Technical Alignment is Doing and Why (Larsen &amp; Lifland, 2022)">L</a><a href="https://aiwatch.issarice.com/" rel="noopener noreferrer" title="AI Watch – AI safety organizations &amp; researchers dataset (Issa Rice)">W</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">22</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/8QjAnWyuE9fktPRgS/ai-safety-field-growth-analysis-2025" rel="noopener noreferrer" title="AI Safety Field Growth Analysis 2025">M</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">20</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/8QjAnWyuE9fktPRgS/ai-safety-field-growth-analysis-2025" rel="noopener noreferrer" title="AI Safety Field Growth Analysis 2025">M</a></sup></td><td class="fm-prov-cell is-anchor" title="Anchored to a published figure"><span class="fm-prov-val">18</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/8QjAnWyuE9fktPRgS/ai-safety-field-growth-analysis-2025" rel="noopener noreferrer" title="AI Safety Field Growth Analysis 2025">M</a></sup></td></tr>
+          <tr><th scope="row">AI control</th><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">0</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/8QjAnWyuE9fktPRgS/ai-safety-field-growth-analysis-2025" rel="noopener noreferrer" title="AI Safety Field Growth Analysis 2025">M</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">0</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/8QjAnWyuE9fktPRgS/ai-safety-field-growth-analysis-2025" rel="noopener noreferrer" title="AI Safety Field Growth Analysis 2025">M</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">0</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/8QjAnWyuE9fktPRgS/ai-safety-field-growth-analysis-2025" rel="noopener noreferrer" title="AI Safety Field Growth Analysis 2025">M</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">0</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/8QjAnWyuE9fktPRgS/ai-safety-field-growth-analysis-2025" rel="noopener noreferrer" title="AI Safety Field Growth Analysis 2025">M</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">0</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/8QjAnWyuE9fktPRgS/ai-safety-field-growth-analysis-2025" rel="noopener noreferrer" title="AI Safety Field Growth Analysis 2025">M</a></sup></td><td class="fm-prov-cell is-anchor" title="Anchored to a published figure"><span class="fm-prov-val">1</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/QBAjndPuFbhEXKcCr/my-understanding-of-what-everyone-in-technical-alignment-is" rel="noopener noreferrer" title="What Everyone in Technical Alignment is Doing and Why (Larsen &amp; Lifland, 2022)">L</a><a href="https://aiwatch.issarice.com/" rel="noopener noreferrer" title="AI Watch – AI safety organizations &amp; researchers dataset (Issa Rice)">W</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">3</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/8QjAnWyuE9fktPRgS/ai-safety-field-growth-analysis-2025" rel="noopener noreferrer" title="AI Safety Field Growth Analysis 2025">M</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">7</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/8QjAnWyuE9fktPRgS/ai-safety-field-growth-analysis-2025" rel="noopener noreferrer" title="AI Safety Field Growth Analysis 2025">M</a></sup></td><td class="fm-prov-cell is-anchor" title="Anchored to a published figure"><span class="fm-prov-val">11</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/8QjAnWyuE9fktPRgS/ai-safety-field-growth-analysis-2025" rel="noopener noreferrer" title="AI Safety Field Growth Analysis 2025">M</a></sup></td></tr>
+          <tr><th scope="row">AI security</th><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">0</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/8QjAnWyuE9fktPRgS/ai-safety-field-growth-analysis-2025" rel="noopener noreferrer" title="AI Safety Field Growth Analysis 2025">M</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">1</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/8QjAnWyuE9fktPRgS/ai-safety-field-growth-analysis-2025" rel="noopener noreferrer" title="AI Safety Field Growth Analysis 2025">M</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">1</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/8QjAnWyuE9fktPRgS/ai-safety-field-growth-analysis-2025" rel="noopener noreferrer" title="AI Safety Field Growth Analysis 2025">M</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">2</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/8QjAnWyuE9fktPRgS/ai-safety-field-growth-analysis-2025" rel="noopener noreferrer" title="AI Safety Field Growth Analysis 2025">M</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">3</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/8QjAnWyuE9fktPRgS/ai-safety-field-growth-analysis-2025" rel="noopener noreferrer" title="AI Safety Field Growth Analysis 2025">M</a></sup></td><td class="fm-prov-cell is-anchor" title="Anchored to a published figure"><span class="fm-prov-val">5</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/QBAjndPuFbhEXKcCr/my-understanding-of-what-everyone-in-technical-alignment-is" rel="noopener noreferrer" title="What Everyone in Technical Alignment is Doing and Why (Larsen &amp; Lifland, 2022)">L</a><a href="https://aiwatch.issarice.com/" rel="noopener noreferrer" title="AI Watch – AI safety organizations &amp; researchers dataset (Issa Rice)">W</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">10</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/8QjAnWyuE9fktPRgS/ai-safety-field-growth-analysis-2025" rel="noopener noreferrer" title="AI Safety Field Growth Analysis 2025">M</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">16</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/8QjAnWyuE9fktPRgS/ai-safety-field-growth-analysis-2025" rel="noopener noreferrer" title="AI Safety Field Growth Analysis 2025">M</a></sup></td><td class="fm-prov-cell is-anchor" title="Anchored to a published figure"><span class="fm-prov-val">21</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/8QjAnWyuE9fktPRgS/ai-safety-field-growth-analysis-2025" rel="noopener noreferrer" title="AI Safety Field Growth Analysis 2025">M</a></sup></td></tr>
+          <tr><th scope="row"><a href="/topics/ai-forecasting-and-timelines/">Forecasting &amp; timelines</a></th><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">2</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/8QjAnWyuE9fktPRgS/ai-safety-field-growth-analysis-2025" rel="noopener noreferrer" title="AI Safety Field Growth Analysis 2025">M</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">2</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/8QjAnWyuE9fktPRgS/ai-safety-field-growth-analysis-2025" rel="noopener noreferrer" title="AI Safety Field Growth Analysis 2025">M</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">3</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/8QjAnWyuE9fktPRgS/ai-safety-field-growth-analysis-2025" rel="noopener noreferrer" title="AI Safety Field Growth Analysis 2025">M</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">4</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/8QjAnWyuE9fktPRgS/ai-safety-field-growth-analysis-2025" rel="noopener noreferrer" title="AI Safety Field Growth Analysis 2025">M</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">6</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/8QjAnWyuE9fktPRgS/ai-safety-field-growth-analysis-2025" rel="noopener noreferrer" title="AI Safety Field Growth Analysis 2025">M</a></sup></td><td class="fm-prov-cell is-anchor" title="Anchored to a published figure"><span class="fm-prov-val">10</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/QBAjndPuFbhEXKcCr/my-understanding-of-what-everyone-in-technical-alignment-is" rel="noopener noreferrer" title="What Everyone in Technical Alignment is Doing and Why (Larsen &amp; Lifland, 2022)">L</a><a href="https://aiwatch.issarice.com/" rel="noopener noreferrer" title="AI Watch – AI safety organizations &amp; researchers dataset (Issa Rice)">W</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">16</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/8QjAnWyuE9fktPRgS/ai-safety-field-growth-analysis-2025" rel="noopener noreferrer" title="AI Safety Field Growth Analysis 2025">M</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">21</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/8QjAnWyuE9fktPRgS/ai-safety-field-growth-analysis-2025" rel="noopener noreferrer" title="AI Safety Field Growth Analysis 2025">M</a></sup></td><td class="fm-prov-cell is-anchor" title="Anchored to a published figure"><span class="fm-prov-val">25</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/8QjAnWyuE9fktPRgS/ai-safety-field-growth-analysis-2025" rel="noopener noreferrer" title="AI Safety Field Growth Analysis 2025">M</a></sup></td></tr>
+          <tr><th scope="row">Learning theory &amp; guarantees</th><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">2</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/8QjAnWyuE9fktPRgS/ai-safety-field-growth-analysis-2025" rel="noopener noreferrer" title="AI Safety Field Growth Analysis 2025">M</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">3</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/8QjAnWyuE9fktPRgS/ai-safety-field-growth-analysis-2025" rel="noopener noreferrer" title="AI Safety Field Growth Analysis 2025">M</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">3</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/8QjAnWyuE9fktPRgS/ai-safety-field-growth-analysis-2025" rel="noopener noreferrer" title="AI Safety Field Growth Analysis 2025">M</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">4</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/8QjAnWyuE9fktPRgS/ai-safety-field-growth-analysis-2025" rel="noopener noreferrer" title="AI Safety Field Growth Analysis 2025">M</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">5</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/8QjAnWyuE9fktPRgS/ai-safety-field-growth-analysis-2025" rel="noopener noreferrer" title="AI Safety Field Growth Analysis 2025">M</a></sup></td><td class="fm-prov-cell is-anchor" title="Anchored to a published figure"><span class="fm-prov-val">5</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/QBAjndPuFbhEXKcCr/my-understanding-of-what-everyone-in-technical-alignment-is" rel="noopener noreferrer" title="What Everyone in Technical Alignment is Doing and Why (Larsen &amp; Lifland, 2022)">L</a><a href="https://aiwatch.issarice.com/" rel="noopener noreferrer" title="AI Watch – AI safety organizations &amp; researchers dataset (Issa Rice)">W</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">6</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/8QjAnWyuE9fktPRgS/ai-safety-field-growth-analysis-2025" rel="noopener noreferrer" title="AI Safety Field Growth Analysis 2025">M</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">5</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/8QjAnWyuE9fktPRgS/ai-safety-field-growth-analysis-2025" rel="noopener noreferrer" title="AI Safety Field Growth Analysis 2025">M</a></sup></td><td class="fm-prov-cell is-anchor" title="Anchored to a published figure"><span class="fm-prov-val">4</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/8QjAnWyuE9fktPRgS/ai-safety-field-growth-analysis-2025" rel="noopener noreferrer" title="AI Safety Field Growth Analysis 2025">M</a></sup></td></tr>
+          <tr class="field-map-group-row"><th colspan="10" scope="rowgroup">Governance &amp; policy</th></tr>
+          <tr><th scope="row"><a href="/topics/ai-governance-and-policy/">Compute governance</a></th><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">0</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/mC3oeq62DWeqxiNBx/estimating-the-current-and-future-number-of-ai-safety" rel="noopener noreferrer" title="Estimating the Number of AI Safety Researchers">E</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">1</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/mC3oeq62DWeqxiNBx/estimating-the-current-and-future-number-of-ai-safety" rel="noopener noreferrer" title="Estimating the Number of AI Safety Researchers">E</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">1</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/mC3oeq62DWeqxiNBx/estimating-the-current-and-future-number-of-ai-safety" rel="noopener noreferrer" title="Estimating the Number of AI Safety Researchers">E</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">2</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/mC3oeq62DWeqxiNBx/estimating-the-current-and-future-number-of-ai-safety" rel="noopener noreferrer" title="Estimating the Number of AI Safety Researchers">E</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">5</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/mC3oeq62DWeqxiNBx/estimating-the-current-and-future-number-of-ai-safety" rel="noopener noreferrer" title="Estimating the Number of AI Safety Researchers">E</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">15</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/mC3oeq62DWeqxiNBx/estimating-the-current-and-future-number-of-ai-safety" rel="noopener noreferrer" title="Estimating the Number of AI Safety Researchers">E</a><a href="https://aiwatch.issarice.com/" rel="noopener noreferrer" title="AI Watch – AI safety organizations &amp; researchers dataset (Issa Rice)">W</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">35</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/mC3oeq62DWeqxiNBx/estimating-the-current-and-future-number-of-ai-safety" rel="noopener noreferrer" title="Estimating the Number of AI Safety Researchers">E</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">55</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/mC3oeq62DWeqxiNBx/estimating-the-current-and-future-number-of-ai-safety" rel="noopener noreferrer" title="Estimating the Number of AI Safety Researchers">E</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">70</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/8QjAnWyuE9fktPRgS/ai-safety-field-growth-analysis-2025" rel="noopener noreferrer" title="AI Safety Field Growth Analysis 2025">M</a></sup></td></tr>
+          <tr><th scope="row"><a href="/topics/ai-governance-and-policy/">Policy &amp; standards</a></th><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">3</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/mC3oeq62DWeqxiNBx/estimating-the-current-and-future-number-of-ai-safety" rel="noopener noreferrer" title="Estimating the Number of AI Safety Researchers">E</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">4</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/mC3oeq62DWeqxiNBx/estimating-the-current-and-future-number-of-ai-safety" rel="noopener noreferrer" title="Estimating the Number of AI Safety Researchers">E</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">6</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/mC3oeq62DWeqxiNBx/estimating-the-current-and-future-number-of-ai-safety" rel="noopener noreferrer" title="Estimating the Number of AI Safety Researchers">E</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">12</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/mC3oeq62DWeqxiNBx/estimating-the-current-and-future-number-of-ai-safety" rel="noopener noreferrer" title="Estimating the Number of AI Safety Researchers">E</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">22</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/mC3oeq62DWeqxiNBx/estimating-the-current-and-future-number-of-ai-safety" rel="noopener noreferrer" title="Estimating the Number of AI Safety Researchers">E</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">40</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/mC3oeq62DWeqxiNBx/estimating-the-current-and-future-number-of-ai-safety" rel="noopener noreferrer" title="Estimating the Number of AI Safety Researchers">E</a><a href="https://aiwatch.issarice.com/" rel="noopener noreferrer" title="AI Watch – AI safety organizations &amp; researchers dataset (Issa Rice)">W</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">80</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/mC3oeq62DWeqxiNBx/estimating-the-current-and-future-number-of-ai-safety" rel="noopener noreferrer" title="Estimating the Number of AI Safety Researchers">E</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">120</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/mC3oeq62DWeqxiNBx/estimating-the-current-and-future-number-of-ai-safety" rel="noopener noreferrer" title="Estimating the Number of AI Safety Researchers">E</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">150</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/8QjAnWyuE9fktPRgS/ai-safety-field-growth-analysis-2025" rel="noopener noreferrer" title="AI Safety Field Growth Analysis 2025">M</a></sup></td></tr>
+          <tr><th scope="row"><a href="/topics/ai-governance-and-policy/">International coordination</a></th><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">1</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/mC3oeq62DWeqxiNBx/estimating-the-current-and-future-number-of-ai-safety" rel="noopener noreferrer" title="Estimating the Number of AI Safety Researchers">E</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">2</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/mC3oeq62DWeqxiNBx/estimating-the-current-and-future-number-of-ai-safety" rel="noopener noreferrer" title="Estimating the Number of AI Safety Researchers">E</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">3</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/mC3oeq62DWeqxiNBx/estimating-the-current-and-future-number-of-ai-safety" rel="noopener noreferrer" title="Estimating the Number of AI Safety Researchers">E</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">4</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/mC3oeq62DWeqxiNBx/estimating-the-current-and-future-number-of-ai-safety" rel="noopener noreferrer" title="Estimating the Number of AI Safety Researchers">E</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">8</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/mC3oeq62DWeqxiNBx/estimating-the-current-and-future-number-of-ai-safety" rel="noopener noreferrer" title="Estimating the Number of AI Safety Researchers">E</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">15</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/mC3oeq62DWeqxiNBx/estimating-the-current-and-future-number-of-ai-safety" rel="noopener noreferrer" title="Estimating the Number of AI Safety Researchers">E</a><a href="https://aiwatch.issarice.com/" rel="noopener noreferrer" title="AI Watch – AI safety organizations &amp; researchers dataset (Issa Rice)">W</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">35</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/mC3oeq62DWeqxiNBx/estimating-the-current-and-future-number-of-ai-safety" rel="noopener noreferrer" title="Estimating the Number of AI Safety Researchers">E</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">55</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/mC3oeq62DWeqxiNBx/estimating-the-current-and-future-number-of-ai-safety" rel="noopener noreferrer" title="Estimating the Number of AI Safety Researchers">E</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">70</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/8QjAnWyuE9fktPRgS/ai-safety-field-growth-analysis-2025" rel="noopener noreferrer" title="AI Safety Field Growth Analysis 2025">M</a></sup></td></tr>
+          <tr><th scope="row"><a href="/topics/ai-governance-and-policy/">Lab governance &amp; RSPs</a></th><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">0</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/mC3oeq62DWeqxiNBx/estimating-the-current-and-future-number-of-ai-safety" rel="noopener noreferrer" title="Estimating the Number of AI Safety Researchers">E</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">0</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/mC3oeq62DWeqxiNBx/estimating-the-current-and-future-number-of-ai-safety" rel="noopener noreferrer" title="Estimating the Number of AI Safety Researchers">E</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">0</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/mC3oeq62DWeqxiNBx/estimating-the-current-and-future-number-of-ai-safety" rel="noopener noreferrer" title="Estimating the Number of AI Safety Researchers">E</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">1</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/mC3oeq62DWeqxiNBx/estimating-the-current-and-future-number-of-ai-safety" rel="noopener noreferrer" title="Estimating the Number of AI Safety Researchers">E</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">2</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/mC3oeq62DWeqxiNBx/estimating-the-current-and-future-number-of-ai-safety" rel="noopener noreferrer" title="Estimating the Number of AI Safety Researchers">E</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">5</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/mC3oeq62DWeqxiNBx/estimating-the-current-and-future-number-of-ai-safety" rel="noopener noreferrer" title="Estimating the Number of AI Safety Researchers">E</a><a href="https://aiwatch.issarice.com/" rel="noopener noreferrer" title="AI Watch – AI safety organizations &amp; researchers dataset (Issa Rice)">W</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">18</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/mC3oeq62DWeqxiNBx/estimating-the-current-and-future-number-of-ai-safety" rel="noopener noreferrer" title="Estimating the Number of AI Safety Researchers">E</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">30</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/mC3oeq62DWeqxiNBx/estimating-the-current-and-future-number-of-ai-safety" rel="noopener noreferrer" title="Estimating the Number of AI Safety Researchers">E</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">40</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/8QjAnWyuE9fktPRgS/ai-safety-field-growth-analysis-2025" rel="noopener noreferrer" title="AI Safety Field Growth Analysis 2025">M</a></sup></td></tr>
+          <tr class="field-map-group-row"><th colspan="10" scope="rowgroup">Cross-cutting</th></tr>
+          <tr><th scope="row">Advocacy &amp; field-building</th><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">3</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/mC3oeq62DWeqxiNBx/estimating-the-current-and-future-number-of-ai-safety" rel="noopener noreferrer" title="Estimating the Number of AI Safety Researchers">E</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">4</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/mC3oeq62DWeqxiNBx/estimating-the-current-and-future-number-of-ai-safety" rel="noopener noreferrer" title="Estimating the Number of AI Safety Researchers">E</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">6</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/mC3oeq62DWeqxiNBx/estimating-the-current-and-future-number-of-ai-safety" rel="noopener noreferrer" title="Estimating the Number of AI Safety Researchers">E</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">8</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/mC3oeq62DWeqxiNBx/estimating-the-current-and-future-number-of-ai-safety" rel="noopener noreferrer" title="Estimating the Number of AI Safety Researchers">E</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">11</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/mC3oeq62DWeqxiNBx/estimating-the-current-and-future-number-of-ai-safety" rel="noopener noreferrer" title="Estimating the Number of AI Safety Researchers">E</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">15</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/mC3oeq62DWeqxiNBx/estimating-the-current-and-future-number-of-ai-safety" rel="noopener noreferrer" title="Estimating the Number of AI Safety Researchers">E</a><a href="https://aiwatch.issarice.com/" rel="noopener noreferrer" title="AI Watch – AI safety organizations &amp; researchers dataset (Issa Rice)">W</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">40</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/mC3oeq62DWeqxiNBx/estimating-the-current-and-future-number-of-ai-safety" rel="noopener noreferrer" title="Estimating the Number of AI Safety Researchers">E</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">65</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/mC3oeq62DWeqxiNBx/estimating-the-current-and-future-number-of-ai-safety" rel="noopener noreferrer" title="Estimating the Number of AI Safety Researchers">E</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">90</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/8QjAnWyuE9fktPRgS/ai-safety-field-growth-analysis-2025" rel="noopener noreferrer" title="AI Safety Field Growth Analysis 2025">M</a></sup></td></tr>
+          <tr><th scope="row"><a href="/topics/ai-ethics-and-society/">Ethics &amp; societal impact</a></th><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">3</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/mC3oeq62DWeqxiNBx/estimating-the-current-and-future-number-of-ai-safety" rel="noopener noreferrer" title="Estimating the Number of AI Safety Researchers">E</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">5</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/mC3oeq62DWeqxiNBx/estimating-the-current-and-future-number-of-ai-safety" rel="noopener noreferrer" title="Estimating the Number of AI Safety Researchers">E</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">7</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/mC3oeq62DWeqxiNBx/estimating-the-current-and-future-number-of-ai-safety" rel="noopener noreferrer" title="Estimating the Number of AI Safety Researchers">E</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">9</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/mC3oeq62DWeqxiNBx/estimating-the-current-and-future-number-of-ai-safety" rel="noopener noreferrer" title="Estimating the Number of AI Safety Researchers">E</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">10</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/mC3oeq62DWeqxiNBx/estimating-the-current-and-future-number-of-ai-safety" rel="noopener noreferrer" title="Estimating the Number of AI Safety Researchers">E</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">10</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/mC3oeq62DWeqxiNBx/estimating-the-current-and-future-number-of-ai-safety" rel="noopener noreferrer" title="Estimating the Number of AI Safety Researchers">E</a><a href="https://aiwatch.issarice.com/" rel="noopener noreferrer" title="AI Watch – AI safety organizations &amp; researchers dataset (Issa Rice)">W</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">22</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/mC3oeq62DWeqxiNBx/estimating-the-current-and-future-number-of-ai-safety" rel="noopener noreferrer" title="Estimating the Number of AI Safety Researchers">E</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">38</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/mC3oeq62DWeqxiNBx/estimating-the-current-and-future-number-of-ai-safety" rel="noopener noreferrer" title="Estimating the Number of AI Safety Researchers">E</a></sup></td><td class="fm-prov-cell is-modeled" title="Modeled / interpolated"><span class="fm-prov-val">50</span><sup class="fm-prov-src"><a href="https://www.lesswrong.com/posts/8QjAnWyuE9fktPRgS/ai-safety-field-growth-analysis-2025" rel="noopener noreferrer" title="AI Safety Field Growth Analysis 2025">M</a></sup></td></tr>
+          </tbody>
+        </table>
+        </div>
+        <p class="fm-prov-key"><span class="fm-prov-key-item"><b class="fm-prov-val is-anchor">n</b> anchored to a published per-category figure</span><span class="fm-prov-key-item"><b class="fm-prov-val is-modeled">n</b> modeled (our split or interpolation of a published total)</span><span class="fm-prov-key-item"><b>M</b> <a href="https://www.lesswrong.com/posts/8QjAnWyuE9fktPRgS/ai-safety-field-growth-analysis-2025" rel="noopener noreferrer">AI Safety Field Growth Analysis 2025</a></span><span class="fm-prov-key-item"><b>E</b> <a href="https://www.lesswrong.com/posts/mC3oeq62DWeqxiNBx/estimating-the-current-and-future-number-of-ai-safety" rel="noopener noreferrer">Estimating the Number of AI Safety Researchers</a></span><span class="fm-prov-key-item"><b>8t</b> <a href="https://80000hours.org/career-reviews/ai-safety-technical-research/" rel="noopener noreferrer">80,000 Hours – AI safety technical research</a></span><span class="fm-prov-key-item"><b>8c</b> <a href="https://www.lesswrong.com/posts/FYFrFjk57WrdFdQB8/how-many-people-are-working-directly-on-reducing-existential" rel="noopener noreferrer">How many people work directly on reducing AI existential risk? (80,000 Hours)</a></span><span class="fm-prov-key-item"><b>L</b> <a href="https://www.lesswrong.com/posts/QBAjndPuFbhEXKcCr/my-understanding-of-what-everyone-in-technical-alignment-is" rel="noopener noreferrer">What Everyone in Technical Alignment is Doing and Why (Larsen &amp; Lifland, 2022)</a></span><span class="fm-prov-key-item"><b>W</b> <a href="https://aiwatch.issarice.com/" rel="noopener noreferrer">AI Watch – AI safety organizations &amp; researchers dataset (Issa Rice)</a></span><span class="fm-prov-key-item"><b>ETO</b> <a href="https://almanac.eto.tech/topics/ai-safety/" rel="noopener noreferrer">Emerging Technology Observatory – AI safety almanac</a></span></p>
+      </details>
       <p class="field-map-sources">Sources: <a href="https://www.lesswrong.com/posts/8QjAnWyuE9fktPRgS/ai-safety-field-growth-analysis-2025" rel="noopener noreferrer">AI Safety Field Growth Analysis 2025</a> · <a href="https://www.lesswrong.com/posts/mC3oeq62DWeqxiNBx/estimating-the-current-and-future-number-of-ai-safety" rel="noopener noreferrer">Estimating the Number of AI Safety Researchers</a> · <a href="https://80000hours.org/career-reviews/ai-safety-technical-research/" rel="noopener noreferrer">80,000 Hours – AI safety technical research</a> · <a href="https://www.lesswrong.com/posts/FYFrFjk57WrdFdQB8/how-many-people-are-working-directly-on-reducing-existential" rel="noopener noreferrer">How many people work directly on reducing AI existential risk? (80,000 Hours)</a> · <a href="https://www.lesswrong.com/posts/QBAjndPuFbhEXKcCr/my-understanding-of-what-everyone-in-technical-alignment-is" rel="noopener noreferrer">What Everyone in Technical Alignment is Doing and Why (Larsen &amp; Lifland, 2022)</a> · <a href="https://aiwatch.issarice.com/" rel="noopener noreferrer">AI Watch – AI safety organizations &amp; researchers dataset (Issa Rice)</a> · <a href="https://almanac.eto.tech/topics/ai-safety/" rel="noopener noreferrer">Emerging Technology Observatory – AI safety almanac</a></p>
   <script type="application/json" id="field-map-data">{
   "meta": {
@@ -441,7 +593,7 @@ h1{font-size:1.9rem;margin:.2rem 0 .4rem;}
       "people": {
         "label": "People (FTEs)",
         "unit": "FTEs",
-        "note": "Full-time-equivalent researchers, 2017–2025. Anchored to published estimates: ~30 technical in 2017, ~50 in 2020 and ~400 total in 2022 (McAleese; 80,000 Hours' '~400 people'), and ~1,100 in 2025 (McAleese: ~600 technical, ~500 non-technical). The 2025 technical splits follow McAleese's 2025 per-category figures (e.g. interpretability ~122, evals ~100, LLM safety ~87); the 2022 splits draw on Larsen & Lifland's org-by-org survey; intervening years are modeled from each branch's documented emergence timeline, and the shape is corroborated by AI Watch (~383 researchers tracked in 2022). Per-bucket splits are approximate, so totals don't sum exactly, and points marked 'estimated' are back-of-envelope.",
+        "note": "Full-time-equivalent researchers, 2017–2025. Anchored to published estimates: ~30 technical in 2017, ~50 in 2020 and ~400 total in 2022 (McAleese; 80,000 Hours' '~400 people'), and ~1,100 in 2025 (McAleese: ~600 technical, ~500 non-technical). The 2025 technical splits follow McAleese's 2025 per-category figures (e.g. interpretability ~122, evals ~100, LLM safety ~87); the 2022 technical splits draw on Larsen & Lifland's org-by-org survey (corroborated by AI Watch, ~383 researchers in 2022); intervening years are modeled from each branch's documented emergence timeline. Every point carries its own source (see the per-year sourcing table below): 'anchor' points come straight from a published per-category figure, 'modeled' points are our split or interpolation of a published total. Per-bucket splits are approximate, so totals don't sum exactly.",
         "auto": false
       },
       "papers": {
@@ -453,30 +605,37 @@ h1{font-size:1.9rem;margin:.2rem 0 .4rem;}
     },
     "sources": [
       {
+        "id": "mcaleese",
         "label": "AI Safety Field Growth Analysis 2025",
         "url": "https://www.lesswrong.com/posts/8QjAnWyuE9fktPRgS/ai-safety-field-growth-analysis-2025"
       },
       {
+        "id": "estimating",
         "label": "Estimating the Number of AI Safety Researchers",
         "url": "https://www.lesswrong.com/posts/mC3oeq62DWeqxiNBx/estimating-the-current-and-future-number-of-ai-safety"
       },
       {
+        "id": "eightyk-tech",
         "label": "80,000 Hours – AI safety technical research",
         "url": "https://80000hours.org/career-reviews/ai-safety-technical-research/"
       },
       {
+        "id": "eightyk-count",
         "label": "How many people work directly on reducing AI existential risk? (80,000 Hours)",
         "url": "https://www.lesswrong.com/posts/FYFrFjk57WrdFdQB8/how-many-people-are-working-directly-on-reducing-existential"
       },
       {
+        "id": "larsen-lifland",
         "label": "What Everyone in Technical Alignment is Doing and Why (Larsen & Lifland, 2022)",
         "url": "https://www.lesswrong.com/posts/QBAjndPuFbhEXKcCr/my-understanding-of-what-everyone-in-technical-alignment-is"
       },
       {
+        "id": "aiwatch",
         "label": "AI Watch – AI safety organizations & researchers dataset (Issa Rice)",
         "url": "https://aiwatch.issarice.com/"
       },
       {
+        "id": "eto",
         "label": "Emerging Technology Observatory – AI safety almanac",
         "url": "https://almanac.eto.tech/topics/ai-safety/"
       }
@@ -508,47 +667,84 @@ h1{font-size:1.9rem;margin:.2rem 0 .4rem;}
         {
           "year": 2017,
           "value": 0,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2018,
           "value": 1,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2019,
           "value": 2,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2020,
           "value": 5,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2021,
           "value": 12,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2022,
           "value": 25,
-          "estimated": true
+          "estimated": true,
+          "basis": "anchor",
+          "src": [
+            "larsen-lifland",
+            "aiwatch"
+          ]
         },
         {
           "year": 2023,
           "value": 50,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2024,
           "value": 85,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2025,
           "value": 122,
-          "estimated": false
+          "estimated": false,
+          "basis": "anchor",
+          "src": [
+            "mcaleese"
+          ]
         }
       ]
     },
@@ -563,47 +759,84 @@ h1{font-size:1.9rem;margin:.2rem 0 .4rem;}
         {
           "year": 2017,
           "value": 3,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2018,
           "value": 5,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2019,
           "value": 7,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2020,
           "value": 10,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2021,
           "value": 18,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2022,
           "value": 45,
-          "estimated": true
+          "estimated": true,
+          "basis": "anchor",
+          "src": [
+            "larsen-lifland",
+            "aiwatch"
+          ]
         },
         {
           "year": 2023,
           "value": 70,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2024,
           "value": 92,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2025,
           "value": 110,
-          "estimated": false
+          "estimated": false,
+          "basis": "anchor",
+          "src": [
+            "mcaleese"
+          ]
         }
       ]
     },
@@ -618,47 +851,84 @@ h1{font-size:1.9rem;margin:.2rem 0 .4rem;}
         {
           "year": 2017,
           "value": 3,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2018,
           "value": 4,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2019,
           "value": 6,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2020,
           "value": 9,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2021,
           "value": 15,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2022,
           "value": 30,
-          "estimated": true
+          "estimated": true,
+          "basis": "anchor",
+          "src": [
+            "larsen-lifland",
+            "aiwatch"
+          ]
         },
         {
           "year": 2023,
           "value": 50,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2024,
           "value": 66,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2025,
           "value": 80,
-          "estimated": false
+          "estimated": false,
+          "basis": "anchor",
+          "src": [
+            "mcaleese"
+          ]
         }
       ]
     },
@@ -673,47 +943,84 @@ h1{font-size:1.9rem;margin:.2rem 0 .4rem;}
         {
           "year": 2017,
           "value": 0,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2018,
           "value": 0,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2019,
           "value": 1,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2020,
           "value": 2,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2021,
           "value": 7,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2022,
           "value": 20,
-          "estimated": true
+          "estimated": true,
+          "basis": "anchor",
+          "src": [
+            "larsen-lifland",
+            "aiwatch"
+          ]
         },
         {
           "year": 2023,
           "value": 43,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2024,
           "value": 65,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2025,
           "value": 87,
-          "estimated": false
+          "estimated": false,
+          "basis": "anchor",
+          "src": [
+            "mcaleese"
+          ]
         }
       ]
     },
@@ -728,47 +1035,84 @@ h1{font-size:1.9rem;margin:.2rem 0 .4rem;}
         {
           "year": 2017,
           "value": 0,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2018,
           "value": 0,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2019,
           "value": 0,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2020,
           "value": 1,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2021,
           "value": 4,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2022,
           "value": 15,
-          "estimated": true
+          "estimated": true,
+          "basis": "anchor",
+          "src": [
+            "larsen-lifland",
+            "aiwatch"
+          ]
         },
         {
           "year": 2023,
           "value": 45,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2024,
           "value": 80,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2025,
           "value": 100,
-          "estimated": false
+          "estimated": false,
+          "basis": "anchor",
+          "src": [
+            "mcaleese"
+          ]
         }
       ]
     },
@@ -783,47 +1127,84 @@ h1{font-size:1.9rem;margin:.2rem 0 .4rem;}
         {
           "year": 2017,
           "value": 0,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2018,
           "value": 0,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2019,
           "value": 1,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2020,
           "value": 1,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2021,
           "value": 3,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2022,
           "value": 8,
-          "estimated": true
+          "estimated": true,
+          "basis": "anchor",
+          "src": [
+            "larsen-lifland",
+            "aiwatch"
+          ]
         },
         {
           "year": 2023,
           "value": 14,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2024,
           "value": 20,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2025,
           "value": 25,
-          "estimated": false
+          "estimated": false,
+          "basis": "anchor",
+          "src": [
+            "mcaleese"
+          ]
         }
       ]
     },
@@ -838,47 +1219,84 @@ h1{font-size:1.9rem;margin:.2rem 0 .4rem;}
         {
           "year": 2017,
           "value": 2,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2018,
           "value": 3,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2019,
           "value": 4,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2020,
           "value": 5,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2021,
           "value": 9,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2022,
           "value": 15,
-          "estimated": true
+          "estimated": true,
+          "basis": "anchor",
+          "src": [
+            "larsen-lifland",
+            "aiwatch"
+          ]
         },
         {
           "year": 2023,
           "value": 20,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2024,
           "value": 25,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2025,
           "value": 29,
-          "estimated": false
+          "estimated": false,
+          "basis": "anchor",
+          "src": [
+            "mcaleese"
+          ]
         }
       ]
     },
@@ -893,47 +1311,84 @@ h1{font-size:1.9rem;margin:.2rem 0 .4rem;}
         {
           "year": 2017,
           "value": 10,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2018,
           "value": 11,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2019,
           "value": 13,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2020,
           "value": 14,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2021,
           "value": 18,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2022,
           "value": 25,
-          "estimated": true
+          "estimated": true,
+          "basis": "anchor",
+          "src": [
+            "larsen-lifland",
+            "aiwatch"
+          ]
         },
         {
           "year": 2023,
           "value": 22,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2024,
           "value": 20,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2025,
           "value": 18,
-          "estimated": false
+          "estimated": false,
+          "basis": "anchor",
+          "src": [
+            "mcaleese"
+          ]
         }
       ]
     },
@@ -948,47 +1403,84 @@ h1{font-size:1.9rem;margin:.2rem 0 .4rem;}
         {
           "year": 2017,
           "value": 0,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2018,
           "value": 0,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2019,
           "value": 0,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2020,
           "value": 0,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2021,
           "value": 0,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2022,
           "value": 1,
-          "estimated": true
+          "estimated": true,
+          "basis": "anchor",
+          "src": [
+            "larsen-lifland",
+            "aiwatch"
+          ]
         },
         {
           "year": 2023,
           "value": 3,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2024,
           "value": 7,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2025,
           "value": 11,
-          "estimated": false
+          "estimated": false,
+          "basis": "anchor",
+          "src": [
+            "mcaleese"
+          ]
         }
       ]
     },
@@ -1003,47 +1495,84 @@ h1{font-size:1.9rem;margin:.2rem 0 .4rem;}
         {
           "year": 2017,
           "value": 0,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2018,
           "value": 1,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2019,
           "value": 1,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2020,
           "value": 2,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2021,
           "value": 3,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2022,
           "value": 5,
-          "estimated": true
+          "estimated": true,
+          "basis": "anchor",
+          "src": [
+            "larsen-lifland",
+            "aiwatch"
+          ]
         },
         {
           "year": 2023,
           "value": 10,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2024,
           "value": 16,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2025,
           "value": 21,
-          "estimated": false
+          "estimated": false,
+          "basis": "anchor",
+          "src": [
+            "mcaleese"
+          ]
         }
       ]
     },
@@ -1058,47 +1587,84 @@ h1{font-size:1.9rem;margin:.2rem 0 .4rem;}
         {
           "year": 2017,
           "value": 2,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2018,
           "value": 2,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2019,
           "value": 3,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2020,
           "value": 4,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2021,
           "value": 6,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2022,
           "value": 10,
-          "estimated": true
+          "estimated": true,
+          "basis": "anchor",
+          "src": [
+            "larsen-lifland",
+            "aiwatch"
+          ]
         },
         {
           "year": 2023,
           "value": 16,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2024,
           "value": 21,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2025,
           "value": 25,
-          "estimated": false
+          "estimated": false,
+          "basis": "anchor",
+          "src": [
+            "mcaleese"
+          ]
         }
       ]
     },
@@ -1113,47 +1679,84 @@ h1{font-size:1.9rem;margin:.2rem 0 .4rem;}
         {
           "year": 2017,
           "value": 2,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2018,
           "value": 3,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2019,
           "value": 3,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2020,
           "value": 4,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2021,
           "value": 5,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2022,
           "value": 5,
-          "estimated": true
+          "estimated": true,
+          "basis": "anchor",
+          "src": [
+            "larsen-lifland",
+            "aiwatch"
+          ]
         },
         {
           "year": 2023,
           "value": 6,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2024,
           "value": 5,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         },
         {
           "year": 2025,
           "value": 4,
-          "estimated": false
+          "estimated": false,
+          "basis": "anchor",
+          "src": [
+            "mcaleese"
+          ]
         }
       ]
     },
@@ -1168,47 +1771,84 @@ h1{font-size:1.9rem;margin:.2rem 0 .4rem;}
         {
           "year": 2017,
           "value": 0,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "estimating"
+          ]
         },
         {
           "year": 2018,
           "value": 1,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "estimating"
+          ]
         },
         {
           "year": 2019,
           "value": 1,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "estimating"
+          ]
         },
         {
           "year": 2020,
           "value": 2,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "estimating"
+          ]
         },
         {
           "year": 2021,
           "value": 5,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "estimating"
+          ]
         },
         {
           "year": 2022,
           "value": 15,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "estimating",
+            "aiwatch"
+          ]
         },
         {
           "year": 2023,
           "value": 35,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "estimating"
+          ]
         },
         {
           "year": 2024,
           "value": 55,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "estimating"
+          ]
         },
         {
           "year": 2025,
           "value": 70,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         }
       ]
     },
@@ -1223,47 +1863,84 @@ h1{font-size:1.9rem;margin:.2rem 0 .4rem;}
         {
           "year": 2017,
           "value": 3,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "estimating"
+          ]
         },
         {
           "year": 2018,
           "value": 4,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "estimating"
+          ]
         },
         {
           "year": 2019,
           "value": 6,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "estimating"
+          ]
         },
         {
           "year": 2020,
           "value": 12,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "estimating"
+          ]
         },
         {
           "year": 2021,
           "value": 22,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "estimating"
+          ]
         },
         {
           "year": 2022,
           "value": 40,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "estimating",
+            "aiwatch"
+          ]
         },
         {
           "year": 2023,
           "value": 80,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "estimating"
+          ]
         },
         {
           "year": 2024,
           "value": 120,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "estimating"
+          ]
         },
         {
           "year": 2025,
           "value": 150,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         }
       ]
     },
@@ -1278,47 +1955,84 @@ h1{font-size:1.9rem;margin:.2rem 0 .4rem;}
         {
           "year": 2017,
           "value": 1,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "estimating"
+          ]
         },
         {
           "year": 2018,
           "value": 2,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "estimating"
+          ]
         },
         {
           "year": 2019,
           "value": 3,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "estimating"
+          ]
         },
         {
           "year": 2020,
           "value": 4,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "estimating"
+          ]
         },
         {
           "year": 2021,
           "value": 8,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "estimating"
+          ]
         },
         {
           "year": 2022,
           "value": 15,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "estimating",
+            "aiwatch"
+          ]
         },
         {
           "year": 2023,
           "value": 35,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "estimating"
+          ]
         },
         {
           "year": 2024,
           "value": 55,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "estimating"
+          ]
         },
         {
           "year": 2025,
           "value": 70,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         }
       ]
     },
@@ -1333,47 +2047,84 @@ h1{font-size:1.9rem;margin:.2rem 0 .4rem;}
         {
           "year": 2017,
           "value": 0,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "estimating"
+          ]
         },
         {
           "year": 2018,
           "value": 0,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "estimating"
+          ]
         },
         {
           "year": 2019,
           "value": 0,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "estimating"
+          ]
         },
         {
           "year": 2020,
           "value": 1,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "estimating"
+          ]
         },
         {
           "year": 2021,
           "value": 2,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "estimating"
+          ]
         },
         {
           "year": 2022,
           "value": 5,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "estimating",
+            "aiwatch"
+          ]
         },
         {
           "year": 2023,
           "value": 18,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "estimating"
+          ]
         },
         {
           "year": 2024,
           "value": 30,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "estimating"
+          ]
         },
         {
           "year": 2025,
           "value": 40,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         }
       ]
     },
@@ -1388,47 +2139,84 @@ h1{font-size:1.9rem;margin:.2rem 0 .4rem;}
         {
           "year": 2017,
           "value": 3,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "estimating"
+          ]
         },
         {
           "year": 2018,
           "value": 4,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "estimating"
+          ]
         },
         {
           "year": 2019,
           "value": 6,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "estimating"
+          ]
         },
         {
           "year": 2020,
           "value": 8,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "estimating"
+          ]
         },
         {
           "year": 2021,
           "value": 11,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "estimating"
+          ]
         },
         {
           "year": 2022,
           "value": 15,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "estimating",
+            "aiwatch"
+          ]
         },
         {
           "year": 2023,
           "value": 40,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "estimating"
+          ]
         },
         {
           "year": 2024,
           "value": 65,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "estimating"
+          ]
         },
         {
           "year": 2025,
           "value": 90,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         }
       ]
     },
@@ -1443,47 +2231,84 @@ h1{font-size:1.9rem;margin:.2rem 0 .4rem;}
         {
           "year": 2017,
           "value": 3,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "estimating"
+          ]
         },
         {
           "year": 2018,
           "value": 5,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "estimating"
+          ]
         },
         {
           "year": 2019,
           "value": 7,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "estimating"
+          ]
         },
         {
           "year": 2020,
           "value": 9,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "estimating"
+          ]
         },
         {
           "year": 2021,
           "value": 10,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "estimating"
+          ]
         },
         {
           "year": 2022,
           "value": 10,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "estimating",
+            "aiwatch"
+          ]
         },
         {
           "year": 2023,
           "value": 22,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "estimating"
+          ]
         },
         {
           "year": 2024,
           "value": 38,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "estimating"
+          ]
         },
         {
           "year": 2025,
           "value": 50,
-          "estimated": true
+          "estimated": true,
+          "basis": "modeled",
+          "src": [
+            "mcaleese"
+          ]
         }
       ]
     }
@@ -1553,6 +2378,26 @@ h1{font-size:1.9rem;margin:.2rem 0 .4rem;}
       }
     }
     return !!last.estimated;
+  }
+
+  // Source lookup by id, for per-point provenance in the tooltip.
+  var SRC_BY_ID = {};
+  (DATA.meta.sources || []).forEach(function (s) {
+    SRC_BY_ID[s.id] = s;
+  });
+
+  // The snapshot whose provenance (basis + sources) applies at a given year —
+  // the point on or just before it. Used to cite the value the tooltip shows.
+  function pointAt(bucket, metric, year) {
+    var series = bucket[metric];
+    if (!series || !series.length) return null;
+    var yr = Math.round(year);
+    var best = null;
+    for (var i = 0; i < series.length; i++) {
+      if (series[i].year === yr) return series[i];
+      if (series[i].year <= yr) best = series[i];
+    }
+    return best || series[0];
   }
 
   // Metric keys actually present in the data, preserving meta order.
@@ -1990,6 +2835,33 @@ h1{font-size:1.9rem;margin:.2rem 0 .4rem;}
     var yNow = Math.round(Math.min(displayYear, range.max));
     var v = valueAt(n.b, metric, yNow);
     var est = isEstimated(n.b, metric, yNow);
+    var pt = pointAt(n.b, metric, yNow);
+    var srcHtml = "";
+    if (pt && pt.src && pt.src.length) {
+      var links = pt.src
+        .map(function (id) {
+          var s = SRC_BY_ID[id];
+          return s
+            ? '<a href="' +
+                escapeHtml(s.url) +
+                '" rel="noopener noreferrer">' +
+                escapeHtml(s.label) +
+                "</a>"
+            : "";
+        })
+        .filter(Boolean)
+        .join(" · ");
+      var basis = pt.basis === "anchor" ? "anchor" : "modeled";
+      srcHtml =
+        '<span class="field-map-tip-src">' +
+        '<span class="field-map-tip-basis ' +
+        (pt.basis === "anchor" ? "is-anchor" : "is-modeled") +
+        '">' +
+        basis +
+        "</span> · " +
+        links +
+        "</span>";
+    }
     tip.innerHTML =
       "<strong>" +
       escapeHtml(n.b.label) +
@@ -2005,6 +2877,7 @@ h1{font-size:1.9rem;margin:.2rem 0 .4rem;}
       '<span class="field-map-tip-blurb">' +
       escapeHtml(n.b.blurb) +
       "</span>" +
+      srcHtml +
       (n.b.topic ? '<span class="field-map-tip-cta">Open topic →</span>' : "");
     tip.hidden = false;
     if (keyboard) {

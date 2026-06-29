@@ -63,6 +63,26 @@
     return !!last.estimated;
   }
 
+  // Source lookup by id, for per-point provenance in the tooltip.
+  var SRC_BY_ID = {};
+  (DATA.meta.sources || []).forEach(function (s) {
+    SRC_BY_ID[s.id] = s;
+  });
+
+  // The snapshot whose provenance (basis + sources) applies at a given year —
+  // the point on or just before it. Used to cite the value the tooltip shows.
+  function pointAt(bucket, metric, year) {
+    var series = bucket[metric];
+    if (!series || !series.length) return null;
+    var yr = Math.round(year);
+    var best = null;
+    for (var i = 0; i < series.length; i++) {
+      if (series[i].year === yr) return series[i];
+      if (series[i].year <= yr) best = series[i];
+    }
+    return best || series[0];
+  }
+
   // Metric keys actually present in the data, preserving meta order.
   var METRICS = Object.keys(DATA.meta.metrics).filter(function (k) {
     return DATA.buckets.some(function (b) {
@@ -498,6 +518,33 @@
     var yNow = Math.round(Math.min(displayYear, range.max));
     var v = valueAt(n.b, metric, yNow);
     var est = isEstimated(n.b, metric, yNow);
+    var pt = pointAt(n.b, metric, yNow);
+    var srcHtml = "";
+    if (pt && pt.src && pt.src.length) {
+      var links = pt.src
+        .map(function (id) {
+          var s = SRC_BY_ID[id];
+          return s
+            ? '<a href="' +
+                escapeHtml(s.url) +
+                '" rel="noopener noreferrer">' +
+                escapeHtml(s.label) +
+                "</a>"
+            : "";
+        })
+        .filter(Boolean)
+        .join(" · ");
+      var basis = pt.basis === "anchor" ? "anchor" : "modeled";
+      srcHtml =
+        '<span class="field-map-tip-src">' +
+        '<span class="field-map-tip-basis ' +
+        (pt.basis === "anchor" ? "is-anchor" : "is-modeled") +
+        '">' +
+        basis +
+        "</span> · " +
+        links +
+        "</span>";
+    }
     tip.innerHTML =
       "<strong>" +
       escapeHtml(n.b.label) +
@@ -513,6 +560,7 @@
       '<span class="field-map-tip-blurb">' +
       escapeHtml(n.b.blurb) +
       "</span>" +
+      srcHtml +
       (n.b.topic ? '<span class="field-map-tip-cta">Open topic →</span>' : "");
     tip.hidden = false;
     if (keyboard) {
