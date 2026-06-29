@@ -1,0 +1,1222 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>The AI Safety field, by the numbers</title>
+<style>
+:root{
+  --bg:#f4f1ea; --surface:#fff; --surface-soft:#f9f7f1; --text:#382110;
+  --muted:#6f6659; --border:#e6ddce; --border-strong:#d5cab7; --accent:#409d69;
+  --on-accent:#fff; --accent-soft:#eef8f1; --accent-soft-border:#b5d6bf;
+  --accent-text:#2f7a52; --link:#166b4c; --shadow-soft:0 4px 14px rgba(56,33,16,.07);
+}
+[data-theme="dark"]{
+  --bg:#15110d; --surface:#1f1913; --surface-soft:#251e17; --text:#ede4d3;
+  --muted:#a99b85; --border:#3b3128; --border-strong:#4d4034; --accent:#4fb87e;
+  --on-accent:#0e231a; --accent-soft:rgba(79,184,126,.14); --accent-soft-border:rgba(79,184,126,.42);
+  --accent-text:#7fd2a4; --link:#7fd2a4; --shadow-soft:0 4px 14px rgba(0,0,0,.35);
+}
+body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--text);}
+.wrap{max-width:1100px;margin:0 auto;padding:1.5rem 1rem 3rem;}
+h1{font-size:1.9rem;margin:.2rem 0 .4rem;}
+.lead{color:var(--muted);max-width:42rem;line-height:1.55;margin:0 0 1rem;}
+.theme-btn{float:right;border:1px solid var(--border);background:var(--surface);color:var(--text);border-radius:999px;padding:.35rem .7rem;cursor:pointer;font-size:.8rem;}
+
+/* Group colors — override to taste. Paired light/dark. */
+:root{
+  --fm-technical:#409d69;
+  --fm-governance:#c98a2b;
+  --fm-crosscutting:#7a6cc4;
+}
+[data-theme="dark"]{
+  --fm-technical:#4fb87e;
+  --fm-governance:#e0a94a;
+  --fm-crosscutting:#9a8ce0;
+}
+
+/* ── Field map ─────────────────────────────────────────────────────────── */
+.field-map-page .hero-title {
+  margin-bottom: 0.25rem;
+}
+.field-map {
+  margin: 1.5rem 0 2rem;
+}
+.field-map-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1.25rem;
+  margin-bottom: 0.5rem;
+}
+.field-map-metric {
+  display: inline-flex;
+  border: 1px solid var(--border-strong);
+  border-radius: 999px;
+  overflow: hidden;
+  background: var(--surface);
+}
+.field-map-metric-btn {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  font: inherit;
+  font-size: 0.85rem;
+  padding: 0.4rem 0.95rem;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+.field-map-metric-btn.is-active {
+  background: var(--accent);
+  color: var(--on-accent);
+}
+.field-map-metric-btn:not(.is-active):hover {
+  color: var(--text);
+}
+.field-map-time {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex: 1 1 240px;
+  min-width: 220px;
+}
+.field-map-play {
+  appearance: none;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  border: 1px solid var(--border-strong);
+  background: var(--surface);
+  color: var(--text);
+  cursor: pointer;
+  font-size: 0.7rem;
+  line-height: 1;
+  flex: none;
+}
+.field-map-play.is-playing {
+  background: var(--accent-soft);
+  border-color: var(--accent-soft-border);
+}
+.field-map-slider {
+  flex: 1 1 auto;
+  accent-color: var(--accent);
+}
+.field-map-year {
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  color: var(--text);
+  min-width: 3ch;
+  text-align: right;
+}
+.field-map-legend {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+.field-map-legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+.field-map-legend-dot {
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 50%;
+  display: inline-block;
+}
+.field-map-legend-item[data-group="technical"] .field-map-legend-dot {
+  background: var(--fm-technical);
+}
+.field-map-legend-item[data-group="governance"] .field-map-legend-dot {
+  background: var(--fm-governance);
+}
+.field-map-legend-item[data-group="crosscutting"] .field-map-legend-dot {
+  background: var(--fm-crosscutting);
+}
+.field-map-stage {
+  position: relative;
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--surface-soft);
+  overflow: hidden;
+}
+.field-map-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.fm-node {
+  cursor: default;
+  transition: opacity 0.4s ease;
+}
+.fm-node[data-href] {
+  cursor: pointer;
+}
+.fm-bubble {
+  stroke: var(--surface);
+  stroke-width: 1.5;
+  fill-opacity: 0.82;
+  transition: fill-opacity 0.15s;
+}
+.fm-node:hover .fm-bubble,
+.fm-node:focus .fm-bubble {
+  fill-opacity: 1;
+}
+.fm-node:focus {
+  outline: none;
+}
+.fm-node:focus .fm-bubble {
+  stroke: var(--accent-text);
+  stroke-width: 2.5;
+}
+.fm-node[data-group="technical"] .fm-bubble {
+  fill: var(--fm-technical);
+}
+.fm-node[data-group="governance"] .fm-bubble {
+  fill: var(--fm-governance);
+}
+.fm-node[data-group="crosscutting"] .fm-bubble {
+  fill: var(--fm-crosscutting);
+}
+.fm-label {
+  fill: #fff;
+  font-weight: 600;
+  pointer-events: none;
+  paint-order: stroke;
+}
+.field-map-tip {
+  position: absolute;
+  z-index: 5;
+  max-width: 16rem;
+  background: var(--surface);
+  border: 1px solid var(--border-strong);
+  border-radius: 10px;
+  box-shadow: var(--shadow-soft);
+  padding: 0.6rem 0.7rem;
+  font-size: 0.82rem;
+  color: var(--text);
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+.field-map-tip-num {
+  font-variant-numeric: tabular-nums;
+  color: var(--accent-text);
+  font-weight: 600;
+}
+.field-map-tip-blurb {
+  color: var(--muted);
+  line-height: 1.35;
+}
+.field-map-tip-cta {
+  color: var(--link);
+  font-weight: 600;
+}
+.field-map-note {
+  font-size: 0.82rem;
+  color: var(--muted);
+  line-height: 1.5;
+  margin-top: 0.6rem;
+}
+.field-map-note strong {
+  color: var(--text);
+}
+.field-map-sources {
+  font-size: 0.78rem;
+  color: var(--muted);
+  line-height: 1.5;
+  margin-top: 1rem;
+}
+.field-map-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+  margin-top: 1rem;
+}
+.field-map-table caption {
+  text-align: left;
+  color: var(--muted);
+  font-size: 0.8rem;
+  margin-bottom: 0.5rem;
+}
+.field-map-table th,
+.field-map-table td {
+  text-align: left;
+  padding: 0.4rem 0.6rem;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+.field-map-table .field-map-num {
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.field-map-group-row th {
+  color: var(--accent-text);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding-top: 0.9rem;
+}
+.field-map-est {
+  color: var(--muted);
+  font-weight: 400;
+}
+/* When JS is active the interactive map is shown and the table becomes a
+   supplementary data view; keep it but de-emphasise. */
+.field-map:not([hidden]) ~ .field-map-table {
+  opacity: 0.85;
+}
+@media (prefers-reduced-motion: reduce) {
+  .fm-node,
+  .fm-bubble {
+    transition: none;
+  }
+}
+</style>
+</head>
+<body class="site-body field-map-page">
+<div class="wrap">
+  <button class="theme-btn" type="button" onclick="var h=document.documentElement;h.setAttribute('data-theme',h.getAttribute('data-theme')==='dark'?'light':'dark')">Toggle theme</button>
+  <h1 class="hero-title">The AI Safety field, by the numbers</h1>
+  <p class="lead">Each branch of AI safety research as a bubble sized by headcount. Drag the slider to watch the field grow over time.</p>
+  <div class="field-map" data-field-map hidden>
+    <div class="field-map-controls" data-field-map-controls></div>
+    <div class="field-map-stage" data-field-map-stage></div>
+    <p class="field-map-note" data-field-map-note></p>
+  </div>
+      <table class="field-map-table">
+        <caption>People (FTEs) by branch (2025). Full-time-equivalent researchers. Hand-curated yearly snapshots from the field-growth analyses below; the field is small (~1,100 FTEs in 2025) and per-bucket splits are approximate, so totals don&#39;t sum exactly. Buckets marked &#39;estimated&#39; are back-of-envelope.</caption>
+        <thead>
+          <tr><th scope="col">Branch</th><th scope="col">People (FTEs)</th><th scope="col">What it covers</th></tr>
+        </thead>
+        <tbody>
+        <tr class="field-map-group-row"><th colspan="3" scope="rowgroup">Technical alignment</th></tr>
+        <tr>
+          <th scope="row"><a href="/topics/mechanistic-interpretability/">Mechanistic interpretability</a></th>
+          <td class="field-map-num">80 FTEs</td>
+          <td>Reverse-engineering model internals: circuits, features, sparse autoencoders.</td>
+        </tr>
+        <tr>
+          <th scope="row"><a href="/topics/ai-alignment/">Scalable oversight</a></th>
+          <td class="field-map-num">110 FTEs</td>
+          <td>RLHF, RLAIF, debate, recursive reward modeling, weak-to-strong generalization.</td>
+        </tr>
+        <tr>
+          <th scope="row">Robustness &amp; jailbreaks</th>
+          <td class="field-map-num">80 FTEs</td>
+          <td>Adversarial robustness, jailbreak resistance, distribution shift.</td>
+        </tr>
+        <tr>
+          <th scope="row"><a href="/topics/large-language-models/">LLM safety</a></th>
+          <td class="field-map-num">75 FTEs</td>
+          <td>Safety work focused specifically on large language models.</td>
+        </tr>
+        <tr>
+          <th scope="row">Evals &amp; dangerous-capability testing</th>
+          <td class="field-map-num">100 FTEs</td>
+          <td>Capability and propensity evals — bio, cyber, autonomy, persuasion (AISI, METR, Apollo).</td>
+        </tr>
+        <tr>
+          <th scope="row"><a href="/topics/deceptive-alignment-and-scheming/">Deceptive alignment &amp; scheming</a></th>
+          <td class="field-map-num">25 FTEs</td>
+          <td>Sleeper agents, mesa-optimization, scheming, models hiding their objectives.</td>
+        </tr>
+        <tr>
+          <th scope="row"><a href="/topics/reinforcement-learning-and-reward-hacking/">RL &amp; reward hacking</a></th>
+          <td class="field-map-num">22 FTEs</td>
+          <td>Reward hacking, specification gaming, goal misgeneralization.</td>
+        </tr>
+        <tr>
+          <th scope="row"><a href="/topics/ai-alignment/">Agent foundations</a></th>
+          <td class="field-map-num">18 FTEs</td>
+          <td>Decision theory, embedded agency, corrigibility (MIRI-lineage theory).</td>
+        </tr>
+        <tr>
+          <th scope="row">AI control</th>
+          <td class="field-map-num">11 FTEs</td>
+          <td>Containing misaligned-but-capable models — distinct from aligning them.</td>
+        </tr>
+        <tr>
+          <th scope="row">AI security</th>
+          <td class="field-map-num">18 FTEs</td>
+          <td>Model-weight security, data poisoning, misuse and uplift pathways.</td>
+        </tr>
+        <tr>
+          <th scope="row"><a href="/topics/ai-forecasting-and-timelines/">Forecasting &amp; timelines</a></th>
+          <td class="field-map-num">25 FTEs</td>
+          <td>Scaling laws, takeoff dynamics, timeline forecasting (incl. Epoch AI).</td>
+        </tr>
+        <tr>
+          <th scope="row">Learning theory &amp; guarantees</th>
+          <td class="field-map-num">4 FTEs</td>
+          <td>Formal guarantees, singular learning theory, theoretical safety.</td>
+        </tr>
+        <tr class="field-map-group-row"><th colspan="3" scope="rowgroup">Governance &amp; policy</th></tr>
+        <tr>
+          <th scope="row"><a href="/topics/ai-governance-and-policy/">Compute governance</a></th>
+          <td class="field-map-num">70 FTEs <span class="field-map-est">(est.)</span></td>
+          <td>Tracking/controlling training compute, export controls, on-chip mechanisms.</td>
+        </tr>
+        <tr>
+          <th scope="row"><a href="/topics/ai-governance-and-policy/">Policy &amp; standards</a></th>
+          <td class="field-map-num">150 FTEs <span class="field-map-est">(est.)</span></td>
+          <td>Frontier-model regulation, evals-based policy, standards, law (EU AI Act, RSPs).</td>
+        </tr>
+        <tr>
+          <th scope="row"><a href="/topics/ai-governance-and-policy/">International coordination</a></th>
+          <td class="field-map-num">70 FTEs <span class="field-map-est">(est.)</span></td>
+          <td>Treaties, arms-race dynamics, international institutions for AI.</td>
+        </tr>
+        <tr>
+          <th scope="row"><a href="/topics/ai-governance-and-policy/">Lab governance &amp; RSPs</a></th>
+          <td class="field-map-num">40 FTEs <span class="field-map-est">(est.)</span></td>
+          <td>Responsible scaling policies, internal lab governance and commitments.</td>
+        </tr>
+        <tr class="field-map-group-row"><th colspan="3" scope="rowgroup">Cross-cutting</th></tr>
+        <tr>
+          <th scope="row">Advocacy &amp; field-building</th>
+          <td class="field-map-num">90 FTEs <span class="field-map-est">(est.)</span></td>
+          <td>Public engagement, awareness, talent pipelines and field-building.</td>
+        </tr>
+        <tr>
+          <th scope="row"><a href="/topics/ai-ethics-and-society/">Ethics &amp; societal impact</a></th>
+          <td class="field-map-num">50 FTEs <span class="field-map-est">(est.)</span></td>
+          <td>Fairness, bias, model welfare, and broader social impact of advanced AI.</td>
+        </tr>
+        </tbody>
+      </table>
+      <p class="field-map-sources">Sources: <a href="https://www.lesswrong.com/posts/8QjAnWyuE9fktPRgS/ai-safety-field-growth-analysis-2025" rel="noopener noreferrer">AI Safety Field Growth Analysis 2025</a> · <a href="https://www.lesswrong.com/posts/mC3oeq62DWeqxiNBx/estimating-the-current-and-future-number-of-ai-safety" rel="noopener noreferrer">Estimating the Number of AI Safety Researchers</a> · <a href="https://80000hours.org/career-reviews/ai-safety-technical-research/" rel="noopener noreferrer">80,000 Hours – AI safety technical research</a> · <a href="https://almanac.eto.tech/topics/ai-safety/" rel="noopener noreferrer">Emerging Technology Observatory – AI safety almanac</a></p>
+  <script type="application/json" id="field-map-data">{
+  "meta": {
+    "title": "The AI Safety field, by the numbers",
+    "updated": "2025",
+    "defaultMetric": "people",
+    "metrics": {
+      "people": {
+        "label": "People (FTEs)",
+        "unit": "FTEs",
+        "note": "Full-time-equivalent researchers. Hand-curated yearly snapshots from the field-growth analyses below; the field is small (~1,100 FTEs in 2025) and per-bucket splits are approximate, so totals don't sum exactly. Buckets marked 'estimated' are back-of-envelope.",
+        "auto": false
+      },
+      "papers": {
+        "label": "Papers / year",
+        "unit": "papers",
+        "note": "A research-VOLUME proxy: arXiv papers per year matching each branch's search terms. Auto-refreshed monthly by scripts/fetch-field-map.mjs. Noisy and over-counts where terms are broad — read it as relative effort, not a headcount.",
+        "auto": true
+      }
+    },
+    "sources": [
+      { "label": "AI Safety Field Growth Analysis 2025", "url": "https://www.lesswrong.com/posts/8QjAnWyuE9fktPRgS/ai-safety-field-growth-analysis-2025" },
+      { "label": "Estimating the Number of AI Safety Researchers", "url": "https://www.lesswrong.com/posts/mC3oeq62DWeqxiNBx/estimating-the-current-and-future-number-of-ai-safety" },
+      { "label": "80,000 Hours – AI safety technical research", "url": "https://80000hours.org/career-reviews/ai-safety-technical-research/" },
+      { "label": "Emerging Technology Observatory – AI safety almanac", "url": "https://almanac.eto.tech/topics/ai-safety/" }
+    ],
+    "groups": [
+      { "key": "technical", "label": "Technical alignment" },
+      { "key": "governance", "label": "Governance & policy" },
+      { "key": "crosscutting", "label": "Cross-cutting" }
+    ]
+  },
+  "buckets": [
+    {
+      "slug": "interpretability",
+      "label": "Mechanistic interpretability",
+      "group": "technical",
+      "topic": "/topics/mechanistic-interpretability/",
+      "blurb": "Reverse-engineering model internals: circuits, features, sparse autoencoders.",
+      "arxiv": "(\"mechanistic interpretability\" OR \"sparse autoencoder\" OR \"superposition\") AND (neural OR transformer OR language model)",
+      "people": [
+        { "year": 2022, "value": 25, "estimated": true },
+        { "year": 2025, "value": 80, "estimated": false }
+      ]
+    },
+    {
+      "slug": "scalable-oversight",
+      "label": "Scalable oversight",
+      "group": "technical",
+      "topic": "/topics/ai-alignment/",
+      "blurb": "RLHF, RLAIF, debate, recursive reward modeling, weak-to-strong generalization.",
+      "arxiv": "(\"scalable oversight\" OR RLHF OR \"reinforcement learning from human feedback\" OR \"weak-to-strong\" OR \"AI debate\")",
+      "people": [
+        { "year": 2022, "value": 45, "estimated": true },
+        { "year": 2025, "value": 110, "estimated": false }
+      ]
+    },
+    {
+      "slug": "robustness",
+      "label": "Robustness & jailbreaks",
+      "group": "technical",
+      "topic": null,
+      "blurb": "Adversarial robustness, jailbreak resistance, distribution shift.",
+      "arxiv": "(jailbreak OR \"adversarial robustness\" OR \"adversarial examples\") AND (\"language model\" OR LLM OR neural)",
+      "people": [
+        { "year": 2022, "value": 30, "estimated": true },
+        { "year": 2025, "value": 80, "estimated": false }
+      ]
+    },
+    {
+      "slug": "llm-safety",
+      "label": "LLM safety",
+      "group": "technical",
+      "topic": "/topics/large-language-models/",
+      "blurb": "Safety work focused specifically on large language models.",
+      "arxiv": "(\"LLM safety\" OR \"language model safety\" OR \"safe language model\" OR \"harmlessness\")",
+      "people": [
+        { "year": 2022, "value": 20, "estimated": true },
+        { "year": 2025, "value": 75, "estimated": false }
+      ]
+    },
+    {
+      "slug": "evals",
+      "label": "Evals & dangerous-capability testing",
+      "group": "technical",
+      "topic": null,
+      "blurb": "Capability and propensity evals — bio, cyber, autonomy, persuasion (AISI, METR, Apollo).",
+      "arxiv": "(\"dangerous capabilities\" OR \"capability evaluation\" OR \"model evaluation\" OR \"red teaming\") AND (\"language model\" OR LLM OR \"frontier model\")",
+      "people": [
+        { "year": 2022, "value": 15, "estimated": true },
+        { "year": 2025, "value": 100, "estimated": false }
+      ]
+    },
+    {
+      "slug": "deceptive-alignment",
+      "label": "Deceptive alignment & scheming",
+      "group": "technical",
+      "topic": "/topics/deceptive-alignment-and-scheming/",
+      "blurb": "Sleeper agents, mesa-optimization, scheming, models hiding their objectives.",
+      "arxiv": "(\"deceptive alignment\" OR \"sleeper agent\" OR scheming OR \"mesa-optimization\" OR \"mesa optimizer\")",
+      "people": [
+        { "year": 2022, "value": 8, "estimated": true },
+        { "year": 2025, "value": 25, "estimated": false }
+      ]
+    },
+    {
+      "slug": "reward-hacking",
+      "label": "RL & reward hacking",
+      "group": "technical",
+      "topic": "/topics/reinforcement-learning-and-reward-hacking/",
+      "blurb": "Reward hacking, specification gaming, goal misgeneralization.",
+      "arxiv": "(\"reward hacking\" OR \"specification gaming\" OR \"goal misgeneralization\" OR \"reward misspecification\")",
+      "people": [
+        { "year": 2022, "value": 15, "estimated": true },
+        { "year": 2025, "value": 22, "estimated": false }
+      ]
+    },
+    {
+      "slug": "agent-foundations",
+      "label": "Agent foundations",
+      "group": "technical",
+      "topic": "/topics/ai-alignment/",
+      "blurb": "Decision theory, embedded agency, corrigibility (MIRI-lineage theory).",
+      "arxiv": "(\"agent foundations\" OR corrigibility OR \"embedded agency\" OR \"decision theory\") AND (AI OR agent)",
+      "people": [
+        { "year": 2022, "value": 25, "estimated": true },
+        { "year": 2025, "value": 18, "estimated": false }
+      ]
+    },
+    {
+      "slug": "ai-control",
+      "label": "AI control",
+      "group": "technical",
+      "topic": null,
+      "blurb": "Containing misaligned-but-capable models — distinct from aligning them.",
+      "arxiv": "(\"AI control\" OR \"controlling untrusted\" OR \"control evaluations\") AND (AI OR \"language model\" OR model)",
+      "people": [
+        { "year": 2022, "value": 1, "estimated": true },
+        { "year": 2025, "value": 11, "estimated": false }
+      ]
+    },
+    {
+      "slug": "ai-security",
+      "label": "AI security",
+      "group": "technical",
+      "topic": null,
+      "blurb": "Model-weight security, data poisoning, misuse and uplift pathways.",
+      "arxiv": "(\"model weight\" OR \"data poisoning\" OR \"backdoor attack\" OR \"model extraction\") AND (neural OR \"language model\")",
+      "people": [
+        { "year": 2022, "value": 5, "estimated": true },
+        { "year": 2025, "value": 18, "estimated": false }
+      ]
+    },
+    {
+      "slug": "forecasting",
+      "label": "Forecasting & timelines",
+      "group": "technical",
+      "topic": "/topics/ai-forecasting-and-timelines/",
+      "blurb": "Scaling laws, takeoff dynamics, timeline forecasting (incl. Epoch AI).",
+      "arxiv": "(\"scaling laws\" OR \"compute trends\" OR \"AI timelines\" OR \"emergent abilities\")",
+      "people": [
+        { "year": 2022, "value": 10, "estimated": true },
+        { "year": 2025, "value": 25, "estimated": false }
+      ]
+    },
+    {
+      "slug": "theory",
+      "label": "Learning theory & guarantees",
+      "group": "technical",
+      "topic": null,
+      "blurb": "Formal guarantees, singular learning theory, theoretical safety.",
+      "arxiv": "(\"singular learning theory\" OR \"provable safety\" OR \"formal verification\") AND (neural OR \"deep learning\")",
+      "people": [
+        { "year": 2022, "value": 5, "estimated": true },
+        { "year": 2025, "value": 4, "estimated": false }
+      ]
+    },
+    {
+      "slug": "compute-governance",
+      "label": "Compute governance",
+      "group": "governance",
+      "topic": "/topics/ai-governance-and-policy/",
+      "blurb": "Tracking/controlling training compute, export controls, on-chip mechanisms.",
+      "arxiv": "(\"compute governance\" OR \"hardware governance\" OR \"on-chip\" OR \"export controls\") AND (AI OR chip OR semiconductor)",
+      "people": [
+        { "year": 2022, "value": 15, "estimated": true },
+        { "year": 2025, "value": 70, "estimated": true }
+      ]
+    },
+    {
+      "slug": "policy-standards",
+      "label": "Policy & standards",
+      "group": "governance",
+      "topic": "/topics/ai-governance-and-policy/",
+      "blurb": "Frontier-model regulation, evals-based policy, standards, law (EU AI Act, RSPs).",
+      "arxiv": "(\"AI regulation\" OR \"AI policy\" OR \"AI governance\" OR \"frontier AI\") AND (policy OR regulation OR standard)",
+      "people": [
+        { "year": 2022, "value": 40, "estimated": true },
+        { "year": 2025, "value": 150, "estimated": true }
+      ]
+    },
+    {
+      "slug": "intl-coordination",
+      "label": "International coordination",
+      "group": "governance",
+      "topic": "/topics/ai-governance-and-policy/",
+      "blurb": "Treaties, arms-race dynamics, international institutions for AI.",
+      "arxiv": "(\"international governance\" OR \"AI treaty\" OR \"arms race\" OR \"international coordination\") AND AI",
+      "people": [
+        { "year": 2022, "value": 15, "estimated": true },
+        { "year": 2025, "value": 70, "estimated": true }
+      ]
+    },
+    {
+      "slug": "lab-governance",
+      "label": "Lab governance & RSPs",
+      "group": "governance",
+      "topic": "/topics/ai-governance-and-policy/",
+      "blurb": "Responsible scaling policies, internal lab governance and commitments.",
+      "arxiv": "(\"responsible scaling\" OR \"responsible AI\" OR \"AI safety levels\" OR \"corporate governance\") AND AI",
+      "people": [
+        { "year": 2022, "value": 5, "estimated": true },
+        { "year": 2025, "value": 40, "estimated": true }
+      ]
+    },
+    {
+      "slug": "advocacy",
+      "label": "Advocacy & field-building",
+      "group": "crosscutting",
+      "topic": null,
+      "blurb": "Public engagement, awareness, talent pipelines and field-building.",
+      "arxiv": "(\"public attitudes\" OR \"AI awareness\" OR \"field building\") AND (AI OR \"artificial intelligence\")",
+      "people": [
+        { "year": 2022, "value": 15, "estimated": true },
+        { "year": 2025, "value": 90, "estimated": true }
+      ]
+    },
+    {
+      "slug": "ethics-society",
+      "label": "Ethics & societal impact",
+      "group": "crosscutting",
+      "topic": "/topics/ai-ethics-and-society/",
+      "blurb": "Fairness, bias, model welfare, and broader social impact of advanced AI.",
+      "arxiv": "(\"AI ethics\" OR \"AI fairness\" OR \"algorithmic bias\" OR \"model welfare\")",
+      "people": [
+        { "year": 2022, "value": 10, "estimated": true },
+        { "year": 2025, "value": 50, "estimated": true }
+      ]
+    }
+  ]
+}
+</script>
+  <script>// Interactive AI-safety field map.
+//
+// Reads the JSON inlined by scripts/build.mjs (#field-map-data) and renders
+// every research branch as a bubble sized by a chosen metric. A year slider
+// animates the bubbles growing/shrinking as the field changes over time.
+//
+// Vanilla, zero-dependency, theme-aware (colors come from CSS custom props).
+(function () {
+  "use strict";
+
+  var root = document.querySelector("[data-field-map]");
+  var dataEl = document.getElementById("field-map-data");
+  if (!root || !dataEl) return;
+
+  var DATA;
+  try {
+    DATA = JSON.parse(dataEl.textContent);
+  } catch (e) {
+    return; // leave the no-JS fallback table in place
+  }
+
+  var SVG_NS = "http://www.w3.org/2000/svg";
+  var prefersReduced =
+    typeof window.matchMedia === "function" &&
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // ── Data helpers ──────────────────────────────────────────────────────────
+
+  // Linear interpolation of a metric series at an arbitrary year. Clamps at the
+  // ends (no wild extrapolation), returns 0 when the branch has no data.
+  function valueAt(bucket, metric, year) {
+    var series = bucket[metric];
+    if (!series || !series.length) return 0;
+    if (year <= series[0].year) return series[0].value;
+    var last = series[series.length - 1];
+    if (year >= last.year) return last.value;
+    for (var i = 0; i < series.length - 1; i++) {
+      var a = series[i],
+        b = series[i + 1];
+      if (year >= a.year && year <= b.year) {
+        var t = (year - a.year) / (b.year - a.year);
+        return a.value + t * (b.value - a.value);
+      }
+    }
+    return last.value;
+  }
+
+  function isEstimated(bucket, metric, year) {
+    var series = bucket[metric];
+    if (!series || !series.length) return false;
+    // estimated if either surrounding snapshot is flagged
+    for (var i = 0; i < series.length; i++) {
+      if (series[i].estimated) {
+        // only the people metric carries the flag; treat the whole series as est. if any point is
+        return true;
+      }
+    }
+    return false;
+  }
+
+  // Metric keys actually present in the data, preserving meta order.
+  var METRICS = Object.keys(DATA.meta.metrics).filter(function (k) {
+    return DATA.buckets.some(function (b) {
+      return b[k] && b[k].length;
+    });
+  });
+  if (!METRICS.length) return;
+  var metric =
+    METRICS.indexOf(DATA.meta.defaultMetric) >= 0 ? DATA.meta.defaultMetric : METRICS[0];
+
+  // Year range for the active metric.
+  function yearRange(m) {
+    var min = Infinity,
+      max = -Infinity;
+    DATA.buckets.forEach(function (b) {
+      (b[m] || []).forEach(function (p) {
+        if (p.year < min) min = p.year;
+        if (p.year > max) max = p.year;
+      });
+    });
+    return { min: min, max: max };
+  }
+
+  // Stable size scale: largest bubble across ALL years so growth reads visually.
+  function maxValueFor(m) {
+    var mv = 0;
+    var r = yearRange(m);
+    DATA.buckets.forEach(function (b) {
+      for (var y = r.min; y <= r.max; y++) {
+        var v = valueAt(b, m, y);
+        if (v > mv) mv = v;
+      }
+    });
+    return mv || 1;
+  }
+
+  // ── State ─────────────────────────────────────────────────────────────────
+
+  var range = yearRange(metric);
+  var year = range.max;
+  var nodes = DATA.buckets.map(function (b) {
+    return {
+      b: b,
+      x: 0,
+      y: 0,
+      r: 0,
+      tr: 0, // target radius
+      el: null,
+      circle: null,
+      label: null,
+    };
+  });
+
+  // ── DOM scaffold ──────────────────────────────────────────────────────────
+
+  root.hidden = false;
+  var controls = root.querySelector("[data-field-map-controls]");
+  var stage = root.querySelector("[data-field-map-stage]");
+  var noteEl = root.querySelector("[data-field-map-note]");
+
+  // Metric toggle
+  var metricWrap = document.createElement("div");
+  metricWrap.className = "field-map-metric";
+  METRICS.forEach(function (m) {
+    var btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "field-map-metric-btn" + (m === metric ? " is-active" : "");
+    btn.textContent = DATA.meta.metrics[m].label;
+    btn.setAttribute("aria-pressed", m === metric ? "true" : "false");
+    btn.addEventListener("click", function () {
+      if (m === metric) return;
+      setMetric(m);
+    });
+    metricWrap.appendChild(btn);
+  });
+
+  // Year slider + play
+  var timeWrap = document.createElement("div");
+  timeWrap.className = "field-map-time";
+  var playBtn = document.createElement("button");
+  playBtn.type = "button";
+  playBtn.className = "field-map-play";
+  playBtn.setAttribute("aria-label", "Play through the years");
+  playBtn.textContent = "▶";
+  var slider = document.createElement("input");
+  slider.type = "range";
+  slider.className = "field-map-slider";
+  slider.min = String(range.min);
+  slider.max = String(range.max);
+  slider.step = "1";
+  slider.value = String(year);
+  slider.setAttribute("aria-label", "Year");
+  var yearOut = document.createElement("output");
+  yearOut.className = "field-map-year";
+  yearOut.textContent = String(year);
+  timeWrap.appendChild(playBtn);
+  timeWrap.appendChild(slider);
+  timeWrap.appendChild(yearOut);
+
+  // Legend
+  var legend = document.createElement("div");
+  legend.className = "field-map-legend";
+  DATA.meta.groups.forEach(function (g) {
+    var item = document.createElement("span");
+    item.className = "field-map-legend-item";
+    item.setAttribute("data-group", g.key);
+    var dot = document.createElement("span");
+    dot.className = "field-map-legend-dot";
+    item.appendChild(dot);
+    item.appendChild(document.createTextNode(g.label));
+    legend.appendChild(item);
+  });
+
+  // Only surface the metric toggle once more than one metric has data (the
+  // "papers" series is empty until the monthly arXiv job populates it).
+  if (METRICS.length > 1) controls.appendChild(metricWrap);
+  controls.appendChild(timeWrap);
+  controls.appendChild(legend);
+
+  // SVG
+  var svg = document.createElementNS(SVG_NS, "svg");
+  svg.setAttribute("class", "field-map-svg");
+  svg.setAttribute("role", "img");
+  svg.setAttribute(
+    "aria-label",
+    "Bubble chart of AI safety research branches sized by " + DATA.meta.metrics[metric].label
+  );
+  stage.appendChild(svg);
+
+  // Tooltip
+  var tip = document.createElement("div");
+  tip.className = "field-map-tip";
+  tip.setAttribute("role", "status");
+  tip.hidden = true;
+  stage.appendChild(tip);
+
+  // Build one group per node (circle + label) once.
+  nodes.forEach(function (n) {
+    var g = document.createElementNS(SVG_NS, "g");
+    g.setAttribute("class", "fm-node");
+    g.setAttribute("tabindex", "0");
+    g.setAttribute("data-group", n.b.group);
+    if (n.b.topic) g.setAttribute("data-href", n.b.topic);
+    g.setAttribute("role", n.b.topic ? "link" : "img");
+
+    var c = document.createElementNS(SVG_NS, "circle");
+    c.setAttribute("class", "fm-bubble");
+    g.appendChild(c);
+
+    var t = document.createElementNS(SVG_NS, "text");
+    t.setAttribute("class", "fm-label");
+    t.setAttribute("text-anchor", "middle");
+    t.setAttribute("dy", "0.32em");
+    g.appendChild(t);
+
+    n.el = g;
+    n.circle = c;
+    n.label = t;
+
+    g.addEventListener("mouseenter", function () {
+      showTip(n);
+    });
+    g.addEventListener("mousemove", function (ev) {
+      positionTip(ev);
+    });
+    g.addEventListener("mouseleave", hideTip);
+    g.addEventListener("focus", function () {
+      showTip(n, true);
+    });
+    g.addEventListener("blur", hideTip);
+    g.addEventListener("click", function () {
+      if (n.b.topic) window.location.href = n.b.topic;
+    });
+    g.addEventListener("keydown", function (ev) {
+      if ((ev.key === "Enter" || ev.key === " ") && n.b.topic) {
+        ev.preventDefault();
+        window.location.href = n.b.topic;
+      }
+    });
+
+    svg.appendChild(g);
+  });
+
+  // ── Layout / simulation ───────────────────────────────────────────────────
+
+  var W = 900,
+    H = 540,
+    maxValue = maxValueFor(metric);
+
+  function measure() {
+    W = Math.max(320, stage.clientWidth || 900);
+    H = W < 560 ? 460 : 540;
+    svg.setAttribute("viewBox", "0 0 " + W + " " + H);
+  }
+
+  // Group anchor x positions (thirds) so groups cluster but can overlap.
+  function groupAnchorX(key) {
+    var idx = DATA.meta.groups.findIndex(function (g) {
+      return g.key === key;
+    });
+    var n = DATA.meta.groups.length;
+    return (W * (idx + 0.5)) / n;
+  }
+
+  function radiusFor(value) {
+    if (value <= 0) return 0;
+    var minSide = Math.min(W, H);
+    var rMax = minSide * 0.16; // largest bubble caps at ~16% of the short side
+    var rMin = 6;
+    return rMin + (rMax - rMin) * Math.sqrt(value / maxValue);
+  }
+
+  // Seed positions deterministically (by index) the first time.
+  function seedPositions() {
+    nodes.forEach(function (n, i) {
+      var ax = groupAnchorX(n.b.group);
+      // golden-angle spread around the group anchor for a stable, non-random start
+      var ang = i * 2.399963;
+      var rad = 30 + (i % 5) * 18;
+      n.x = ax + Math.cos(ang) * rad;
+      n.y = H / 2 + Math.sin(ang) * rad;
+    });
+  }
+
+  function updateTargets() {
+    nodes.forEach(function (n) {
+      n.tr = radiusFor(valueAt(n.b, metric, year));
+    });
+  }
+
+  // One relaxation step: ease radius toward target, resolve collisions, pull
+  // toward the group anchor + vertical center. Returns total movement (for
+  // settling detection).
+  function step() {
+    var moved = 0;
+    // ease radii
+    nodes.forEach(function (n) {
+      n.r += (n.tr - n.r) * 0.18;
+    });
+    // centering / grouping pull
+    nodes.forEach(function (n) {
+      if (n.tr <= 0) return;
+      var ax = groupAnchorX(n.b.group);
+      n.x += (ax - n.x) * 0.04;
+      n.y += (H / 2 - n.y) * 0.06;
+    });
+    // collision resolution
+    for (var i = 0; i < nodes.length; i++) {
+      var a = nodes[i];
+      if (a.tr <= 0) continue;
+      for (var j = i + 1; j < nodes.length; j++) {
+        var b = nodes[j];
+        if (b.tr <= 0) continue;
+        var dx = b.x - a.x,
+          dy = b.y - a.y;
+        var d = Math.sqrt(dx * dx + dy * dy) || 0.01;
+        var min = a.r + b.r + 2;
+        if (d < min) {
+          var push = (min - d) / 2;
+          var ux = dx / d,
+            uy = dy / d;
+          a.x -= ux * push;
+          a.y -= uy * push;
+          b.x += ux * push;
+          b.y += uy * push;
+          moved += push;
+        }
+      }
+    }
+    // keep inside the box
+    nodes.forEach(function (n) {
+      if (n.tr <= 0) return;
+      var r = n.r;
+      if (n.x < r) n.x = r;
+      if (n.x > W - r) n.x = W - r;
+      if (n.y < r) n.y = r;
+      if (n.y > H - r) n.y = H - r;
+    });
+    return moved;
+  }
+
+  function render() {
+    nodes.forEach(function (n) {
+      if (n.tr <= 0) {
+        n.el.setAttribute("opacity", "0");
+        n.el.style.pointerEvents = "none";
+        return;
+      }
+      n.el.setAttribute("opacity", "1");
+      n.el.style.pointerEvents = "";
+      n.el.setAttribute("transform", "translate(" + n.x.toFixed(1) + "," + n.y.toFixed(1) + ")");
+      n.circle.setAttribute("r", Math.max(0, n.r).toFixed(1));
+      // show the label only when the bubble is roomy enough
+      if (n.r > 30) {
+        var fontSize = Math.min(15, 8 + n.r / 7);
+        n.label.textContent = fitLabel(n.b.label, n.r, fontSize);
+        n.label.setAttribute("opacity", "1");
+        n.label.setAttribute("font-size", fontSize.toFixed(1));
+      } else {
+        n.label.setAttribute("opacity", "0");
+      }
+    });
+  }
+
+  // Trim a label to what fits inside a bubble of radius r at the given font
+  // size: keep the full label if it fits, else the first word, else ellipsis.
+  function fitLabel(s, r, fontSize) {
+    var maxChars = Math.max(3, Math.floor((1.7 * r) / (0.56 * fontSize)));
+    if (s.length <= maxChars) return s;
+    var first = s.split(/\s*&\s*|\s+/)[0];
+    if (first.length <= maxChars) return first;
+    return first.slice(0, Math.max(1, maxChars - 1)) + "…";
+  }
+
+  var rafId = null,
+    settleFrames = 0;
+  function loop() {
+    var moved = step();
+    render();
+    // also count radius easing as movement
+    var rDelta = 0;
+    nodes.forEach(function (n) {
+      rDelta += Math.abs(n.tr - n.r);
+    });
+    if (moved < 0.4 && rDelta < 0.6) {
+      settleFrames++;
+    } else {
+      settleFrames = 0;
+    }
+    if (settleFrames > 8 && !playing) {
+      rafId = null;
+      return; // settled — stop animating to save battery
+    }
+    rafId = requestAnimationFrame(loop);
+  }
+
+  function kick() {
+    if (prefersReduced) {
+      // snap to target without animating
+      nodes.forEach(function (n) {
+        n.r = n.tr;
+      });
+      for (var k = 0; k < 200; k++) step();
+      render();
+      return;
+    }
+    settleFrames = 0;
+    if (rafId == null) rafId = requestAnimationFrame(loop);
+  }
+
+  // ── Tooltip ───────────────────────────────────────────────────────────────
+
+  function showTip(n, keyboard) {
+    var m = DATA.meta.metrics[metric];
+    var v = valueAt(n.b, metric, year);
+    var est = isEstimated(n.b, metric, year);
+    var shown = metric === "people" ? Math.round(v) : Math.round(v);
+    tip.innerHTML =
+      '<strong>' +
+      escapeHtml(n.b.label) +
+      "</strong>" +
+      '<span class="field-map-tip-num">' +
+      shown +
+      " " +
+      escapeHtml(m.unit) +
+      (est ? " <em>(est.)</em>" : "") +
+      " · " +
+      year +
+      "</span>" +
+      '<span class="field-map-tip-blurb">' +
+      escapeHtml(n.b.blurb) +
+      "</span>" +
+      (n.b.topic ? '<span class="field-map-tip-cta">Open topic →</span>' : "");
+    tip.hidden = false;
+    if (keyboard) {
+      // position near the node for keyboard users
+      var rect = stage.getBoundingClientRect();
+      var sx = (n.x / W) * rect.width;
+      var sy = (n.y / H) * rect.height;
+      tip.style.left = sx + "px";
+      tip.style.top = Math.max(0, sy - 10) + "px";
+    }
+  }
+  function positionTip(ev) {
+    var rect = stage.getBoundingClientRect();
+    tip.style.left = ev.clientX - rect.left + 14 + "px";
+    tip.style.top = ev.clientY - rect.top + 14 + "px";
+  }
+  function hideTip() {
+    tip.hidden = true;
+  }
+
+  function escapeHtml(s) {
+    return String(s).replace(/[&<>"']/g, function (c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+    });
+  }
+
+  // ── Note / caption ────────────────────────────────────────────────────────
+
+  function updateNote() {
+    var m = DATA.meta.metrics[metric];
+    var total = 0;
+    nodes.forEach(function (n) {
+      total += valueAt(n.b, metric, year);
+    });
+    noteEl.innerHTML =
+      "<strong>" +
+      Math.round(total).toLocaleString() +
+      " " +
+      escapeHtml(m.unit) +
+      "</strong> across " +
+      nodes.filter(function (n) {
+        return n.tr > 0;
+      }).length +
+      " branches in " +
+      year +
+      ". " +
+      escapeHtml(m.note);
+  }
+
+  // ── Wiring ────────────────────────────────────────────────────────────────
+
+  function setYear(y) {
+    year = y;
+    yearOut.textContent = String(y);
+    slider.value = String(y);
+    updateTargets();
+    updateNote();
+    kick();
+  }
+
+  function setMetric(m) {
+    metric = m;
+    range = yearRange(metric);
+    maxValue = maxValueFor(metric);
+    // keep year in range
+    if (year < range.min) year = range.min;
+    if (year > range.max) year = range.max;
+    slider.min = String(range.min);
+    slider.max = String(range.max);
+    slider.value = String(year);
+    yearOut.textContent = String(year);
+    Array.prototype.forEach.call(metricWrap.children, function (btn, i) {
+      var active = METRICS[i] === m;
+      btn.classList.toggle("is-active", active);
+      btn.setAttribute("aria-pressed", active ? "true" : "false");
+    });
+    svg.setAttribute(
+      "aria-label",
+      "Bubble chart of AI safety research branches sized by " + DATA.meta.metrics[metric].label
+    );
+    updateTargets();
+    updateNote();
+    kick();
+  }
+
+  slider.addEventListener("input", function () {
+    setYear(parseInt(slider.value, 10));
+  });
+
+  // Play / pause sweeps the slider across the range.
+  var playing = false,
+    playTimer = null;
+  function stopPlay() {
+    playing = false;
+    playBtn.textContent = "▶";
+    playBtn.classList.remove("is-playing");
+    if (playTimer) {
+      clearInterval(playTimer);
+      playTimer = null;
+    }
+  }
+  function startPlay() {
+    if (year >= range.max) setYear(range.min);
+    playing = true;
+    playBtn.textContent = "❚❚";
+    playBtn.classList.add("is-playing");
+    kick();
+    playTimer = setInterval(function () {
+      if (year >= range.max) {
+        stopPlay();
+        return;
+      }
+      setYear(year + 1);
+    }, prefersReduced ? 1 : 1100);
+  }
+  playBtn.addEventListener("click", function () {
+    if (playing) stopPlay();
+    else startPlay();
+  });
+
+  // ── Init ──────────────────────────────────────────────────────────────────
+
+  measure();
+  seedPositions();
+  updateTargets();
+  updateNote();
+  // warm the layout so first paint isn't a pile in the corner
+  for (var w = 0; w < 60; w++) step();
+  render();
+  kick();
+
+  var resizeT = null;
+  window.addEventListener("resize", function () {
+    if (resizeT) clearTimeout(resizeT);
+    resizeT = setTimeout(function () {
+      measure();
+      maxValue = maxValueFor(metric);
+      updateTargets();
+      kick();
+    }, 150);
+  });
+})();
+</script>
+</div>
+</body>
+</html>

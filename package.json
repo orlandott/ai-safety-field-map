@@ -1,0 +1,16 @@
+{
+  "name": "ai-safety-field-map",
+  "version": "1.0.0",
+  "description": "An interactive, zero-dependency bubble chart of AI-safety research branches.",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "fetch": "node scripts/fetch-field-map.mjs",
+    "fetch:dry": "node scripts/fetch-field-map.mjs --dry-run"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "license": "MIT"
+}
