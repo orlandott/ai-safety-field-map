@@ -331,7 +331,7 @@ h1{font-size:1.9rem;margin:.2rem 0 .4rem;}
     <p class="field-map-note" data-field-map-note></p>
   </div>
       <table class="field-map-table">
-        <caption>People (FTEs) by branch (2025). Full-time-equivalent researchers. Hand-curated yearly snapshots from the field-growth analyses below; the field is small (~1,100 FTEs in 2025) and per-bucket splits are approximate, so totals don&#39;t sum exactly. Buckets marked &#39;estimated&#39; are back-of-envelope.</caption>
+        <caption>People (FTEs) by branch (2025). Full-time-equivalent researchers, 2017–2025. Anchored to the field-growth analyses below (~30 FTEs in 2017 → ~1,100 in 2025); the 2022 and 2025 splits are hand-curated, and the intervening years are modeled from each branch&#39;s documented emergence timeline. Per-bucket splits are approximate, so totals don&#39;t sum exactly, and points marked &#39;estimated&#39; are back-of-envelope.</caption>
         <thead>
           <tr><th scope="col">Branch</th><th scope="col">People (FTEs)</th><th scope="col">What it covers</th></tr>
         </thead>
@@ -441,7 +441,7 @@ h1{font-size:1.9rem;margin:.2rem 0 .4rem;}
       "people": {
         "label": "People (FTEs)",
         "unit": "FTEs",
-        "note": "Full-time-equivalent researchers. Hand-curated yearly snapshots from the field-growth analyses below; the field is small (~1,100 FTEs in 2025) and per-bucket splits are approximate, so totals don't sum exactly. Buckets marked 'estimated' are back-of-envelope.",
+        "note": "Full-time-equivalent researchers, 2017–2025. Anchored to the field-growth analyses below (~30 FTEs in 2017 → ~1,100 in 2025); the 2022 and 2025 splits are hand-curated, and the intervening years are modeled from each branch's documented emergence timeline. Per-bucket splits are approximate, so totals don't sum exactly, and points marked 'estimated' are back-of-envelope.",
         "auto": false
       },
       "papers": {
@@ -452,15 +452,36 @@ h1{font-size:1.9rem;margin:.2rem 0 .4rem;}
       }
     },
     "sources": [
-      { "label": "AI Safety Field Growth Analysis 2025", "url": "https://www.lesswrong.com/posts/8QjAnWyuE9fktPRgS/ai-safety-field-growth-analysis-2025" },
-      { "label": "Estimating the Number of AI Safety Researchers", "url": "https://www.lesswrong.com/posts/mC3oeq62DWeqxiNBx/estimating-the-current-and-future-number-of-ai-safety" },
-      { "label": "80,000 Hours – AI safety technical research", "url": "https://80000hours.org/career-reviews/ai-safety-technical-research/" },
-      { "label": "Emerging Technology Observatory – AI safety almanac", "url": "https://almanac.eto.tech/topics/ai-safety/" }
+      {
+        "label": "AI Safety Field Growth Analysis 2025",
+        "url": "https://www.lesswrong.com/posts/8QjAnWyuE9fktPRgS/ai-safety-field-growth-analysis-2025"
+      },
+      {
+        "label": "Estimating the Number of AI Safety Researchers",
+        "url": "https://www.lesswrong.com/posts/mC3oeq62DWeqxiNBx/estimating-the-current-and-future-number-of-ai-safety"
+      },
+      {
+        "label": "80,000 Hours – AI safety technical research",
+        "url": "https://80000hours.org/career-reviews/ai-safety-technical-research/"
+      },
+      {
+        "label": "Emerging Technology Observatory – AI safety almanac",
+        "url": "https://almanac.eto.tech/topics/ai-safety/"
+      }
     ],
     "groups": [
-      { "key": "technical", "label": "Technical alignment" },
-      { "key": "governance", "label": "Governance & policy" },
-      { "key": "crosscutting", "label": "Cross-cutting" }
+      {
+        "key": "technical",
+        "label": "Technical alignment"
+      },
+      {
+        "key": "governance",
+        "label": "Governance & policy"
+      },
+      {
+        "key": "crosscutting",
+        "label": "Cross-cutting"
+      }
     ]
   },
   "buckets": [
@@ -472,8 +493,51 @@ h1{font-size:1.9rem;margin:.2rem 0 .4rem;}
       "blurb": "Reverse-engineering model internals: circuits, features, sparse autoencoders.",
       "arxiv": "(\"mechanistic interpretability\" OR \"sparse autoencoder\" OR \"superposition\") AND (neural OR transformer OR language model)",
       "people": [
-        { "year": 2022, "value": 25, "estimated": true },
-        { "year": 2025, "value": 80, "estimated": false }
+        {
+          "year": 2017,
+          "value": 0,
+          "estimated": true
+        },
+        {
+          "year": 2018,
+          "value": 1,
+          "estimated": true
+        },
+        {
+          "year": 2019,
+          "value": 2,
+          "estimated": true
+        },
+        {
+          "year": 2020,
+          "value": 5,
+          "estimated": true
+        },
+        {
+          "year": 2021,
+          "value": 12,
+          "estimated": true
+        },
+        {
+          "year": 2022,
+          "value": 25,
+          "estimated": true
+        },
+        {
+          "year": 2023,
+          "value": 42,
+          "estimated": true
+        },
+        {
+          "year": 2024,
+          "value": 60,
+          "estimated": true
+        },
+        {
+          "year": 2025,
+          "value": 80,
+          "estimated": false
+        }
       ]
     },
     {
@@ -484,8 +548,51 @@ h1{font-size:1.9rem;margin:.2rem 0 .4rem;}
       "blurb": "RLHF, RLAIF, debate, recursive reward modeling, weak-to-strong generalization.",
       "arxiv": "(\"scalable oversight\" OR RLHF OR \"reinforcement learning from human feedback\" OR \"weak-to-strong\" OR \"AI debate\")",
       "people": [
-        { "year": 2022, "value": 45, "estimated": true },
-        { "year": 2025, "value": 110, "estimated": false }
+        {
+          "year": 2017,
+          "value": 3,
+          "estimated": true
+        },
+        {
+          "year": 2018,
+          "value": 5,
+          "estimated": true
+        },
+        {
+          "year": 2019,
+          "value": 7,
+          "estimated": true
+        },
+        {
+          "year": 2020,
+          "value": 10,
+          "estimated": true
+        },
+        {
+          "year": 2021,
+          "value": 18,
+          "estimated": true
+        },
+        {
+          "year": 2022,
+          "value": 45,
+          "estimated": true
+        },
+        {
+          "year": 2023,
+          "value": 70,
+          "estimated": true
+        },
+        {
+          "year": 2024,
+          "value": 92,
+          "estimated": true
+        },
+        {
+          "year": 2025,
+          "value": 110,
+          "estimated": false
+        }
       ]
     },
     {
@@ -496,8 +603,51 @@ h1{font-size:1.9rem;margin:.2rem 0 .4rem;}
       "blurb": "Adversarial robustness, jailbreak resistance, distribution shift.",
       "arxiv": "(jailbreak OR \"adversarial robustness\" OR \"adversarial examples\") AND (\"language model\" OR LLM OR neural)",
       "people": [
-        { "year": 2022, "value": 30, "estimated": true },
-        { "year": 2025, "value": 80, "estimated": false }
+        {
+          "year": 2017,
+          "value": 3,
+          "estimated": true
+        },
+        {
+          "year": 2018,
+          "value": 4,
+          "estimated": true
+        },
+        {
+          "year": 2019,
+          "value": 6,
+          "estimated": true
+        },
+        {
+          "year": 2020,
+          "value": 9,
+          "estimated": true
+        },
+        {
+          "year": 2021,
+          "value": 15,
+          "estimated": true
+        },
+        {
+          "year": 2022,
+          "value": 30,
+          "estimated": true
+        },
+        {
+          "year": 2023,
+          "value": 50,
+          "estimated": true
+        },
+        {
+          "year": 2024,
+          "value": 66,
+          "estimated": true
+        },
+        {
+          "year": 2025,
+          "value": 80,
+          "estimated": false
+        }
       ]
     },
     {
@@ -508,8 +658,51 @@ h1{font-size:1.9rem;margin:.2rem 0 .4rem;}
       "blurb": "Safety work focused specifically on large language models.",
       "arxiv": "(\"LLM safety\" OR \"language model safety\" OR \"safe language model\" OR \"harmlessness\")",
       "people": [
-        { "year": 2022, "value": 20, "estimated": true },
-        { "year": 2025, "value": 75, "estimated": false }
+        {
+          "year": 2017,
+          "value": 0,
+          "estimated": true
+        },
+        {
+          "year": 2018,
+          "value": 0,
+          "estimated": true
+        },
+        {
+          "year": 2019,
+          "value": 1,
+          "estimated": true
+        },
+        {
+          "year": 2020,
+          "value": 2,
+          "estimated": true
+        },
+        {
+          "year": 2021,
+          "value": 7,
+          "estimated": true
+        },
+        {
+          "year": 2022,
+          "value": 20,
+          "estimated": true
+        },
+        {
+          "year": 2023,
+          "value": 40,
+          "estimated": true
+        },
+        {
+          "year": 2024,
+          "value": 60,
+          "estimated": true
+        },
+        {
+          "year": 2025,
+          "value": 75,
+          "estimated": false
+        }
       ]
     },
     {
@@ -520,8 +713,51 @@ h1{font-size:1.9rem;margin:.2rem 0 .4rem;}
       "blurb": "Capability and propensity evals — bio, cyber, autonomy, persuasion (AISI, METR, Apollo).",
       "arxiv": "(\"dangerous capabilities\" OR \"capability evaluation\" OR \"model evaluation\" OR \"red teaming\") AND (\"language model\" OR LLM OR \"frontier model\")",
       "people": [
-        { "year": 2022, "value": 15, "estimated": true },
-        { "year": 2025, "value": 100, "estimated": false }
+        {
+          "year": 2017,
+          "value": 0,
+          "estimated": true
+        },
+        {
+          "year": 2018,
+          "value": 0,
+          "estimated": true
+        },
+        {
+          "year": 2019,
+          "value": 0,
+          "estimated": true
+        },
+        {
+          "year": 2020,
+          "value": 1,
+          "estimated": true
+        },
+        {
+          "year": 2021,
+          "value": 4,
+          "estimated": true
+        },
+        {
+          "year": 2022,
+          "value": 15,
+          "estimated": true
+        },
+        {
+          "year": 2023,
+          "value": 45,
+          "estimated": true
+        },
+        {
+          "year": 2024,
+          "value": 80,
+          "estimated": true
+        },
+        {
+          "year": 2025,
+          "value": 100,
+          "estimated": false
+        }
       ]
     },
     {
@@ -532,8 +768,51 @@ h1{font-size:1.9rem;margin:.2rem 0 .4rem;}
       "blurb": "Sleeper agents, mesa-optimization, scheming, models hiding their objectives.",
       "arxiv": "(\"deceptive alignment\" OR \"sleeper agent\" OR scheming OR \"mesa-optimization\" OR \"mesa optimizer\")",
       "people": [
-        { "year": 2022, "value": 8, "estimated": true },
-        { "year": 2025, "value": 25, "estimated": false }
+        {
+          "year": 2017,
+          "value": 0,
+          "estimated": true
+        },
+        {
+          "year": 2018,
+          "value": 0,
+          "estimated": true
+        },
+        {
+          "year": 2019,
+          "value": 1,
+          "estimated": true
+        },
+        {
+          "year": 2020,
+          "value": 1,
+          "estimated": true
+        },
+        {
+          "year": 2021,
+          "value": 3,
+          "estimated": true
+        },
+        {
+          "year": 2022,
+          "value": 8,
+          "estimated": true
+        },
+        {
+          "year": 2023,
+          "value": 14,
+          "estimated": true
+        },
+        {
+          "year": 2024,
+          "value": 20,
+          "estimated": true
+        },
+        {
+          "year": 2025,
+          "value": 25,
+          "estimated": false
+        }
       ]
     },
     {
@@ -544,8 +823,51 @@ h1{font-size:1.9rem;margin:.2rem 0 .4rem;}
       "blurb": "Reward hacking, specification gaming, goal misgeneralization.",
       "arxiv": "(\"reward hacking\" OR \"specification gaming\" OR \"goal misgeneralization\" OR \"reward misspecification\")",
       "people": [
-        { "year": 2022, "value": 15, "estimated": true },
-        { "year": 2025, "value": 22, "estimated": false }
+        {
+          "year": 2017,
+          "value": 2,
+          "estimated": true
+        },
+        {
+          "year": 2018,
+          "value": 3,
+          "estimated": true
+        },
+        {
+          "year": 2019,
+          "value": 4,
+          "estimated": true
+        },
+        {
+          "year": 2020,
+          "value": 5,
+          "estimated": true
+        },
+        {
+          "year": 2021,
+          "value": 9,
+          "estimated": true
+        },
+        {
+          "year": 2022,
+          "value": 15,
+          "estimated": true
+        },
+        {
+          "year": 2023,
+          "value": 18,
+          "estimated": true
+        },
+        {
+          "year": 2024,
+          "value": 20,
+          "estimated": true
+        },
+        {
+          "year": 2025,
+          "value": 22,
+          "estimated": false
+        }
       ]
     },
     {
@@ -556,8 +878,51 @@ h1{font-size:1.9rem;margin:.2rem 0 .4rem;}
       "blurb": "Decision theory, embedded agency, corrigibility (MIRI-lineage theory).",
       "arxiv": "(\"agent foundations\" OR corrigibility OR \"embedded agency\" OR \"decision theory\") AND (AI OR agent)",
       "people": [
-        { "year": 2022, "value": 25, "estimated": true },
-        { "year": 2025, "value": 18, "estimated": false }
+        {
+          "year": 2017,
+          "value": 10,
+          "estimated": true
+        },
+        {
+          "year": 2018,
+          "value": 11,
+          "estimated": true
+        },
+        {
+          "year": 2019,
+          "value": 13,
+          "estimated": true
+        },
+        {
+          "year": 2020,
+          "value": 14,
+          "estimated": true
+        },
+        {
+          "year": 2021,
+          "value": 18,
+          "estimated": true
+        },
+        {
+          "year": 2022,
+          "value": 25,
+          "estimated": true
+        },
+        {
+          "year": 2023,
+          "value": 22,
+          "estimated": true
+        },
+        {
+          "year": 2024,
+          "value": 20,
+          "estimated": true
+        },
+        {
+          "year": 2025,
+          "value": 18,
+          "estimated": false
+        }
       ]
     },
     {
@@ -568,8 +933,51 @@ h1{font-size:1.9rem;margin:.2rem 0 .4rem;}
       "blurb": "Containing misaligned-but-capable models — distinct from aligning them.",
       "arxiv": "(\"AI control\" OR \"controlling untrusted\" OR \"control evaluations\") AND (AI OR \"language model\" OR model)",
       "people": [
-        { "year": 2022, "value": 1, "estimated": true },
-        { "year": 2025, "value": 11, "estimated": false }
+        {
+          "year": 2017,
+          "value": 0,
+          "estimated": true
+        },
+        {
+          "year": 2018,
+          "value": 0,
+          "estimated": true
+        },
+        {
+          "year": 2019,
+          "value": 0,
+          "estimated": true
+        },
+        {
+          "year": 2020,
+          "value": 0,
+          "estimated": true
+        },
+        {
+          "year": 2021,
+          "value": 0,
+          "estimated": true
+        },
+        {
+          "year": 2022,
+          "value": 1,
+          "estimated": true
+        },
+        {
+          "year": 2023,
+          "value": 3,
+          "estimated": true
+        },
+        {
+          "year": 2024,
+          "value": 7,
+          "estimated": true
+        },
+        {
+          "year": 2025,
+          "value": 11,
+          "estimated": false
+        }
       ]
     },
     {
@@ -580,8 +988,51 @@ h1{font-size:1.9rem;margin:.2rem 0 .4rem;}
       "blurb": "Model-weight security, data poisoning, misuse and uplift pathways.",
       "arxiv": "(\"model weight\" OR \"data poisoning\" OR \"backdoor attack\" OR \"model extraction\") AND (neural OR \"language model\")",
       "people": [
-        { "year": 2022, "value": 5, "estimated": true },
-        { "year": 2025, "value": 18, "estimated": false }
+        {
+          "year": 2017,
+          "value": 0,
+          "estimated": true
+        },
+        {
+          "year": 2018,
+          "value": 1,
+          "estimated": true
+        },
+        {
+          "year": 2019,
+          "value": 1,
+          "estimated": true
+        },
+        {
+          "year": 2020,
+          "value": 2,
+          "estimated": true
+        },
+        {
+          "year": 2021,
+          "value": 3,
+          "estimated": true
+        },
+        {
+          "year": 2022,
+          "value": 5,
+          "estimated": true
+        },
+        {
+          "year": 2023,
+          "value": 9,
+          "estimated": true
+        },
+        {
+          "year": 2024,
+          "value": 14,
+          "estimated": true
+        },
+        {
+          "year": 2025,
+          "value": 18,
+          "estimated": false
+        }
       ]
     },
     {
@@ -592,8 +1043,51 @@ h1{font-size:1.9rem;margin:.2rem 0 .4rem;}
       "blurb": "Scaling laws, takeoff dynamics, timeline forecasting (incl. Epoch AI).",
       "arxiv": "(\"scaling laws\" OR \"compute trends\" OR \"AI timelines\" OR \"emergent abilities\")",
       "people": [
-        { "year": 2022, "value": 10, "estimated": true },
-        { "year": 2025, "value": 25, "estimated": false }
+        {
+          "year": 2017,
+          "value": 2,
+          "estimated": true
+        },
+        {
+          "year": 2018,
+          "value": 2,
+          "estimated": true
+        },
+        {
+          "year": 2019,
+          "value": 3,
+          "estimated": true
+        },
+        {
+          "year": 2020,
+          "value": 4,
+          "estimated": true
+        },
+        {
+          "year": 2021,
+          "value": 6,
+          "estimated": true
+        },
+        {
+          "year": 2022,
+          "value": 10,
+          "estimated": true
+        },
+        {
+          "year": 2023,
+          "value": 16,
+          "estimated": true
+        },
+        {
+          "year": 2024,
+          "value": 21,
+          "estimated": true
+        },
+        {
+          "year": 2025,
+          "value": 25,
+          "estimated": false
+        }
       ]
     },
     {
@@ -604,8 +1098,51 @@ h1{font-size:1.9rem;margin:.2rem 0 .4rem;}
       "blurb": "Formal guarantees, singular learning theory, theoretical safety.",
       "arxiv": "(\"singular learning theory\" OR \"provable safety\" OR \"formal verification\") AND (neural OR \"deep learning\")",
       "people": [
-        { "year": 2022, "value": 5, "estimated": true },
-        { "year": 2025, "value": 4, "estimated": false }
+        {
+          "year": 2017,
+          "value": 2,
+          "estimated": true
+        },
+        {
+          "year": 2018,
+          "value": 3,
+          "estimated": true
+        },
+        {
+          "year": 2019,
+          "value": 3,
+          "estimated": true
+        },
+        {
+          "year": 2020,
+          "value": 4,
+          "estimated": true
+        },
+        {
+          "year": 2021,
+          "value": 5,
+          "estimated": true
+        },
+        {
+          "year": 2022,
+          "value": 5,
+          "estimated": true
+        },
+        {
+          "year": 2023,
+          "value": 6,
+          "estimated": true
+        },
+        {
+          "year": 2024,
+          "value": 5,
+          "estimated": true
+        },
+        {
+          "year": 2025,
+          "value": 4,
+          "estimated": false
+        }
       ]
     },
     {
@@ -616,8 +1153,51 @@ h1{font-size:1.9rem;margin:.2rem 0 .4rem;}
       "blurb": "Tracking/controlling training compute, export controls, on-chip mechanisms.",
       "arxiv": "(\"compute governance\" OR \"hardware governance\" OR \"on-chip\" OR \"export controls\") AND (AI OR chip OR semiconductor)",
       "people": [
-        { "year": 2022, "value": 15, "estimated": true },
-        { "year": 2025, "value": 70, "estimated": true }
+        {
+          "year": 2017,
+          "value": 0,
+          "estimated": true
+        },
+        {
+          "year": 2018,
+          "value": 1,
+          "estimated": true
+        },
+        {
+          "year": 2019,
+          "value": 1,
+          "estimated": true
+        },
+        {
+          "year": 2020,
+          "value": 2,
+          "estimated": true
+        },
+        {
+          "year": 2021,
+          "value": 5,
+          "estimated": true
+        },
+        {
+          "year": 2022,
+          "value": 15,
+          "estimated": true
+        },
+        {
+          "year": 2023,
+          "value": 35,
+          "estimated": true
+        },
+        {
+          "year": 2024,
+          "value": 55,
+          "estimated": true
+        },
+        {
+          "year": 2025,
+          "value": 70,
+          "estimated": true
+        }
       ]
     },
     {
@@ -628,8 +1208,51 @@ h1{font-size:1.9rem;margin:.2rem 0 .4rem;}
       "blurb": "Frontier-model regulation, evals-based policy, standards, law (EU AI Act, RSPs).",
       "arxiv": "(\"AI regulation\" OR \"AI policy\" OR \"AI governance\" OR \"frontier AI\") AND (policy OR regulation OR standard)",
       "people": [
-        { "year": 2022, "value": 40, "estimated": true },
-        { "year": 2025, "value": 150, "estimated": true }
+        {
+          "year": 2017,
+          "value": 3,
+          "estimated": true
+        },
+        {
+          "year": 2018,
+          "value": 4,
+          "estimated": true
+        },
+        {
+          "year": 2019,
+          "value": 6,
+          "estimated": true
+        },
+        {
+          "year": 2020,
+          "value": 12,
+          "estimated": true
+        },
+        {
+          "year": 2021,
+          "value": 22,
+          "estimated": true
+        },
+        {
+          "year": 2022,
+          "value": 40,
+          "estimated": true
+        },
+        {
+          "year": 2023,
+          "value": 80,
+          "estimated": true
+        },
+        {
+          "year": 2024,
+          "value": 120,
+          "estimated": true
+        },
+        {
+          "year": 2025,
+          "value": 150,
+          "estimated": true
+        }
       ]
     },
     {
@@ -640,8 +1263,51 @@ h1{font-size:1.9rem;margin:.2rem 0 .4rem;}
       "blurb": "Treaties, arms-race dynamics, international institutions for AI.",
       "arxiv": "(\"international governance\" OR \"AI treaty\" OR \"arms race\" OR \"international coordination\") AND AI",
       "people": [
-        { "year": 2022, "value": 15, "estimated": true },
-        { "year": 2025, "value": 70, "estimated": true }
+        {
+          "year": 2017,
+          "value": 1,
+          "estimated": true
+        },
+        {
+          "year": 2018,
+          "value": 2,
+          "estimated": true
+        },
+        {
+          "year": 2019,
+          "value": 3,
+          "estimated": true
+        },
+        {
+          "year": 2020,
+          "value": 4,
+          "estimated": true
+        },
+        {
+          "year": 2021,
+          "value": 8,
+          "estimated": true
+        },
+        {
+          "year": 2022,
+          "value": 15,
+          "estimated": true
+        },
+        {
+          "year": 2023,
+          "value": 35,
+          "estimated": true
+        },
+        {
+          "year": 2024,
+          "value": 55,
+          "estimated": true
+        },
+        {
+          "year": 2025,
+          "value": 70,
+          "estimated": true
+        }
       ]
     },
     {
@@ -652,8 +1318,51 @@ h1{font-size:1.9rem;margin:.2rem 0 .4rem;}
       "blurb": "Responsible scaling policies, internal lab governance and commitments.",
       "arxiv": "(\"responsible scaling\" OR \"responsible AI\" OR \"AI safety levels\" OR \"corporate governance\") AND AI",
       "people": [
-        { "year": 2022, "value": 5, "estimated": true },
-        { "year": 2025, "value": 40, "estimated": true }
+        {
+          "year": 2017,
+          "value": 0,
+          "estimated": true
+        },
+        {
+          "year": 2018,
+          "value": 0,
+          "estimated": true
+        },
+        {
+          "year": 2019,
+          "value": 0,
+          "estimated": true
+        },
+        {
+          "year": 2020,
+          "value": 1,
+          "estimated": true
+        },
+        {
+          "year": 2021,
+          "value": 2,
+          "estimated": true
+        },
+        {
+          "year": 2022,
+          "value": 5,
+          "estimated": true
+        },
+        {
+          "year": 2023,
+          "value": 18,
+          "estimated": true
+        },
+        {
+          "year": 2024,
+          "value": 30,
+          "estimated": true
+        },
+        {
+          "year": 2025,
+          "value": 40,
+          "estimated": true
+        }
       ]
     },
     {
@@ -664,8 +1373,51 @@ h1{font-size:1.9rem;margin:.2rem 0 .4rem;}
       "blurb": "Public engagement, awareness, talent pipelines and field-building.",
       "arxiv": "(\"public attitudes\" OR \"AI awareness\" OR \"field building\") AND (AI OR \"artificial intelligence\")",
       "people": [
-        { "year": 2022, "value": 15, "estimated": true },
-        { "year": 2025, "value": 90, "estimated": true }
+        {
+          "year": 2017,
+          "value": 3,
+          "estimated": true
+        },
+        {
+          "year": 2018,
+          "value": 4,
+          "estimated": true
+        },
+        {
+          "year": 2019,
+          "value": 6,
+          "estimated": true
+        },
+        {
+          "year": 2020,
+          "value": 8,
+          "estimated": true
+        },
+        {
+          "year": 2021,
+          "value": 11,
+          "estimated": true
+        },
+        {
+          "year": 2022,
+          "value": 15,
+          "estimated": true
+        },
+        {
+          "year": 2023,
+          "value": 40,
+          "estimated": true
+        },
+        {
+          "year": 2024,
+          "value": 65,
+          "estimated": true
+        },
+        {
+          "year": 2025,
+          "value": 90,
+          "estimated": true
+        }
       ]
     },
     {
@@ -676,8 +1428,51 @@ h1{font-size:1.9rem;margin:.2rem 0 .4rem;}
       "blurb": "Fairness, bias, model welfare, and broader social impact of advanced AI.",
       "arxiv": "(\"AI ethics\" OR \"AI fairness\" OR \"algorithmic bias\" OR \"model welfare\")",
       "people": [
-        { "year": 2022, "value": 10, "estimated": true },
-        { "year": 2025, "value": 50, "estimated": true }
+        {
+          "year": 2017,
+          "value": 3,
+          "estimated": true
+        },
+        {
+          "year": 2018,
+          "value": 5,
+          "estimated": true
+        },
+        {
+          "year": 2019,
+          "value": 7,
+          "estimated": true
+        },
+        {
+          "year": 2020,
+          "value": 9,
+          "estimated": true
+        },
+        {
+          "year": 2021,
+          "value": 10,
+          "estimated": true
+        },
+        {
+          "year": 2022,
+          "value": 10,
+          "estimated": true
+        },
+        {
+          "year": 2023,
+          "value": 22,
+          "estimated": true
+        },
+        {
+          "year": 2024,
+          "value": 38,
+          "estimated": true
+        },
+        {
+          "year": 2025,
+          "value": 50,
+          "estimated": true
+        }
       ]
     }
   ]
@@ -732,13 +1527,20 @@ h1{font-size:1.9rem;margin:.2rem 0 .4rem;}
     return last.value;
   }
 
-  function isEstimated(bucket, metric) {
+  // Estimated if either snapshot bracketing this year is flagged — so the
+  // marker reflects the year you're viewing, not the whole series.
+  function isEstimated(bucket, metric, year) {
     var series = bucket[metric];
     if (!series || !series.length) return false;
-    for (var i = 0; i < series.length; i++) {
-      if (series[i].estimated) return true; // any flagged point ⇒ treat series as est.
+    if (year <= series[0].year) return !!series[0].estimated;
+    var last = series[series.length - 1];
+    if (year >= last.year) return !!last.estimated;
+    for (var i = 0; i < series.length - 1; i++) {
+      if (year >= series[i].year && year <= series[i + 1].year) {
+        return !!(series[i].estimated || series[i + 1].estimated);
+      }
     }
-    return false;
+    return !!last.estimated;
   }
 
   // Metric keys actually present in the data, preserving meta order.
@@ -1050,16 +1852,32 @@ h1{font-size:1.9rem;margin:.2rem 0 .4rem;}
 
     nodes.forEach(function (n) {
       var series = n.b[metric] || [];
+      var v = valueAt(n.b, metric, dy);
+      // A branch that hasn't emerged yet (still zero) is hidden — branches
+      // appear as the field grows into them.
+      if (v <= 0) {
+        n.el.setAttribute("opacity", "0");
+        n.el.style.pointerEvents = "none";
+        return;
+      }
+      n.el.setAttribute("opacity", "1");
+      n.el.style.pointerEvents = "";
+
+      // Start the line one point before the first non-zero year so its rise
+      // from ~0 reads, without dragging a long flat run along the axis.
+      var startIdx = 0;
+      while (startIdx < series.length && series[startIdx].value <= 0) startIdx++;
+      if (startIdx > 0) startIdx--;
+
       var d = "";
       var started = false;
-      for (var i = 0; i < series.length; i++) {
+      for (var i = startIdx; i < series.length; i++) {
         var p = series[i];
         if (p.year < dy) {
           d += (started ? "L" : "M") + xScale(p.year).toFixed(1) + " " + yScale(p.value).toFixed(1);
           started = true;
         }
       }
-      var v = valueAt(n.b, metric, dy);
       var ex = xScale(dy);
       var ey = yScale(v);
       d += (started ? "L" : "M") + ex.toFixed(1) + " " + ey.toFixed(1);
@@ -1159,7 +1977,7 @@ h1{font-size:1.9rem;margin:.2rem 0 .4rem;}
     var m = DATA.meta.metrics[metric];
     var yNow = Math.round(Math.min(displayYear, range.max));
     var v = valueAt(n.b, metric, yNow);
-    var est = isEstimated(n.b, metric);
+    var est = isEstimated(n.b, metric, yNow);
     tip.innerHTML =
       "<strong>" +
       escapeHtml(n.b.label) +

@@ -47,13 +47,20 @@
     return last.value;
   }
 
-  function isEstimated(bucket, metric) {
+  // Estimated if either snapshot bracketing this year is flagged — so the
+  // marker reflects the year you're viewing, not the whole series.
+  function isEstimated(bucket, metric, year) {
     var series = bucket[metric];
     if (!series || !series.length) return false;
-    for (var i = 0; i < series.length; i++) {
-      if (series[i].estimated) return true; // any flagged point ⇒ treat series as est.
+    if (year <= series[0].year) return !!series[0].estimated;
+    var last = series[series.length - 1];
+    if (year >= last.year) return !!last.estimated;
+    for (var i = 0; i < series.length - 1; i++) {
+      if (year >= series[i].year && year <= series[i + 1].year) {
+        return !!(series[i].estimated || series[i + 1].estimated);
+      }
     }
-    return false;
+    return !!last.estimated;
   }
 
   // Metric keys actually present in the data, preserving meta order.
@@ -365,16 +372,32 @@
 
     nodes.forEach(function (n) {
       var series = n.b[metric] || [];
+      var v = valueAt(n.b, metric, dy);
+      // A branch that hasn't emerged yet (still zero) is hidden — branches
+      // appear as the field grows into them.
+      if (v <= 0) {
+        n.el.setAttribute("opacity", "0");
+        n.el.style.pointerEvents = "none";
+        return;
+      }
+      n.el.setAttribute("opacity", "1");
+      n.el.style.pointerEvents = "";
+
+      // Start the line one point before the first non-zero year so its rise
+      // from ~0 reads, without dragging a long flat run along the axis.
+      var startIdx = 0;
+      while (startIdx < series.length && series[startIdx].value <= 0) startIdx++;
+      if (startIdx > 0) startIdx--;
+
       var d = "";
       var started = false;
-      for (var i = 0; i < series.length; i++) {
+      for (var i = startIdx; i < series.length; i++) {
         var p = series[i];
         if (p.year < dy) {
           d += (started ? "L" : "M") + xScale(p.year).toFixed(1) + " " + yScale(p.value).toFixed(1);
           started = true;
         }
       }
-      var v = valueAt(n.b, metric, dy);
       var ex = xScale(dy);
       var ey = yScale(v);
       d += (started ? "L" : "M") + ex.toFixed(1) + " " + ey.toFixed(1);
@@ -474,7 +497,7 @@
     var m = DATA.meta.metrics[metric];
     var yNow = Math.round(Math.min(displayYear, range.max));
     var v = valueAt(n.b, metric, yNow);
-    var est = isEstimated(n.b, metric);
+    var est = isEstimated(n.b, metric, yNow);
     tip.innerHTML =
       "<strong>" +
       escapeHtml(n.b.label) +
