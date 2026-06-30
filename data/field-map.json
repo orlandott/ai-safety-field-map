@@ -7,7 +7,7 @@
       "people": {
         "label": "People (FTEs)",
         "unit": "FTEs",
-        "note": "Full-time-equivalent researchers, 2017–2025. The 2025 column is taken directly from McAleese's org-by-org dataset — 118 organisations totalling ~1,130 FTEs: ~624 technical (misc technical 200, interpretability 122, evals 100 [AISI 50, METR 31, Apollo 19], LLM safety 87, …) and ~505 non-technical (governance 249, non-technical research 146, advocacy 79, forecasting 25, watchdog/whistleblower 6). Every 2025 point is anchored to that dataset; earlier years are modeled — each category's history is reconstructed from its organisations' founding years and normalised to McAleese's published totals (≈30 technical in 2017, ≈50 in 2020, ≈300 technical + ≈100 non-technical in 2022). Every point carries its own source (see the per-year sourcing table below): 'anchor' = straight from the dataset, 'modeled' = our founding-year reconstruction. Per-bucket splits are approximate, so totals don't sum exactly.",
+        "note": "Full-time-equivalent researchers, 2017–2025. The 2025 column is taken directly from McAleese's org-by-org dataset — 118 organisations totalling ~1,130 FTEs: ~624 technical (misc technical 200, interpretability 122, evals 100 [AISI 50, METR 31, Apollo 19], LLM safety 87, …) and ~505 non-technical (governance 249, non-technical research 146, advocacy 79, forecasting 25, watchdog/whistleblower 6). Every 2025 point is anchored to that dataset; earlier years are modeled — each category's history is reconstructed from its organisations' founding years and normalised to McAleese's published totals (≈30 technical in 2017, ≈50 in 2020, ≈300 technical + ≈100 non-technical in 2022). Technical branches in 2022 are additionally anchored to Larsen & Lifland's org-by-org survey (corroborated by AI Watch). Every point carries its own source (see the per-year sourcing table below): 'anchor' = straight from the dataset, 'modeled' = our founding-year reconstruction. Per-bucket splits are approximate, so totals don't sum exactly.",
         "auto": false
       },
       "papers": {
@@ -136,11 +136,11 @@
         {
           "year": 2022,
           "value": 151,
-          "estimated": true,
-          "basis": "modeled",
+          "estimated": false,
+          "basis": "anchor",
           "src": [
-            "mcaleese-data",
-            "mcaleese"
+            "larsen-lifland",
+            "aiwatch"
           ]
         },
         {
@@ -236,11 +236,11 @@
         {
           "year": 2022,
           "value": 23,
-          "estimated": true,
-          "basis": "modeled",
+          "estimated": false,
+          "basis": "anchor",
           "src": [
-            "mcaleese-data",
-            "mcaleese"
+            "larsen-lifland",
+            "aiwatch"
           ]
         },
         {
@@ -336,11 +336,11 @@
         {
           "year": 2022,
           "value": 0,
-          "estimated": true,
-          "basis": "modeled",
+          "estimated": false,
+          "basis": "anchor",
           "src": [
-            "mcaleese-data",
-            "mcaleese"
+            "larsen-lifland",
+            "aiwatch"
           ]
         },
         {
@@ -436,11 +436,11 @@
         {
           "year": 2022,
           "value": 49,
-          "estimated": true,
-          "basis": "modeled",
+          "estimated": false,
+          "basis": "anchor",
           "src": [
-            "mcaleese-data",
-            "mcaleese"
+            "larsen-lifland",
+            "aiwatch"
           ]
         },
         {
@@ -536,11 +536,11 @@
         {
           "year": 2022,
           "value": 43,
-          "estimated": true,
-          "basis": "modeled",
+          "estimated": false,
+          "basis": "anchor",
           "src": [
-            "mcaleese-data",
-            "mcaleese"
+            "larsen-lifland",
+            "aiwatch"
           ]
         },
         {
@@ -636,11 +636,11 @@
         {
           "year": 2022,
           "value": 2,
-          "estimated": true,
-          "basis": "modeled",
+          "estimated": false,
+          "basis": "anchor",
           "src": [
-            "mcaleese-data",
-            "mcaleese"
+            "larsen-lifland",
+            "aiwatch"
           ]
         },
         {
@@ -736,11 +736,11 @@
         {
           "year": 2022,
           "value": 23,
-          "estimated": true,
-          "basis": "modeled",
+          "estimated": false,
+          "basis": "anchor",
           "src": [
-            "mcaleese-data",
-            "mcaleese"
+            "larsen-lifland",
+            "aiwatch"
           ]
         },
         {
@@ -836,11 +836,11 @@
         {
           "year": 2022,
           "value": 6,
-          "estimated": true,
-          "basis": "modeled",
+          "estimated": false,
+          "basis": "anchor",
           "src": [
-            "mcaleese-data",
-            "mcaleese"
+            "larsen-lifland",
+            "aiwatch"
           ]
         },
         {
@@ -936,11 +936,11 @@
         {
           "year": 2022,
           "value": 0,
-          "estimated": true,
-          "basis": "modeled",
+          "estimated": false,
+          "basis": "anchor",
           "src": [
-            "mcaleese-data",
-            "mcaleese"
+            "larsen-lifland",
+            "aiwatch"
           ]
         },
         {
@@ -1036,11 +1036,11 @@
         {
           "year": 2022,
           "value": 0,
-          "estimated": true,
-          "basis": "modeled",
+          "estimated": false,
+          "basis": "anchor",
           "src": [
-            "mcaleese-data",
-            "mcaleese"
+            "larsen-lifland",
+            "aiwatch"
           ]
         },
         {
@@ -1136,11 +1136,11 @@
         {
           "year": 2022,
           "value": 2,
-          "estimated": true,
-          "basis": "modeled",
+          "estimated": false,
+          "basis": "anchor",
           "src": [
-            "mcaleese-data",
-            "mcaleese"
+            "larsen-lifland",
+            "aiwatch"
           ]
         },
         {
@@ -1236,11 +1236,11 @@
         {
           "year": 2022,
           "value": 1,
-          "estimated": true,
-          "basis": "modeled",
+          "estimated": false,
+          "basis": "anchor",
           "src": [
-            "mcaleese-data",
-            "mcaleese"
+            "larsen-lifland",
+            "aiwatch"
           ]
         },
         {
