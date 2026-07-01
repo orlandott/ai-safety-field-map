@@ -116,7 +116,8 @@
           "value": 122,
           "estimated": false
         }
-      ]
+      ],
+      "papers": []
     },
     {
       "slug": "scalable-oversight",
@@ -171,7 +172,8 @@
           "value": 110,
           "estimated": false
         }
-      ]
+      ],
+      "papers": []
     },
     {
       "slug": "robustness",
@@ -226,7 +228,8 @@
           "value": 80,
           "estimated": false
         }
-      ]
+      ],
+      "papers": []
     },
     {
       "slug": "llm-safety",
@@ -281,7 +284,8 @@
           "value": 87,
           "estimated": false
         }
-      ]
+      ],
+      "papers": []
     },
     {
       "slug": "evals",
@@ -336,7 +340,8 @@
           "value": 100,
           "estimated": false
         }
-      ]
+      ],
+      "papers": []
     },
     {
       "slug": "deceptive-alignment",
@@ -391,7 +396,8 @@
           "value": 25,
           "estimated": false
         }
-      ]
+      ],
+      "papers": []
     },
     {
       "slug": "reward-hacking",
@@ -446,7 +452,8 @@
           "value": 29,
           "estimated": false
         }
-      ]
+      ],
+      "papers": []
     },
     {
       "slug": "agent-foundations",
@@ -501,7 +508,8 @@
           "value": 18,
           "estimated": false
         }
-      ]
+      ],
+      "papers": []
     },
     {
       "slug": "ai-control",
@@ -556,7 +564,8 @@
           "value": 11,
           "estimated": false
         }
-      ]
+      ],
+      "papers": []
     },
     {
       "slug": "ai-security",
@@ -611,7 +620,8 @@
           "value": 21,
           "estimated": false
         }
-      ]
+      ],
+      "papers": []
     },
     {
       "slug": "forecasting",
@@ -666,7 +676,8 @@
           "value": 25,
           "estimated": false
         }
-      ]
+      ],
+      "papers": []
     },
     {
       "slug": "theory",
@@ -721,7 +732,8 @@
           "value": 4,
           "estimated": false
         }
-      ]
+      ],
+      "papers": []
     },
     {
       "slug": "compute-governance",
@@ -776,7 +788,8 @@
           "value": 70,
           "estimated": true
         }
-      ]
+      ],
+      "papers": []
     },
     {
       "slug": "policy-standards",
@@ -831,7 +844,8 @@
           "value": 150,
           "estimated": true
         }
-      ]
+      ],
+      "papers": []
     },
     {
       "slug": "intl-coordination",
@@ -886,7 +900,8 @@
           "value": 70,
           "estimated": true
         }
-      ]
+      ],
+      "papers": []
     },
     {
       "slug": "lab-governance",
@@ -941,7 +956,8 @@
           "value": 40,
           "estimated": true
         }
-      ]
+      ],
+      "papers": []
     },
     {
       "slug": "advocacy",
@@ -996,7 +1012,8 @@
           "value": 90,
           "estimated": true
         }
-      ]
+      ],
+      "papers": []
     },
     {
       "slug": "ethics-society",
@@ -1051,7 +1068,8 @@
           "value": 50,
           "estimated": true
         }
-      ]
+      ],
+      "papers": []
     }
   ]
 }
